@@ -85,8 +85,8 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
-vim.g.netrw_liststyle=0
-vim.g.netrw_banner=0
+vim.g.netrw_liststyle = 0
+vim.g.netrw_banner = 0
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -121,7 +121,7 @@ vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open float
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
 
--- kickstart.nvim starts you with this. 
+-- kickstart.nvim starts you with this.
 -- But it constantly clobbers your system clipboard whenever you delete anything.
 
 -- Sync clipboard between OS and Neovim.
@@ -130,11 +130,22 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.o.clipboard = 'unnamedplus'
 
 -- You should instead use these keybindings so that they are still easy to use, but dont conflict
-vim.keymap.set({"v", "x", "n"}, '<leader>y', '"+y', { noremap = true, silent = true, desc = 'Yank to clipboard' })
-vim.keymap.set({"n", "v", "x"}, '<leader>Y', '"+yy', { noremap = true, silent = true, desc = 'Yank line to clipboard' })
-vim.keymap.set({"n", "v", "x"}, '<C-a>', 'gg0vG$', { noremap = true, silent = true, desc = 'Select all' })
-vim.keymap.set({'n', 'v', 'x'}, '<leader>p', '"+p', { noremap = true, silent = true, desc = 'Paste from clipboard' })
-vim.keymap.set('i', '<C-p>', '<C-r><C-p>+', { noremap = true, silent = true, desc = 'Paste from clipboard from within insert mode' })
-vim.keymap.set("x", "<leader>P", '"_dP', { noremap = true, silent = true, desc = 'Paste over selection without erasing unnamed register' })
+vim.keymap.set({ "v", "x", "n" }, '<leader>y', '"+y', { noremap = true, silent = true, desc = 'Yank to clipboard' })
+vim.keymap.set({ "n", "v", "x" }, '<leader>Y', '"+yy', { noremap = true, silent = true, desc = 'Yank line to clipboard' })
+vim.keymap.set({ "n", "v", "x" }, '<C-a>', 'gg0vG$', { noremap = true, silent = true, desc = 'Select all' })
+vim.keymap.set({ 'n', 'v', 'x' }, '<leader>p', '"+p', { noremap = true, silent = true, desc = 'Paste from clipboard' })
+vim.keymap.set('i', '<C-p>', '<C-r><C-p>+',
+  { noremap = true, silent = true, desc = 'Paste from clipboard from within insert mode' })
+vim.keymap.set("x", "<leader>P", '"_dP',
+  { noremap = true, silent = true, desc = 'Paste over selection without erasing unnamed register' })
 
 
+-- Tab motions (FIXME: revisit)
+vim.keymap.set("n", "<leader><tab>e", ":tablast", { noremap = true, silent = true, desc = 'Go to last tab' })
+vim.keymap.set("n", "<leader><tab>0", ":tabfirst", { noremap = true, silent = true, desc = 'Go to first tab' })
+vim.keymap.set("n", "<leader><tab>h", "gT", { noremap = true, silent = true, desc = 'Go to previous tab' })
+vim.keymap.set("n", "<leader><tab>l", "gt", { noremap = true, silent = true, desc = 'Go to next tab' })
+vim.keymap.set("n", "<leader><tab><tab>", ":tabnew", { noremap = true, silent = true, desc = 'Open new tab' })
+vim.keymap.set("n", "<leader><tab>x", ":tabclose", { noremap = true, silent = true, desc = 'Close current tab' })
+vim.keymap.set("n", "<leader><tab>H", ":-tabmove", { noremap = true, silent = true, desc = 'Move tab to left' })
+vim.keymap.set("n", "<leader><tab>L", ":+tabmove", { noremap = true, silent = true, desc = 'Move tab to right' })
