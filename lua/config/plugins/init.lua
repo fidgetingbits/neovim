@@ -10,13 +10,13 @@ vim.cmd.colorscheme(colorschemeName)
 local ok, notify = pcall(require, "notify")
 if ok then
   notify.setup({
-    on_open = function(win)
+      on_open = function(win)
       vim.api.nvim_win_set_config(win, { focusable = false })
     end,
   })
   vim.notify = notify
   vim.keymap.set("n", "<Esc>", function()
-      notify.dismiss({ silent = true, })
+    notify.dismiss({ silent = true, })
   end, { desc = "dismiss notify popup and clear hlsearch" })
 end
 
@@ -78,9 +78,9 @@ require('lze').load {
     cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle", },
     ft = "markdown",
     keys = {
-      {"<leader>mp", "<cmd>MarkdownPreview <CR>", mode = {"n"}, noremap = true, desc = "markdown preview"},
-      {"<leader>ms", "<cmd>MarkdownPreviewStop <CR>", mode = {"n"}, noremap = true, desc = "markdown preview stop"},
-      {"<leader>mt", "<cmd>MarkdownPreviewToggle <CR>", mode = {"n"}, noremap = true, desc = "markdown preview toggle"},
+      { "<leader>mp", "<cmd>MarkdownPreview <CR>",       mode = { "n" }, noremap = true, desc = "markdown preview" },
+      { "<leader>ms", "<cmd>MarkdownPreviewStop <CR>",   mode = { "n" }, noremap = true, desc = "markdown preview stop" },
+      { "<leader>mt", "<cmd>MarkdownPreviewToggle <CR>", mode = { "n" }, noremap = true, desc = "markdown preview toggle" },
     },
     before = function(plugin)
       vim.g.mkdp_auto_close = 0
@@ -162,8 +162,7 @@ require('lze').load {
     -- ft = "",
     -- keys = "",
     -- colorscheme = "",
-    after = function (plugin)
-
+    after = function(plugin)
       require('lualine').setup({
         options = {
           icons_enabled = false,
@@ -184,7 +183,7 @@ require('lze').load {
               'filename', path = 3, status = true,
             },
           },
-          lualine_x = {'filetype'},
+          lualine_x = { 'filetype' },
         },
         tabline = {
           lualine_a = { 'buffers' },
@@ -203,7 +202,7 @@ require('lze').load {
     -- ft = "",
     -- keys = "",
     -- colorscheme = "",
-    after = function (plugin)
+    after = function(plugin)
       require('gitsigns').setup({
         -- See `:help gitsigns.txt`
         signs = {
@@ -287,29 +286,57 @@ require('lze').load {
     -- ft = "",
     -- keys = "",
     -- colorscheme = "",
-    after = function (plugin)
+    after = function(plugin)
       require('which-key').setup({
       })
       require('which-key').add {
-        { "<leader><leader>", group = "buffer commands" },
+        { "<leader><leader>",  group = "buffer commands" },
         { "<leader><leader>_", hidden = true },
-        { "<leader>c", group = "[c]ode" },
-        { "<leader>c_", hidden = true },
-        { "<leader>d", group = "[d]ocument" },
-        { "<leader>d_", hidden = true },
-        { "<leader>g", group = "[g]it" },
-        { "<leader>g_", hidden = true },
-        { "<leader>m", group = "[m]arkdown" },
-        { "<leader>m_", hidden = true },
-        { "<leader>r", group = "[r]ename" },
-        { "<leader>r_", hidden = true },
-        { "<leader>s", group = "[s]earch" },
-        { "<leader>s_", hidden = true },
-        { "<leader>t", group = "[t]oggles" },
-        { "<leader>t_", hidden = true },
-        { "<leader>w", group = "[w]orkspace" },
-        { "<leader>w_", hidden = true },
+        { "<leader>c",         group = "[c]ode" },
+        { "<leader>c_",        hidden = true },
+        { "<leader>d",         group = "[d]ocument" },
+        { "<leader>d_",        hidden = true },
+        { "<leader>g",         group = "[g]it" },
+        { "<leader>g_",        hidden = true },
+        { "<leader>m",         group = "[m]arkdown" },
+        { "<leader>m_",        hidden = true },
+        { "<leader>r",         group = "[r]ename" },
+        { "<leader>r_",        hidden = true },
+        { "<leader>s",         group = "[s]earch" },
+        { "<leader>s_",        hidden = true },
+        { "<leader>t",         group = "[t]oggles" },
+        { "<leader>t_",        hidden = true },
+        { "<leader>w",         group = "[w]orkspace" },
+        { "<leader>w_",        hidden = true },
       }
     end,
   },
+  {
+    -- a quick way to jump to anywhere in a buffer. sneak, easymotion, hop alternative
+    "leap.nvim",
+    for_cat = 'general.core',
+    event = "DeferredUIEnter",
+    -- keys = "",
+    after = function(plugin)
+      require('leap').set_default_mappings()
+    end
+  },
+  {
+    -- Better in and around targeting that includes treesitter support
+    "mini.ai",
+    for_cat = 'general.core',
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require('mini.ai').setup()
+    end
+  },
+  {
+    "neo-tree.nvim",
+    for_cat = 'general.core',
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require('neo-tree').setup()
+      vim.keymap.set("n", "<leader>n", ":Neotree toggle<CR>", { desc = "Toggle Neotree" })
+    end
+  }
 }
