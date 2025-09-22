@@ -10,7 +10,7 @@ vim.cmd.colorscheme(colorschemeName)
 local ok, notify = pcall(require, "notify")
 if ok then
   notify.setup({
-      on_open = function(win)
+    on_open = function(win)
       vim.api.nvim_win_set_config(win, { focusable = false })
     end,
   })
@@ -308,6 +308,8 @@ require('lze').load {
         { "<leader>t_",        hidden = true },
         { "<leader>w",         group = "[w]orkspace" },
         { "<leader>w_",        hidden = true },
+        { "<leader>y",         group = "[y]ank" },
+        { "<leader>y_",        hidden = true },
       }
     end,
   },
@@ -338,5 +340,15 @@ require('lze').load {
       require('neo-tree').setup()
       vim.keymap.set("n", "<leader>n", ":Neotree toggle<CR>", { desc = "Toggle Neotree" })
     end
-  }
+  },
+  -- FIXME: Revisit. Seems neat in theory but too many 3 column lines is annoying
+  -- {
+  --   -- A Neovim plugin that makes vertical motions more comfortable.
+  --   "comfy-line-numbers.nvim",
+  --   for_cat = 'general.core',
+  --   event = "DeferredUIEnter",
+  --   after = function(plugin)
+  --     require('comfy-line-numbers').setup()
+  --   end
+  -- }
 }

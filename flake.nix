@@ -122,7 +122,7 @@
               universal-ctags
               ripgrep
               fd
-              # lint (FIXME: Maybe make this a category)
+              # lint (FIXME: Maybe actually use the lint categry below?)
               shfmt
               shellharden
               nixfmt
@@ -131,6 +131,11 @@
               yamlfmt
               prettier
               taplo
+              bash-language-server
+              just-lsp
+              # FIXME: This is maybe better for project-specific
+              # pkgs.kdePackages.qtdeclarative /bin/qmlls
+
             ];
             # these names are arbitrary.
             lint = with pkgs; [
@@ -247,18 +252,21 @@
                 telescope-ui-select-nvim
                 telescope-nvim
               ];
-              always = with pkgs.vimPlugins; [
-                nvim-lspconfig
-                lualine-nvim
-                gitsigns-nvim
-                vim-sleuth
-                vim-fugitive
-                vim-rhubarb
-                nvim-surround
-                leap-nvim
-                # FIXME: Move this maybe?
-                neo-tree-nvim
-              ];
+              always = builtins.attrValues {
+                inherit (pkgs.vimPlugins)
+                  nvim-lspconfig
+                  lualine-nvim
+                  gitsigns-nvim
+                  vim-sleuth
+                  vim-fugitive
+                  vim-rhubarb
+                  nvim-surround
+                  leap-nvim
+                  comfy-line-numbers-nvim
+                  # FIXME: Move this maybe?
+                  neo-tree-nvim
+                  ;
+              };
               # FIXME: Figure out why adding extra = true to cats doesn't load these?
               extra = with pkgs.vimPlugins; [
                 fidget-nvim

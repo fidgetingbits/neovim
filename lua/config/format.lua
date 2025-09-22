@@ -9,7 +9,7 @@ require('lze').load {
       { "<leader>FF", desc = "[F]ormat [F]ile" },
     },
     -- colorscheme = "",
-    after = function (plugin)
+    after = function(plugin)
       local conform = require("conform")
 
       conform.setup({
@@ -40,31 +40,30 @@ require('lze').load {
           timeout_ms = 1000,
         })
       end, { desc = "[F]ormat [F]ile" })
-
     end,
   },
 }
 -- Setup format on save
 vim.api.nvim_create_autocmd("LspAttach", {
-callback = function(args)
-  local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-  if client:supports_method('textDocument/formatting') then
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      buffer = args.buf,
-      callback = function()
-        -- Allow per-project shut off via vim.o.exrc files
-        -- FIXME: Add a function to write such a file to the root of a project
-        if vim.b.disable_autoformat then
-          return
-        end
+  callback = function(args)
+    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+    if client:supports_method('textDocument/formatting') then
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        buffer = args.buf,
+        callback = function()
+          -- Allow per-project shut off via vim.o.exrc files
+          -- FIXME: Add a function to write such a file to the root of a project
+          if vim.b.disable_autoformat then
+            return
+          end
 
-        vim.lsp.buf.format({
-          async = false,
-          bufnr = args.buf,
-          id = client.id
-        })
-      end,
-    })
-  end
-end,
+          vim.lsp.buf.format({
+            async = false,
+            bufnr = args.buf,
+            id = client.id
+          })
+        end,
+      })
+    end
+  end,
 })

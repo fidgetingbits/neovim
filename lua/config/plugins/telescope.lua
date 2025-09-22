@@ -124,7 +124,11 @@ return {
           mappings = {
             i = { ['<c-enter>'] = 'to_fuzzy_refine' },
           },
-          file_ignore_patterns = telescope_ignore_patterns
+          file_ignore_patterns = telescope_ignore_patterns,
+          layout_strategy = 'vertical',
+          layout_config = {
+            preview_height = 0.75,
+            height = 0.95 },
         },
         -- pickers = {}
         extensions = {

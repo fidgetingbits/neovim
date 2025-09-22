@@ -9,7 +9,8 @@ end
 -- nixCats gives us the paths, which is faster than searching the rtp!
 local old_ft_fallback = require('lze').h.lsp.get_ft_fallback()
 require('lze').h.lsp.set_ft_fallback(function(name)
-  local lspcfg = nixCats.pawsible({ "allPlugins", "opt", "nvim-lspconfig" }) or nixCats.pawsible({ "allPlugins", "start", "nvim-lspconfig" })
+  local lspcfg = nixCats.pawsible({ "allPlugins", "opt", "nvim-lspconfig" }) or
+      nixCats.pawsible({ "allPlugins", "start", "nvim-lspconfig" })
   if lspcfg then
     local ok, cfg = pcall(dofile, lspcfg .. "/lsp/" .. name .. ".lua")
     if not ok then
@@ -163,4 +164,35 @@ require('lze').load {
       },
     },
   },
+  {
+    "bashls",
+    enabled = true,
+    lsp = {
+      -- Add .zsh files as there is no dedicated zsh lsp afaik
+      filetypes = { 'bash', 'sh', 'zsh' },
+      root_markers = { ".git", ".zshrc", ".bashrc", ".envrc" },
+      single_file_support = true,
+      settings = {
+        -- Default globPattern isn't recursive
+        -- This encourages use of GLOB_PATTERN in a .env file I guess?
+        -- vim.env.GLOB_PATTERN or '*@(.sh|.inc|.bash|.command)',
+        -- https://github.com/neovim/nvim-lspconfig/blob/1f7fbc34e6420476142b5cc85e9bee52717540fb/lsp/bashls.lua#L4
+        -- FIXME: Disable this if it becomes problematic
+        bashIde = {
+          globPattern = '**/*@(.sh|.inc|.bash|.command)',
+        },
+        bashls = {}
+      }
+    },
+  },
+  {
+    "just",
+    enabled = true,
+    --= Explicit empty entry like this seems to be needed for it to attach
+    lsp = {
+      settings = {
+        just = {}
+      }
+    }
+  }
 }
