@@ -390,8 +390,10 @@
               # WARNING: MAKE SURE THESE DONT CONFLICT WITH OTHER INSTALLED PACKAGES ON YOUR PATH
               # That would result in a failed build, as nixos and home manager modules validate for collisions on your path
               aliases = [
+                "nvim"
                 "vim"
                 "vimcat"
+                "vi"
               ];
 
               # explained below in the `regularCats` package's definition
