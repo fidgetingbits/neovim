@@ -99,10 +99,11 @@ vim.keymap.set("n", "n", "nzzzv", { desc = 'Next Search Result' })
 vim.keymap.set("n", "N", "Nzzzv", { desc = 'Previous Search Result' })
 
 -- FIXME(keymap): revisit these
-vim.keymap.set("n", "<leader><leader>[", "<cmd>bprev<CR>", { desc = 'Previous buffer' })
-vim.keymap.set("n", "<leader><leader>]", "<cmd>bnext<CR>", { desc = 'Next buffer' })
-vim.keymap.set("n", "<leader><leader>l", "<cmd>b#<CR>", { desc = 'Last buffer' })
-vim.keymap.set("n", "<leader><leader>d", "<cmd>bdelete<CR>", { desc = 'delete buffer' })
+vim.keymap.set("n", "<leader>bh", "<cmd>bprev<CR>", { desc = 'Previous buffer' })
+vim.keymap.set("n", "<leader>bl", "<cmd>bnext<CR>", { desc = 'Next buffer' })
+vim.keymap.set("n", "<leader>bb", "<cmd>b#<CR>", { desc = 'Last buffer' })
+vim.keymap.set("n", "<leader>bs", "<cmd>ls<CR>", { desc = 'List buffers' })
+vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = 'delete buffer' })
 
 -- see help sticky keys on windows
 vim.cmd([[command! W w]])

@@ -290,7 +290,7 @@ require('lze').load {
       require('which-key').setup({
       })
       require('which-key').add {
-        { "<leader><leader>",  group = "buffer commands" },
+        { "<leader>b",         group = "buffer commands" },
         { "<leader><leader>_", hidden = true },
         { "<leader>c",         group = "[c]ode" },
         { "<leader>c_",        hidden = true },
