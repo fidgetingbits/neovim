@@ -125,10 +125,18 @@ return {
             i = { ['<c-enter>'] = 'to_fuzzy_refine' },
           },
           file_ignore_patterns = telescope_ignore_patterns,
-          layout_strategy = 'vertical',
+          layout_strategy = 'flex', -- Change layout depending on if on laptop screen or dualup
+          -- FIXME: Still need to test this on the laptop... may be better to just make the layout_strategy a function that checks for monitors or something eventually?
           layout_config = {
-            preview_height = 0.75,
-            height = 0.95 },
+            flex = {
+              flip_columns = 180,
+              flip_lines = 50,
+            },
+            vertical = {
+              preview_height = 0.75,
+              height = 0.95,
+            }
+          },
         },
         -- pickers = {}
         extensions = {
