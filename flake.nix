@@ -258,6 +258,7 @@
                   lualine-nvim
                   gitsigns-nvim
                   vim-sleuth
+                  neogit
                   vim-fugitive
                   vim-rhubarb
                   nvim-surround
@@ -265,6 +266,13 @@
                   comfy-line-numbers-nvim
                   # FIXME: Move this maybe?
                   neo-tree-nvim
+                  vimwiki
+                  zen-mode-nvim
+                  ;
+              };
+              development = builtins.attrValues {
+                inherit (pkgs.vimPlugins)
+                  neogit
                   ;
               };
               # FIXME: Figure out why adding extra = true to cats doesn't load these?

@@ -341,6 +341,33 @@ require('lze').load {
       vim.keymap.set("n", "<leader>n", ":Neotree toggle<CR>", { desc = "Toggle Neotree" })
     end
   },
+  -- Magit port for neovim
+  {
+    "neogit",
+    for_cat = 'general.core',
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require('neogit').setup()
+    end
+  },
+  {
+    "vimwiki",
+    for_cat = 'general.core',
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      -- FIXME: Add configuration stuff here
+      -- require('vimwiki').setup()
+    end
+  },
+  {
+    "zen-mode.nvim",
+    for_cat = 'general.core',
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require('zen-mode').setup()
+    end
+  }
+
   -- FIXME: Revisit. Seems neat in theory but too many 3 column lines is annoying
   -- {
   --   -- A Neovim plugin that makes vertical motions more comfortable.
