@@ -87,6 +87,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 vim.g.netrw_liststyle = 0
 vim.g.netrw_banner = 0
+
 -- [[ Basic Keymaps ]]
 
 -- Keymaps for better default experience
@@ -98,12 +99,6 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = 'Scroll Up' })
 vim.keymap.set("n", "n", "nzzzv", { desc = 'Next Search Result' })
 vim.keymap.set("n", "N", "Nzzzv", { desc = 'Previous Search Result' })
 
--- FIXME(keymap): revisit these
-vim.keymap.set("n", "<leader>bh", "<cmd>bprev<CR>", { desc = 'Previous buffer' })
-vim.keymap.set("n", "<leader>bl", "<cmd>bnext<CR>", { desc = 'Next buffer' })
-vim.keymap.set("n", "<leader>bb", "<cmd>b#<CR>", { desc = 'Last buffer' })
-vim.keymap.set("n", "<leader>bs", "<cmd>ls<CR>", { desc = 'List buffers' })
-vim.keymap.set("n", "<leader>bd", "<cmd>bdelete<CR>", { desc = 'delete buffer' })
 
 -- see help sticky keys on windows
 vim.cmd([[command! W w]])
@@ -141,12 +136,32 @@ vim.keymap.set('i', '<C-p>', '<C-r><C-p>+',
 vim.keymap.set("x", "<leader>P", '"_dP',
   { noremap = true, silent = true, desc = 'Paste over selection without erasing unnamed register' })
 
+
+-- LSP
+local l = "<leader>l"
+vim.keymap.set("n", l .. "x", ":LspStop<CR>", { desc = 'Turn of LSP' })
+vim.keymap.set("n", l .. "o", ":LspStart<CR>", { desc = 'Turn on LSP' })
+
+-- Window/split motions
+-- See smart-splits.nvim maps instead
+
+-- Buffer motions
+local l = "<leader>b"
+vim.keymap.set("n", l .. "h", "<cmd>bprev<CR>", { desc = 'Previous buffer' })
+vim.keymap.set("n", l .. "l", "<cmd>bnext<CR>", { desc = 'Next buffer' })
+vim.keymap.set("n", l .. ".", "<cmd>b#<CR>", { desc = 'Most recent buffer' })
+vim.keymap.set("n", l .. "s", "<cmd>ls<CR>", { desc = 'List buffers' })
+vim.keymap.set("n", l .. "x", "<cmd>bdelete<CR>", { desc = 'Delete buffer' })
+
 -- Tab motions (FIXME: revisit)
-vim.keymap.set("n", "<leader><tab>e", ":tablast", { noremap = true, silent = true, desc = 'Go to last tab' })
-vim.keymap.set("n", "<leader><tab>0", ":tabfirst", { noremap = true, silent = true, desc = 'Go to first tab' })
-vim.keymap.set("n", "<leader><tab>h", "gT", { noremap = true, silent = true, desc = 'Go to previous tab' })
-vim.keymap.set("n", "<leader><tab>l", "gt", { noremap = true, silent = true, desc = 'Go to next tab' })
-vim.keymap.set("n", "<leader><tab><tab>", ":tabnew", { noremap = true, silent = true, desc = 'Open new tab' })
-vim.keymap.set("n", "<leader><tab>x", ":tabclose", { noremap = true, silent = true, desc = 'Close current tab' })
-vim.keymap.set("n", "<leader><tab>H", ":-tabmove", { noremap = true, silent = true, desc = 'Move tab to left' })
-vim.keymap.set("n", "<leader><tab>L", ":+tabmove", { noremap = true, silent = true, desc = 'Move tab to right' })
+l = "<leader><tab>"
+
+vim.keymap.set("n", l .. "e", ":tablast", { noremap = true, silent = true, desc = 'Go to last tab' })
+vim.keymap.set("n", l .. "0", ":tabfirst", { noremap = true, silent = true, desc = 'Go to first tab' })
+vim.keymap.set("n", l .. "h", "gT", { noremap = true, silent = true, desc = 'Go to previous tab' })
+vim.keymap.set("n", l .. "l", "gt", { noremap = true, silent = true, desc = 'Go to next tab' })
+vim.keymap.set("n", l .. ".", "g<tab>", { noremap = true, silent = true, desc = 'Go to last accessed tab page' })
+vim.keymap.set("n", l .. "<tab>", ":tabnew<CR>", { noremap = true, silent = true, desc = 'Open new tab' })
+vim.keymap.set("n", l .. "x", ":tabclose", { noremap = true, silent = true, desc = 'Close current tab' })
+vim.keymap.set("n", l .. "H", ":-tabmove", { noremap = true, silent = true, desc = 'Move tab to left' })
+vim.keymap.set("n", l .. "L", ":+tabmove", { noremap = true, silent = true, desc = 'Move tab to right' })
