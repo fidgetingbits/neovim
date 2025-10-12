@@ -395,6 +395,7 @@ require('lze').load {
       vim.keymap.set('n', '<C-S-l>', require('smart-splits').swap_buf_right)
     end
   },
+  -- FIXME: Figure out how to make transparency the default
   {
     "transparent.nvim",
     for_cat = 'general.core',
@@ -402,11 +403,10 @@ require('lze').load {
     after = function(plugin)
       require('transparent').setup({ auto = true })
       vim.keymap.set("n", "<leader>tr", '<cmd>TransparentToggle<CR>', { desc = '[T]oggle t[R]ansparency' })
-      -- FIXME: This throws a warning I need to fix
-      vim.cmd("TransparentEnabled")
       vim.g.transparent_enabled = true
     end
   },
+
 
   -- FIXME: Revisit. Seems neat in theory but too many 3 column lines is annoying
   -- {

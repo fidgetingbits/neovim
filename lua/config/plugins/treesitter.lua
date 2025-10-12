@@ -9,11 +9,11 @@ return {
     -- ft = "",
     -- keys = "",
     -- colorscheme = "",
-    load = function (name)
-        vim.cmd.packadd(name)
-        vim.cmd.packadd("nvim-treesitter-textobjects")
+    load = function(name)
+      vim.cmd.packadd(name)
+      vim.cmd.packadd("nvim-treesitter-textobjects")
     end,
-    after = function (plugin)
+    after = function(plugin)
       -- [[ Configure Treesitter ]]
       -- See `:help nvim-treesitter`
       require('nvim-treesitter.configs').setup {
@@ -22,6 +22,7 @@ return {
         incremental_selection = {
           enable = true,
           keymaps = {
+            -- FIXME: These conflict with fcitx5
             init_selection = '<c-space>',
             node_incremental = '<c-space>',
             scope_incremental = '<c-s>',

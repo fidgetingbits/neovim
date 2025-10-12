@@ -8,7 +8,8 @@ return {
     -- vim.cmd("highlight WinSeparator guifg=#EDC4E5 guibg=#171720")
 
     require("catppuccin").setup({
-      --transparent_background = true,
+      -- FIXME: This should maybe be a toggle from somewhere else
+      transparent_background = true,
       integrations = {
         cmp = true,
         gitsigns = true,
