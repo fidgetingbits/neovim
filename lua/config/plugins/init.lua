@@ -409,16 +409,15 @@ require('lze').load {
       vim.g.transparent_enabled = true
     end
   },
-  -- FIXME: This errors say alpha can't be found, so just ignore for now
-  -- {
-  --   "alpha.nvim",
-  --   for_cat = 'general.extra',
-  --   event = "VimEnter",
-  --   after = function(plugin)
-  --     require('alpha').setup({})
-  --     --require('alpha.themes.dashboard')
-  --   end
-  -- }
+  {
+    "alpha-nvim",
+    for_cat = 'general.extra',
+    --event = "VimEnter",
+    after = function(plugin)
+      local dashboard = require('alpha.themes.dashboard')
+      require('alpha').setup(dashboard.config)
+    end
+  }
 
   -- FIXME: Revisit. Seems neat in theory but too many 3 column lines is annoying
   -- {
