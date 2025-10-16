@@ -5,23 +5,27 @@ vim.g.maplocalleader = ' '
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
+-- Hide the message output line below the status bar
+-- FIXME: We probably only want this in terminal mode
+-- vim.o.cmdheight = 0
+
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.o.list = true
+--vim.o.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Set highlight on search
-vim.opt.hlsearch = true
+vim.o.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Preview substitutions live, as you type!
-vim.opt.inccommand = 'split'
+vim.o.inccommand = 'split'
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 10
+vim.o.scrolloff = 10
 -- Unlimited scrollback in terminal
-vim.opt.scrollback = -1
+vim.o.scrollback = -1
 
 -- Make line numbers default
 vim.wo.number = true

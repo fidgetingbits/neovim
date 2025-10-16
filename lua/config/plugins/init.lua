@@ -13,6 +13,9 @@ if ok then
     on_open = function(win)
       vim.api.nvim_win_set_config(win, { focusable = false })
     end,
+    -- Avoid warning when using transparency
+    -- FIXME: Tweak color, only using suggestion from warning for now
+    background_colour = "#000000",
   })
   vim.notify = notify
   vim.keymap.set("n", "<Esc>", function()
@@ -337,7 +340,7 @@ require('lze').load {
     for_cat = 'general.core',
     event = "DeferredUIEnter",
     after = function(plugin)
-      require('neo-tree').setup()
+      require('neo-tree').setup({})
       vim.keymap.set("n", "<leader>n", ":Neotree toggle<CR>", { desc = "Toggle Neotree" })
     end
   },
@@ -406,6 +409,16 @@ require('lze').load {
       vim.g.transparent_enabled = true
     end
   },
+  {
+    "alpha.nvim",
+    for_cat = 'general.extra',
+    event = "VimEnter",
+    after = function(plugin)
+      require('alpha').setup({})
+      --require('alpha.themes.dashboard')
+    end
+  }
+
 
 
   -- FIXME: Revisit. Seems neat in theory but too many 3 column lines is annoying

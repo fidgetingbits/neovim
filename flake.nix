@@ -286,6 +286,8 @@
                 undotree
                 indent-blankline-nvim
                 vim-startuptime
+                persistence-nvim # FIXME: Not sure this is needed, but is related to alpha
+                alpha-nvim
                 #buffers
                 # If it was included in your flake inputs as plugins-hlargs,
                 # this would be how to add that plugin in your config.
