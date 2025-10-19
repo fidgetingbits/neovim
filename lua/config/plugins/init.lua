@@ -417,8 +417,35 @@ require('lze').load {
       local dashboard = require('alpha.themes.dashboard')
       require('alpha').setup(dashboard.config)
     end
+  },
+  {
+    "obsidian.nvim",
+    for_cat = 'general.extra',
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require('obsidian').setup({
+        legacy_commands = false,
+        -- workspaces = {
+        --   {
+        --     name = "personal",
+        --     path = "~/wikis/abbot-wiki",
+        --   },
+        -- },
+      })
+    end
+  },
+  -- FIXME: prefer using marksman with lsp to access toc via telescope
+  {
+    "vim-markdown-toc",
+    for_cat = 'general.extra',
+    --event = "VimEnter",
+    after = function(plugin)
+      vim.g.vmt_list_item_char = "-"
+      vim.g.vmt_fence_text = '_header: "Outline"'
+      vim.g.vmt_fence_closing_text = '_footer: ""'
+      vim.g.vmt_fence_hidden_markdown_style = "GFM"
+    end
   }
-
   -- FIXME: Revisit. Seems neat in theory but too many 3 column lines is annoying
   -- {
   --   -- A Neovim plugin that makes vertical motions more comfortable.

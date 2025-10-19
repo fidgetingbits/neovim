@@ -135,6 +135,7 @@
               just-lsp
               # FIXME: This is maybe better for project-specific
               # pkgs.kdePackages.qtdeclarative /bin/qmlls
+              marksman
 
             ];
             # these names are arbitrary.
@@ -288,6 +289,8 @@
                 vim-startuptime
                 persistence-nvim # FIXME: Not sure this is needed, but is related to alpha
                 alpha-nvim
+                obsidian-nvim
+                vim-markdown-toc
                 #buffers
                 # If it was included in your flake inputs as plugins-hlargs,
                 # this would be how to add that plugin in your config.

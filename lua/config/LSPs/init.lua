@@ -194,5 +194,12 @@ require('lze').load {
         just = {}
       }
     }
-  }
+  },
+  {
+    "marksman",
+    for_cat = "markdown",
+    lsp = {
+      filetypes = { "markdown", "markdown.mdx" },
+    },
+  },
 }
