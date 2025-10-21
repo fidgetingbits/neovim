@@ -425,12 +425,13 @@ require('lze').load {
     after = function(plugin)
       require('obsidian').setup({
         legacy_commands = false,
-        -- workspaces = {
-        --   {
-        --     name = "personal",
-        --     path = "~/wikis/abbot-wiki",
-        --   },
-        -- },
+        disable_metadata = true,
+        workspaces = {
+          {
+            name = "personal",
+            path = "~/wiki/",
+          },
+        },
       })
     end
   },
