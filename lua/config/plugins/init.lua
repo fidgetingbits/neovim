@@ -433,6 +433,8 @@ require('lze').load {
           },
         },
       })
+      vim.keymap.set("n", "<leader>ot", require("obsidian").util.toggle_checkbox(),
+        { desc = '[O]bsidian [T]oggle checkbox' })
     end
   },
   -- FIXME: prefer using marksman with lsp to access toc via telescope

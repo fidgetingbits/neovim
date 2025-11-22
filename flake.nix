@@ -264,7 +264,7 @@
                   vim-rhubarb
                   nvim-surround
                   leap-nvim
-                  comfy-line-numbers-nvim
+                  # comfy-line-numbers-nvim
                   # FIXME: Move this maybe?
                   neo-tree-nvim
                   vimwiki
