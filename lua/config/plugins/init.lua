@@ -418,25 +418,25 @@ require('lze').load {
       require('alpha').setup(dashboard.config)
     end
   },
-  {
-    "obsidian.nvim",
-    for_cat = 'general.extra',
-    event = "DeferredUIEnter",
-    after = function(plugin)
-      require('obsidian').setup({
-        legacy_commands = false,
-        disable_metadata = true,
-        workspaces = {
-          {
-            name = "personal",
-            path = "~/wiki/",
-          },
-        },
-      })
-      vim.keymap.set("n", "<leader>ot", require("obsidian").util.toggle_checkbox(),
-        { desc = '[O]bsidian [T]oggle checkbox' })
-    end
-  },
+  -- {
+  --   "obsidian.nvim",
+  --   for_cat = 'general.extra',
+  --   event = "DeferredUIEnter",
+  --   after = function(plugin)
+  --     require('obsidian').setup({
+  --       legacy_commands = false,
+  --       disable_metadata = true,
+  --       workspaces = {
+  --         {
+  --           name = "personal",
+  --           path = "~/wiki/",
+  --         },
+  --       },
+  --     })
+  --     vim.keymap.set("n", "<leader>ot", require("obsidian").util.toggle_checkbox(),
+  --       { desc = '[O]bsidian [T]oggle checkbox' })
+  --   end
+  -- },
   -- FIXME: prefer using marksman with lsp to access toc via telescope
   {
     "vim-markdown-toc",
