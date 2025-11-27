@@ -116,6 +116,7 @@ return {
       vim.cmd.packadd("telescope-ui-select.nvim")
     end,
     after = function(plugin)
+      local actions = require("telescope.actions")
       require('telescope').setup {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
@@ -123,6 +124,8 @@ return {
         defaults = {
           mappings = {
             i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+            -- If selection, send it to qf, otherwise send all to qf
+            ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
           },
           file_ignore_patterns = telescope_ignore_patterns,
           layout_strategy = 'flex', -- Change layout depending on if on laptop screen or dualup
