@@ -316,17 +316,16 @@ require('lze').load {
       }
     end,
   },
-  {
-    -- a quick way to jump to anywhere in a buffer. sneak, easymotion, hop alternative
-    "leap.nvim",
-    for_cat = 'general.core',
-    event = "DeferredUIEnter",
-    -- keys = "",
-    after = function(plugin)
-      vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Plug>(leap)')
-      vim.keymap.set('n', 'S', '<Plug>(leap-from-window)')
-    end
-  },
+  -- {
+  --   -- a quick way to jump to anywhere in a buffer. sneak, easymotion, hop alternative
+  --   "leap.nvim",
+  --   for_cat = 'general.core',
+  --   event = "DeferredUIEnter",
+  --   after = function(plugin)
+  --     vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Plug>(leap)')
+  --     vim.keymap.set('n', 'S', '<Plug>(leap-from-window)')
+  --   end
+  -- },
   {
     -- Better in and around targeting that includes treesitter support
     "mini.ai",
