@@ -125,7 +125,7 @@ return {
           mappings = {
             i = { ['<c-enter>'] = 'to_fuzzy_refine' },
             -- If selection, send it to qf, otherwise send all to qf
-            ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+            -- ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
           },
           file_ignore_patterns = telescope_ignore_patterns,
           layout_strategy = 'flex', -- Change layout depending on if on laptop screen or dualup
