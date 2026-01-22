@@ -448,7 +448,7 @@ require('lze').load {
       vim.g.vmt_fence_closing_text = '_footer: ""'
       vim.g.vmt_fence_hidden_markdown_style = "GFM"
     end
-  }
+  },
   -- FIXME: Revisit. Seems neat in theory but too many 3 column lines is annoying
   -- {
   --   -- A Neovim plugin that makes vertical motions more comfortable.
@@ -459,4 +459,18 @@ require('lze').load {
   --     require('comfy-line-numbers').setup()
   --   end
   -- }
+
+  {
+    "kdl.vim",
+    for_cat = 'general.extra',
+    ft = "kdl",
+  },
+  {
+    'todo-comments.nvim',
+    for_cat = 'general.core',
+    event = 'DeferredUIEnter',
+    after = function(_)
+      require('todo-comments').setup()
+    end,
+  },
 }

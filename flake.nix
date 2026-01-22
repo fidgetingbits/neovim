@@ -1,28 +1,10 @@
-# Copyright (c) 2023 BirdeeHub
-# Licensed under the MIT license
-
-# Welcome to the main example config of nixCats!
-# there is a minimal flake the starter templates use
-# within the nix directory without the nixpkgs input,
-# but this one would work too!
-# Every config based on nixCats is a full nixCats.
-
-# This example config doesnt use lazy.nvim, and
-# it loads everything via nix.
-
-# It has some useful tricks
-# in it, especially for lsps, so if you have any questions,
-# first look through the docs, and then here!
-# It has examples of most of the things you would want to do
-# in your main nvim configuration.
-
-# If there is still not adequate info, ask in discussions
-# on the nixCats repo (or open a PR to add the info to the help!)
 {
   description = "Fidgetingbits' nixCats Flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    # nvim-treesitter is busted https://github.com/NotAShelf/nvf/issues/1312
+    # nixpkgs.url = "github:NixOS/nixpkgs/cad22e7d996aea55ecab064e84834289143e44a0";
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
 
     # see :help nixCats.flake.inputs
@@ -144,7 +126,7 @@
               universal-ctags
               ripgrep
               fd
-              # lint (FIXME: Maybe actually use the lint categry below?)
+              # lint (FIXME: Maybe actually use the lint category below?)
               shfmt
               shellharden
               nixfmt
@@ -272,6 +254,7 @@
                     json
                     bash
                     c
+                    kdl
                   ]
                 ))
               ];
@@ -298,11 +281,13 @@
                   zen-mode-nvim
                   smart-splits-nvim
                   transparent-nvim
+                  todo-comments-nvim
                   ;
               };
               development = builtins.attrValues {
                 inherit (pkgs.vimPlugins)
                   neogit
+                  kdl-vim
                   ;
               };
               # FIXME: Figure out why adding extra = true to cats doesn't load these?
