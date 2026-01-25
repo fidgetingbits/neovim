@@ -127,6 +127,7 @@
               ripgrep
               fd
               # lint (FIXME: Maybe actually use the lint category below?)
+              kdlfmt
               shfmt
               shellharden
               nixfmt

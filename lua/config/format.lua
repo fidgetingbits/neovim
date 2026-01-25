@@ -20,6 +20,7 @@ require('lze').load {
           -- templ = { "templ" },
           -- Conform will run multiple formatters sequentially
           lua = { "stylua" },
+          kdl = { "kdlfmt" },
           python = { "ruff" },
           nix = { "nixfmt" },
           rust = { "rustfmt" },
