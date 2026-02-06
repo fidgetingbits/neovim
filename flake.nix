@@ -256,6 +256,27 @@
                     bash
                     c
                     kdl
+                    zsh
+                    toml
+                    yaml
+                    markdown
+                    nasm
+                    just
+                    jq
+                    json5
+                    kconfig
+                    java
+                    javascript
+                    jinja
+                    html
+                    go
+                    git_config
+                    gitignore
+                    gitcommit
+                    gsv
+                    cpp
+                    cmake
+                    asm
                   ]
                 ))
               ];

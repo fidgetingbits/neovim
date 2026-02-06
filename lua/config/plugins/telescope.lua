@@ -60,6 +60,32 @@ local telescope_ignore_patterns = {
   "%.lock"
 }
 
+-- Allows you to toggle the search to include hidden files
+-- From https://github.com/nvim-telescope/telescope.nvim/issues/2874#issuecomment-1900967890
+local function my_find_files(opts, no_ignore)
+  opts = opts or {}
+  no_ignore = vim.F.if_nil(no_ignore, false)
+  opts.attach_mappings = function(_, map)
+    map({ "n", "i" }, "<C-h>", function(prompt_bufnr) -- <C-h> to toggle modes
+      local prompt = require("telescope.actions.state").get_current_line()
+      require("telescope.actions").close(prompt_bufnr)
+      no_ignore = not no_ignore
+      my_find_files({ default_text = prompt }, no_ignore)
+    end)
+    return true
+  end
+
+  if no_ignore then
+    opts.no_ignore = true
+    opts.hidden = true
+    opts.prompt_title = "Find Files <ALL>"
+    require("telescope.builtin").find_files(opts)
+  else
+    opts.prompt_title = "Find Files"
+    require("telescope.builtin").find_files(opts)
+  end
+end
+
 return {
   {
     "telescope.nvim",
@@ -97,7 +123,7 @@ return {
         desc = '[S]earch [/] in Open Files'
       },
       { "<leader>sn", '<cmd>Telescope notify<CR>',                                      mode = { "n" }, desc = '[S]earch [N]otifications', },
-      { "<leader>sb", function() return require('telescope.builtin').buffers() end,     mode = { "n" }, desc = '[S]earch existing buffers', },
+      { "<leader>sb", function() return require('telescope.builtin').buffers() end,     mode = { "n" }, desc = '[S]earch existing [B]uffers', },
       { "<leader>s.", function() return require('telescope.builtin').oldfiles() end,    mode = { "n" }, desc = '[S]earch Recent Files ("." for repeat)', },
       { "<leader>sr", function() return require('telescope.builtin').resume() end,      mode = { "n" }, desc = '[S]earch [R]esume', },
       { "<leader>sd", function() return require('telescope.builtin').diagnostics() end, mode = { "n" }, desc = '[S]earch [D]iagnostics', },
@@ -124,6 +150,7 @@ return {
         defaults = {
           mappings = {
             i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+            i = { [
             -- If selection, send it to qf, otherwise send all to qf
             -- ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
           },
