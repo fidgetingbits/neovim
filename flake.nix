@@ -273,7 +273,7 @@
                     git_config
                     gitignore
                     gitcommit
-                    gsv
+                    # gsv
                     cpp
                     cmake
                     asm
