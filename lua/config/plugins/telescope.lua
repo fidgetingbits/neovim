@@ -150,7 +150,8 @@ return {
         defaults = {
           mappings = {
             i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-            i = { [
+            -- FIXME: Add in the my_find_files trigger
+            -- i = { [
             -- If selection, send it to qf, otherwise send all to qf
             -- ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
           },
