@@ -277,6 +277,7 @@
                     cpp
                     cmake
                     asm
+                    # plantuml
                   ]
                 ))
               ];
@@ -310,6 +311,7 @@
                 inherit (pkgs.vimPlugins)
                   neogit
                   kdl-vim
+                  plantuml-syntax
                   ;
               };
               # FIXME: Figure out why adding extra = true to cats doesn't load these?
