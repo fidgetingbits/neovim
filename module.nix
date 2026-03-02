@@ -37,6 +37,25 @@ inputs:
     };
   };
 
+  config.specs.search = {
+    data = lib.attrValues {
+      inherit (pkgs.vimPlugins)
+        telescope-nvim
+        telescope-fzf-native-nvim
+        telescope-ui-select-nvim
+        flash-nvim
+        ;
+    };
+  };
+
+  config.specs.colors = {
+    data = lib.attrValues {
+      inherit (pkgs.vimPlugins)
+        catppuccin-nvim
+        ;
+    };
+  };
+
   config.specs.format = {
     enable = false;
     data = lib.attrValues {
