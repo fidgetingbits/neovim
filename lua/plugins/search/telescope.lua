@@ -83,7 +83,6 @@ return {
     -- event = "",
     -- ft = "",
     keys = {
-      { "<leader>sp", live_grep_git_root,                                               mode = { "n" }, desc = '[S]earch git [P]roject root', },
       {
         "<leader>/",
         function()
@@ -108,6 +107,7 @@ return {
         mode = { "n" },
         desc = '[S]earch [/] in Open Files'
       },
+      { "<leader>sp", live_grep_git_root,                                               mode = { "n" }, desc = '[S]earch git [P]roject root', },
       { "<leader>sn", '<cmd>Telescope notify<CR>',                                      mode = { "n" }, desc = '[S]earch [N]otifications', },
       { "<leader>sb", function() return require('telescope.builtin').buffers() end,     mode = { "n" }, desc = '[S]earch existing [B]uffers', },
       { "<leader>s.", function() return require('telescope.builtin').oldfiles() end,    mode = { "n" }, desc = '[S]earch Recent Files ("." for repeat)', },
@@ -122,11 +122,13 @@ return {
       { "<leader>sh", function() return require('telescope.builtin').help_tags() end,   mode = { "n" }, desc = '[S]earch [H]elp', },
     },
     -- colorscheme = "",
+    -- FIXME: Should these be loaded via lze instead?
     load = function(name)
       vim.cmd.packadd(name)
       vim.cmd.packadd("telescope-fzf-native.nvim")
       vim.cmd.packadd("telescope-ui-select.nvim")
     end,
+
     after = function(plugin)
       local actions = require("telescope.actions")
       require('telescope').setup {

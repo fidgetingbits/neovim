@@ -38,6 +38,8 @@ inputs:
   };
 
   config.specs.search = {
+    after = [ "core" ];
+    lazy = true;
     data = lib.attrValues {
       inherit (pkgs.vimPlugins)
         telescope-nvim
@@ -49,6 +51,8 @@ inputs:
   };
 
   config.specs.colors = {
+    after = [ "core" ];
+    lazy = true;
     data = lib.attrValues {
       inherit (pkgs.vimPlugins)
         catppuccin-nvim
@@ -57,6 +61,8 @@ inputs:
   };
 
   config.specs.format = {
+    after = [ "core" ];
+    lazy = true;
     enable = false;
     data = lib.attrValues {
       inherit (pkgs.vimPlugins)
