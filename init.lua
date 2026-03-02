@@ -2,6 +2,9 @@ vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.loader.enable() -- byte code caching
 
+-- See the auto-loaded files in plugin/ for options, keybinds, etc.
+require('nixinfo')
+
 nixInfo.lze.load {
   {
     import = "ai",
