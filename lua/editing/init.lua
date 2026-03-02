@@ -1,7 +1,7 @@
 return {
-  { import = "plugins.editing.mini-ai" },
-  { import = "plugins.editing.todo-comments" },
-  { import = "plugins.editing.undotree" },
+  { import = "editing.mini-ai" },
+  { import = "editing.todo-comments" },
+  { import = "editing.undotree" },
   -- FIXME: Move to modules
   {
     "indent-blankline.nvim",

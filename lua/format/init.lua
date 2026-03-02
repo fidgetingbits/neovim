@@ -1,5 +1,5 @@
 return {
-  { import = "plugins.format.conform" },
+  { import = "format.conform" },
   {
     "kdl.vim",
     ft = "kdl",
