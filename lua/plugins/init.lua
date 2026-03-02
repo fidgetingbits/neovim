@@ -20,6 +20,10 @@ return {
     category = "git"
   },
   {
+    import = "plugins.lsp",
+    category = "lsp"
+  },
+  {
     import = "plugins.markdown",
     category = "markdown"
   },

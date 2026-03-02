@@ -70,20 +70,3 @@ nixInfo.lze.register_handlers {
   -- as it also relies on the modify hook, and the value of enabled at that point
   nixInfo.lze.lsp,
 }
-
--- NOTE: This config uses lzextras.lsp handler
--- https://github.com/BirdeeHub/lzextras?tab=readme-ov-file#lsp-handler
--- Because we have the paths, we can set a more performant fallback function
--- for when you don't provide a filetype to trigger on yourself.
--- If you do provide a filetype, this will never be called.
-
-nixInfo.lze.h.lsp.set_ft_fallback(function(name)
-  local lspcfg = nixInfo.get_nix_plugin_path "nvim-lspconfig"
-  if lspcfg then
-    local ok, cfg = pcall(dofile, lspcfg .. "/lsp/" .. name .. ".lua")
-    return (ok and cfg or {}).filetypes or {}
-  else
-    -- the less performant thing we are trying to avoid at startup
-    return (vim.lsp.config[name] or {}).filetypes or {}
-  end
-end)

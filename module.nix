@@ -30,7 +30,6 @@ in
         vim-repeat
         plenary-nvim
         nvim-web-devicons
-        nvim-lspconfig
         ;
     };
 
@@ -40,6 +39,28 @@ in
         ripgrep
         fd
         tree-sitter
+        ;
+    };
+  };
+
+  config.specs.lsp = {
+    data = lib.attrValues {
+      inherit (pkgs.vimPlugins)
+        nvim-lspconfig
+        lazydev-nvim # FIXME: switch this to specs.lua eventually
+        ;
+    };
+
+    extraPackages = lib.attrValues {
+      inherit (pkgs)
+        taplo # toml
+        bash-language-server
+        just-lsp
+        marksman # markdown
+        nixd
+        nix-doc
+        stylua # lua
+        ruff # python
         ;
     };
   };
@@ -110,10 +131,6 @@ in
         ruff
         yamlfmt
         prettier
-        taplo # toml
-        bash-language-server
-        just-lsp
-        marksman # markdown
         ;
     };
   };
