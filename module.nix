@@ -6,10 +6,20 @@ inputs:
   pkgs,
   ...
 }:
+let
+  configSource = lib.fileset.toSource {
+    root = ./.;
+    fileset = lib.fileset.unions [
+      ./init.lua
+      ./lua
+      ./after
+      ./plugin
+    ];
+  };
+in
 {
-
   imports = [ wlib.wrapperModules.neovim ];
-  config.settings.config_directory = ./.;
+  config.settings.config_directory = "${configSource}";
 
   # NOTE: Specs are enabled by default
   config.specs.core = {
@@ -19,7 +29,6 @@ inputs:
         lzextras
         vim-repeat
         plenary-nvim
-        nvim-notify
         nvim-web-devicons
         nvim-lspconfig
         ;
@@ -54,14 +63,17 @@ inputs:
     data = lib.attrValues {
       inherit (pkgs.vimPlugins)
         catppuccin-nvim
+        nvim-notify
         fidget-nvim
         lualine-nvim
+        noice-nvim
         neo-tree-nvim
         trouble-nvim
         zen-mode-nvim
         snacks-nvim
         which-key-nvim
         smart-splits-nvim
+        wilder-nvim
         ;
     };
   };
@@ -137,6 +149,21 @@ inputs:
     data = lib.attrValues {
       inherit (pkgs.vimPlugins)
         codecompanion-nvim
+        ;
+    };
+  };
+
+  config.specs.completion = {
+    after = [ "core" ];
+    lazy = true;
+    data = lib.attrValues {
+      inherit (pkgs.vimPlugins)
+        # FIXME: see if we want any other blink-cmp sources
+        blink-cmp
+        blink-cmp-conventional-commits
+        luasnip
+
+        colorful-menu-nvim # provide additional info for completion suggestions
         ;
     };
   };
