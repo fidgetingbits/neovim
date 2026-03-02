@@ -22,8 +22,6 @@ inputs:
         nvim-notify
         nvim-web-devicons
         nvim-lspconfig
-        # FIXME: core?
-        nvim-lint
         ;
     };
 
@@ -63,6 +61,7 @@ inputs:
         zen-mode-nvim
         snacks-nvim
         which-key-nvim
+        smart-splits-nvim
         ;
     };
   };
@@ -77,10 +76,11 @@ inputs:
   #   };
   # };
 
+  # FIXME: make this false by default
   config.specs.format = {
     after = [ "core" ];
     lazy = true;
-    enable = false;
+    enable = true;
     data = lib.attrValues {
       inherit (pkgs.vimPlugins)
         conform-nvim
@@ -102,6 +102,81 @@ inputs:
         marksman # markdown
         ;
     };
+  };
+
+  config.specs.kdl = {
+    after = [ "format" ];
+    lazy = true;
+    enable = true;
+    data = lib.attrValues {
+      inherit (pkgs.vimPlugins)
+        kdl-vim
+        ;
+    };
+  };
+
+  config.specs.markdown = {
+    after = [ "core" ];
+    lazy = true;
+    enable = true;
+    data = lib.attrValues {
+      inherit (pkgs.vimPlugins)
+        vim-markdown-toc
+        ;
+    };
+  };
+
+  # FIXME: the extended tree sitter stuff should only be for development.
+  # maybe just nix, python, bash, json for servers?
+  config.specs.editing = {
+    after = [ "core" ];
+    lazy = true;
+    enable = true;
+    data =
+      lib.attrValues {
+        inherit (pkgs.vimPlugins)
+          mini-ai
+          nvim-surround
+          comment-nvim
+          indent-blankline-nvim
+          ;
+      }
+      ++ [
+        (pkgs.vimPlugins.nvim-treesitter.withPlugins (
+          plugins: with plugins; [
+            nix
+            lua
+            python
+            rust
+            json
+            bash
+            c
+            kdl
+            zsh
+            toml
+            yaml
+            markdown
+            nasm
+            just
+            jq
+            json5
+            kconfig
+            java
+            javascript
+            jinja
+            html
+            go
+            git_config
+            gitignore
+            gitcommit
+            # gsv
+            cpp
+            cmake
+            asm
+            # plantuml
+          ]
+        ))
+      ];
   };
 
   # config.specs.lint = {

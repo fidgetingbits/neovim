@@ -11,4 +11,8 @@ return {
     import = "plugins.ui",
     category = "colors"
   },
+  {
+    import = "plugins.editing",
+    category = "editing"
+  },
 }

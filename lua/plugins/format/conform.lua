@@ -1,10 +1,6 @@
 return {
   {
     "conform.nvim",
-    category = 'format',
-    -- cmd = { "" },
-    -- event = "",
-    -- ft = "",
     keys = {
       { "<leader>FF", desc = "[F]ormat [F]ile" },
     },
