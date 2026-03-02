@@ -1,10 +1,3 @@
-vim.loader.enable() -- bytecode caching
-
--- NOTE: These 2 need to be set up before any plugins are loaded.
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
-
--- [[ Setting options ]]
 -- See `:help vim.o`
 
 -- Hide the message output line below the status bar
