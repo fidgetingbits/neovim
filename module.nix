@@ -62,6 +62,7 @@ inputs:
         trouble-nvim
         zen-mode-nvim
         snacks-nvim
+        which-key-nvim
         ;
     };
   };
