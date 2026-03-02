@@ -1,8 +1,11 @@
-# Fidgetingbits' Standalone Neovim Config
+# Fidgeting Neovim
 
-This config is based on the idiomatic example from https://nixcats.org. I try
-to mostly copy the lazyvim.nvim distro for most functionality, with whatever
-additions I want. I don't use the lazyvim nixCats template because dealing with
-the tight integration of mason.nvim seems like a hack.
+A config based on
+[nix-wrappers-modules](https://github.com/BirdeeHub/nix-wrapper-modules/blob/main/templates/neovim/README.md).
+It is templated off some other examples of people I happened to see moving
+over, such as [here](https://github.com/pinksteven/stevenvim).
 
-If you want to try it, clone the repo and run `nix run`.
+## Resources
+
+* [official neovim template](https://github.com/BirdeeHub/nix-wrapper-modules/tree/main/templates/neovim)
+* [official nvim module](https://github.com/BirdeeHub/nix-wrapper-modules/tree/cf2acacb/wrapperModules/n/neovim)
