@@ -66,15 +66,17 @@ inputs:
     };
   };
 
-  # config.specs.development = {
-  #   after = [ "development" ];
-  #   lazy = true;
-  #   enable = false;
-  #   data = lib.attrValues {
-  #     inherit (pkgs.vimplugins)
-  #       ;
-  #   };
-  # };
+  # FIXME: Make this default disable or tied to development
+  config.specs.git = {
+    after = [ "core" ];
+    lazy = true;
+    data = lib.attrValues {
+      inherit (pkgs.vimPlugins)
+        gitsigns-nvim
+        neogit
+        ;
+    };
+  };
 
   # FIXME: make this false by default
   config.specs.format = {
@@ -122,6 +124,19 @@ inputs:
     data = lib.attrValues {
       inherit (pkgs.vimPlugins)
         vim-markdown-toc
+        markdown-preview-nvim
+        obsidian-nvim
+        ;
+    };
+  };
+
+  config.specs.ai = {
+    after = [ "ui" ];
+    lazy = true;
+    enable = true;
+    data = lib.attrValues {
+      inherit (pkgs.vimPlugins)
+        codecompanion-nvim
         ;
     };
   };

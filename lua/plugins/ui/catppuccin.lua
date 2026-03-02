@@ -22,7 +22,7 @@ return {
       },
     })
   end,
-  after = function()
+  after = function(plugin)
     vim.cmd.colorscheme("catppuccin")
   end,
 }
