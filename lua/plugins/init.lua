@@ -8,7 +8,7 @@ return {
     category = "search"
   },
   {
-    import = "plugins.colors",
+    import = "plugins.ui",
     category = "colors"
   },
 }

@@ -50,15 +50,31 @@ inputs:
     };
   };
 
-  config.specs.colors = {
+  config.specs.ui = {
     after = [ "core" ];
     lazy = true;
     data = lib.attrValues {
       inherit (pkgs.vimPlugins)
         catppuccin-nvim
+        fidget-nvim
+        lualine-nvim
+        neo-tree-nvim
+        trouble-nvim
+        zen-mode-nvim
+        snacks-nvim
         ;
     };
   };
+
+  # config.specs.development = {
+  #   after = [ "development" ];
+  #   lazy = true;
+  #   enable = false;
+  #   data = lib.attrValues {
+  #     inherit (pkgs.vimplugins)
+  #       ;
+  #   };
+  # };
 
   config.specs.format = {
     after = [ "core" ];

@@ -4,7 +4,6 @@ return {
   lazy = false,
   priority = 1000,
   config = function()
-    vim.cmd([[colorscheme catppuccin]])
     -- vim.cmd("highlight WinSeparator guifg=#EDC4E5 guibg=#171720")
 
     require("catppuccin").setup({
@@ -22,5 +21,8 @@ return {
         leap = true,
       },
     })
+  end,
+  after = function()
+    vim.cmd.colorscheme("catppuccin")
   end,
 }
