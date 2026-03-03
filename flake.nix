@@ -16,10 +16,10 @@
     # Neovim plugins from outside nixpkgs, either for fetching latest source or
     # because there is no package yet. See nvim-lib.neovimPlugins in module.nix
     ###
-    # inputs.plugins-XXX = {
-    #   url = "github:foo/bar";
-    #   flake = false;
-    # };
+    plugins-vim-cutlass = {
+      url = "github:svermeulen/vim-cutlass";
+      flake = false;
+    };
   };
 
   outputs =

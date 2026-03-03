@@ -36,10 +36,27 @@
         "type": "github"
       }
     },
+    "plugins-vim-cutlass": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1583100466,
+        "narHash": "sha256-j5W9q905ApDf3fvCIS4UwyHYnEZu5Ictn+6JkV/xjig=",
+        "owner": "svermeulen",
+        "repo": "vim-cutlass",
+        "rev": "7afd649415541634c8ce317fafbc31cd19d57589",
+        "type": "github"
+      },
+      "original": {
+        "owner": "svermeulen",
+        "repo": "vim-cutlass",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs",
+        "plugins-vim-cutlass": "plugins-vim-cutlass",
         "wrappers": "wrappers"
       }
     },

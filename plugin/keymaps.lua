@@ -73,3 +73,8 @@ vim.keymap.set("n", l .. "<tab>", ":tabnew<CR>", { noremap = true, silent = true
 vim.keymap.set("n", l .. "x", ":tabclose", { noremap = true, silent = true, desc = 'Close current tab' })
 vim.keymap.set("n", l .. "H", ":-tabmove", { noremap = true, silent = true, desc = 'Move tab to left' })
 vim.keymap.set("n", l .. "L", ":+tabmove", { noremap = true, silent = true, desc = 'Move tab to right' })
+
+if vim.g.neovide then
+  vim.keymap.set({ 'i', 'c', "n", "x", "v" }, '<C-S-v>', '<C-r>+',
+    { noremap = true, silent = true, desc = 'Paste from clipboard from within all modes' })
+end

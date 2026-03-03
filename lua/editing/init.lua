@@ -21,11 +21,20 @@ return {
   -- FIXME: Probably replace with mini-surround?
   {
     "nvim-surround",
-    for_cat = 'general.always',
     event = "DeferredUIEnter",
     -- keys = "",
     after = function(plugin)
       require('nvim-surround').setup()
     end,
+  },
+
+  {
+    "vim-cutlass",
+    event = "DeferredUIEnter",
+    keys = {
+      { "x",  "d",  mode = { "n", "x" }, noremap = true, desc = "cut text to clipboard" },
+      { "xx", "dd", mode = { "n" },      noremap = true, desc = "cut line to clipboard" },
+      { "X",  "D",  mode = { "n" },      noremap = true, desc = "cut remaining line to clipboard" },
+    },
   },
 }
