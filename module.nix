@@ -82,7 +82,7 @@ in
         marksman # markdown
         nixd
         nix-doc
-        stylua # lua
+        lua-language-server
         ruff # python
         ;
     };
@@ -154,6 +154,7 @@ in
         ruff
         yamlfmt
         prettier
+        stylua
         ;
     };
   };
@@ -202,6 +203,7 @@ in
         blink-cmp
         blink-cmp-conventional-commits
         luasnip
+        friendly-snippets
 
         colorful-menu-nvim # provide additional info for completion suggestions
         ;

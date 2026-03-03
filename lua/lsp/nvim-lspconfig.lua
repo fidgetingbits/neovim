@@ -32,7 +32,6 @@ return {
           -- we create a function that lets us more easily define mappings specific
           -- for LSP related items. It sets the mode, buffer and description for us each time.
 
-          -- FIXME: Switch these to keys = {}
           local nmap = function(keys, func, desc)
             if desc then
               desc = 'LSP: ' .. desc
@@ -41,6 +40,7 @@ return {
             vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
           end
 
+          -- FIXME: Change these probably
           nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
           nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
@@ -57,6 +57,7 @@ return {
           nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
 
           -- See `:help K` for why this keymap
+          -- FIXME: Double press should toggle no?
           nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
           nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
