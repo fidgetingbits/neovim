@@ -1,17 +1,22 @@
 {
   "nodes": {
-    "nixCats": {
+    "flake-parts": {
+      "inputs": {
+        "nixpkgs-lib": [
+          "nixpkgs"
+        ]
+      },
       "locked": {
-        "lastModified": 1764009888,
-        "narHash": "sha256-hJekfTiW1792txgRSM4LcHnz1lDSY87LYbsJEn2V378=",
-        "owner": "BirdeeHub",
-        "repo": "nixCats-nvim",
-        "rev": "16ac3281f322ea15d39843829e42a44d22da3715",
+        "lastModified": 1772408722,
+        "narHash": "sha256-rHuJtdcOjK7rAHpHphUb1iCvgkU3GpfvicLMwwnfMT0=",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
+        "rev": "f20dc5d9b8027381c474144ecabc9034d6a839a3",
         "type": "github"
       },
       "original": {
-        "owner": "BirdeeHub",
-        "repo": "nixCats-nvim",
+        "owner": "hercules-ci",
+        "repo": "flake-parts",
         "type": "github"
       }
     },
@@ -31,10 +36,48 @@
         "type": "github"
       }
     },
+    "plugins-vim-cutlass": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1583100466,
+        "narHash": "sha256-j5W9q905ApDf3fvCIS4UwyHYnEZu5Ictn+6JkV/xjig=",
+        "owner": "svermeulen",
+        "repo": "vim-cutlass",
+        "rev": "7afd649415541634c8ce317fafbc31cd19d57589",
+        "type": "github"
+      },
+      "original": {
+        "owner": "svermeulen",
+        "repo": "vim-cutlass",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
-        "nixCats": "nixCats",
-        "nixpkgs": "nixpkgs"
+        "flake-parts": "flake-parts",
+        "nixpkgs": "nixpkgs",
+        "plugins-vim-cutlass": "plugins-vim-cutlass",
+        "wrappers": "wrappers"
+      }
+    },
+    "wrappers": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1772329359,
+        "narHash": "sha256-0zwyzQ6TV1HZDs182O9ahtFLlUBm/TkOBSewG9EmP74=",
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
+        "rev": "cf2acacbbb4dc86211be108524891e316bc3e4f4",
+        "type": "github"
+      },
+      "original": {
+        "owner": "BirdeeHub",
+        "repo": "nix-wrapper-modules",
+        "type": "github"
       }
     }
   },

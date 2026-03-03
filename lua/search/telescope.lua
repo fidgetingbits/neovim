@@ -1,0 +1,184 @@
+-- Two important keymaps to use while in telescope are:
+--  - Insert mode: <c-/>
+--  - Normal mode: ?
+--
+-- This opens a window that shows you all of the keymaps for the current
+-- telescope picker. This is really useful to discover what Telescope can
+-- do as well as how to actually do it!
+
+-- Telescope live_grep in git root
+-- Function to find the git root directory based on the current buffer's path
+local function find_git_root()
+  -- Use the current buffer's path as the starting point for the git search
+  local current_file = vim.api.nvim_buf_get_name(0)
+  local current_dir
+  local cwd = vim.fn.getcwd()
+  -- If the buffer is not associated with a file, return nil
+  if current_file == "" then
+    current_dir = cwd
+  else
+    -- Extract the directory from the current file's path
+    current_dir = vim.fn.fnamemodify(current_file, ":h")
+  end
+
+  -- Find the Git root directory from the current file's path
+  local git_root = vim.fn.systemlist("git -C " .. vim.fn.escape(current_dir, " ") .. " rev-parse --show-toplevel")[1]
+  if vim.v.shell_error ~= 0 then
+    print("Not a git repository. Searching on current working directory")
+    return cwd
+  end
+  return git_root
+end
+
+-- Custom live_grep function to search in git root
+local function live_grep_git_root()
+  local git_root = find_git_root()
+  if git_root then
+    require('telescope.builtin').live_grep({
+      search_dirs = { git_root },
+    })
+  end
+end
+
+
+local telescope_ignore_patterns = {
+  -- Ignore nix lock files
+  "%.lock"
+}
+
+-- Allows you to toggle the search to include hidden files
+-- From https://github.com/nvim-telescope/telescope.nvim/issues/2874#issuecomment-1900967890
+local function my_find_files(opts, no_ignore)
+  opts = opts or {}
+  no_ignore = vim.F.if_nil(no_ignore, false)
+  opts.attach_mappings = function(_, map)
+    map({ "n", "i" }, "<C-h>", function(prompt_bufnr) -- <C-h> to toggle modes
+      local prompt = require("telescope.actions.state").get_current_line()
+      require("telescope.actions").close(prompt_bufnr)
+      no_ignore = not no_ignore
+      my_find_files({ default_text = prompt }, no_ignore)
+    end)
+    return true
+  end
+
+  if no_ignore then
+    opts.no_ignore = true
+    opts.hidden = true
+    opts.prompt_title = "Find Files <ALL>"
+    require("telescope.builtin").find_files(opts)
+  else
+    opts.prompt_title = "Find Files"
+    require("telescope.builtin").find_files(opts)
+  end
+end
+
+return {
+  {
+    "telescope.nvim",
+    category = 'search',
+    cmd = { "Telescope", "LiveGrepGitRoot" },
+    -- NOTE: our on attach function defines keybinds that call telescope.
+    -- so, the on_require handler will load telescope when we use those.
+    on_require = { "telescope", },
+    -- event = "",
+    -- ft = "",
+    keys = {
+      {
+        "<leader>/",
+        function()
+          -- Slightly advanced example of overriding default behavior and theme
+          -- You can pass additional configuration to telescope to change theme, layout, etc.
+          require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+            winblend = 10,
+            previewer = false,
+          })
+        end,
+        mode = { "n" },
+        desc = '[/] Fuzzily search in current buffer',
+      },
+      {
+        "<leader>s/",
+        function()
+          require('telescope.builtin').live_grep {
+            grep_open_files = true,
+            prompt_title = 'Live Grep in Open Files',
+          }
+        end,
+        mode = { "n" },
+        desc = '[S]earch [/] in Open Files'
+      },
+      { "<leader>sp", live_grep_git_root,                                               mode = { "n" }, desc = '[S]earch git [P]roject root', },
+      { "<leader>sn", '<cmd>Telescope notify<CR>',                                      mode = { "n" }, desc = '[S]earch [N]otifications', },
+      { "<leader>sb", function() return require('telescope.builtin').buffers() end,     mode = { "n" }, desc = '[S]earch existing [B]uffers', },
+      { "<leader>s.", function() return require('telescope.builtin').oldfiles() end,    mode = { "n" }, desc = '[S]earch Recent Files ("." for repeat)', },
+      { "<leader>sr", function() return require('telescope.builtin').resume() end,      mode = { "n" }, desc = '[S]earch [R]esume', },
+      { "<leader>sd", function() return require('telescope.builtin').diagnostics() end, mode = { "n" }, desc = '[S]earch [D]iagnostics', },
+      { "<leader>sg", function() return require('telescope.builtin').live_grep() end,   mode = { "n" }, desc = '[S]earch by [G]rep', },
+      { "<leader>sw", function() return require('telescope.builtin').grep_string() end, mode = { "n" }, desc = '[S]earch current [W]ord', },
+      { "<leader>ss", function() return require('telescope.builtin').builtin() end,     mode = { "n" }, desc = '[S]earch [S]elect Telescope', },
+      { "<leader>sf", function() return require('telescope.builtin').find_files() end,  mode = { "n" }, desc = '[S]earch [F]iles', },
+      { "<leader>sp", function() return require('telescope.builtin').git_files() end,   mode = { "n" }, desc = '[S]earch [P]roject Root Files', },
+      { "<leader>sk", function() return require('telescope.builtin').keymaps() end,     mode = { "n" }, desc = '[S]earch [K]eymaps', },
+      { "<leader>sh", function() return require('telescope.builtin').help_tags() end,   mode = { "n" }, desc = '[S]earch [H]elp', },
+    },
+    -- colorscheme = "",
+    -- FIXME: Should these be loaded via lze instead?
+    load = function(name)
+      vim.cmd.packadd(name)
+      vim.cmd.packadd("telescope-fzf-native.nvim")
+      vim.cmd.packadd("telescope-ui-select.nvim")
+    end,
+
+    after = function(plugin)
+      local actions = require("telescope.actions")
+      require('telescope').setup {
+        -- You can put your default mappings / updates / etc. in here
+        --  All the info you're looking for is in `:help telescope.setup()`
+        --
+        defaults = {
+          mappings = {
+            i = { ['<c-enter>'] = 'to_fuzzy_refine' },
+            -- FIXME: Add in the my_find_files trigger
+            -- i = { [
+            -- If selection, send it to qf, otherwise send all to qf
+            -- ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
+          },
+          file_ignore_patterns = telescope_ignore_patterns,
+          layout_strategy = 'flex', -- Change layout depending on if on laptop screen or dualup
+          -- FIXME: Still need to test this on the laptop... may be better to just make the layout_strategy a function that checks for monitors or something eventually?
+          layout_config = {
+            flex = {
+              flip_columns = 180,
+              flip_lines = 50,
+            },
+            vertical = {
+              preview_height = 0.75,
+              height = 0.95,
+            }
+          },
+        },
+        -- pickers = {}
+        extensions = {
+          ['ui-select'] = {
+            require('telescope.themes').get_dropdown(),
+          },
+        },
+      }
+
+      -- FIXME: revisit this key
+      vim.keymap.set("n", "<leader>uI", function()
+        vim.g.telescope_ignore_enabled = not vim.g.telescope_ignore_enabled
+
+        require("telescope.config").set_defaults({
+          file_ignore_patterns = vim.g.telescope_ignore_enabled and telescope_ignore_patterns or {},
+        })
+      end, { noremap = true, desc = "Toggle telescope ignore patterns" })
+
+      -- Enable telescope extensions, if they are installed
+      pcall(require('telescope').load_extension, 'fzf')
+      pcall(require('telescope').load_extension, 'ui-select')
+
+      vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
+    end,
+  },
+}
