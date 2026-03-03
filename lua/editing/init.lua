@@ -27,14 +27,13 @@ return {
       require('nvim-surround').setup()
     end,
   },
-
   {
-    "vim-cutlass",
-    event = "DeferredUIEnter",
-    keys = {
-      { "x",  "d",  mode = { "n", "x" }, noremap = true, desc = "cut text to clipboard" },
-      { "xx", "dd", mode = { "n" },      noremap = true, desc = "cut line to clipboard" },
-      { "X",  "D",  mode = { "n" },      noremap = true, desc = "cut remaining line to clipboard" },
-    },
+    "cutlass.nvim",
+    lazy = false,
+    after = function(plugin)
+      require('cutlass').setup({
+        cut_key = 'x',
+      })
+    end,
   },
 }

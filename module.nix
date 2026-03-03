@@ -198,10 +198,10 @@ in
           nvim-surround
           comment-nvim
           indent-blankline-nvim
+          cutlass-nvim
           ;
       }
       ++ [
-        config.nvim-lib.neovimPlugins.vim-cutlass
         (pkgs.vimPlugins.nvim-treesitter.withPlugins (
           plugins: with plugins; [
             nix
