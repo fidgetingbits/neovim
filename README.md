@@ -7,5 +7,5 @@ over, such as [here](https://github.com/pinksteven/stevenvim).
 
 ## Resources
 
-* [official neovim template](https://github.com/BirdeeHub/nix-wrapper-modules/tree/main/templates/neovim)
-* [official nvim module](https://github.com/BirdeeHub/nix-wrapper-modules/tree/cf2acacb/wrapperModules/n/neovim)
+* [neovim wrapper template](https://github.com/BirdeeHub/nix-wrapper-modules/tree/main/templates/neovim)
+* [neovim wrapper module](https://github.com/BirdeeHub/nix-wrapper-modules/tree/cf2acacb/wrapperModules/n/neovim)

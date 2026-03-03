@@ -3,8 +3,10 @@ vim.g.maplocalleader = ' '
 vim.loader.enable() -- byte code caching
 
 -- See the auto-loaded files in plugin/ for options, keybinds, etc.
-require('nixinfo')
 
+require('nixinfo') -- setup nixInfo and lze
+
+-- Load all the plugins/lsps from lua/
 nixInfo.lze.load {
   {
     import = "ai",
