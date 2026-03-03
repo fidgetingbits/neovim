@@ -19,7 +19,30 @@ let
 in
 {
   imports = [ wlib.wrapperModules.neovim ];
-  config.settings.config_directory = "${configSource}";
+
+  options.settings.dev_mode = lib.mkOption {
+    type = lib.types.bool;
+    default = false;
+  };
+
+  # Have neovim use immutable config from /nix/store
+  options.settings.wrapped_config = lib.mkOption {
+    type = lib.types.either wlib.types.stringable lib.types.luaInline;
+    default = "${configSource}";
+  };
+
+  # Have neovim use raw config folder for faster prototyping
+  options.settings.unwrapped_config = lib.mkOption {
+    type = lib.types.either wlib.types.stringable lib.types.luaInline;
+    default = lib.generators.mkLuaInline "vim.uv.os_homedir() .. '/dev/nix/neovim'";
+  };
+
+  config.settings.config_directory =
+    if config.settings.dev_mode then
+      config.settings.unwrapped_config
+    else
+      config.settings.wrapped_config;
+
 
   # NOTE: Specs are enabled by default
   config.specs.core = {
