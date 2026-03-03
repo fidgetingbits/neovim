@@ -36,10 +36,27 @@
         "type": "github"
       }
     },
+    "plugins-nvim-toggler": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1718462352,
+        "narHash": "sha256-5+pFsPtA2u1m5tjkJHW9hDb/dM848jdhwnu3OWKgeIU=",
+        "owner": "nguyenvukhang",
+        "repo": "nvim-toggler",
+        "rev": "467808600882fd6c9e33b9dbc4889b1b80cfd917",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nguyenvukhang",
+        "repo": "nvim-toggler",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs",
+        "plugins-nvim-toggler": "plugins-nvim-toggler",
         "wrappers": "wrappers"
       }
     },

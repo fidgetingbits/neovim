@@ -16,11 +16,10 @@
     # Neovim plugins from outside nixpkgs, either for fetching latest source or
     # because there is no package yet. See nvim-lib.neovimPlugins in module.nix
     ###
-    # inputs.plugins-foo = {
-    #   url = "github:foo/bar";
-
-    #   flake = false;
-    # };
+    plugins-nvim-toggler = {
+      url = "github:nguyenvukhang/nvim-toggler";
+      flake = false;
+    };
   };
 
   outputs =

@@ -43,7 +43,6 @@ in
     else
       config.settings.wrapped_config;
 
-
   # NOTE: Specs are enabled by default
   config.specs.core = {
     data = lib.attrValues {
@@ -53,6 +52,7 @@ in
         vim-repeat
         plenary-nvim
         nvim-web-devicons
+        mini-icons
         ;
     };
 
@@ -222,9 +222,11 @@ in
           comment-nvim
           indent-blankline-nvim
           cutlass-nvim
+
           ;
       }
       ++ [
+        config.nvim-lib.neovimPlugins.nvim-toggler
         (pkgs.vimPlugins.nvim-treesitter.withPlugins (
           plugins: with plugins; [
             nix
@@ -257,6 +259,7 @@ in
             cmake
             asm
             # plantuml
+            regex
           ]
         ))
       ];

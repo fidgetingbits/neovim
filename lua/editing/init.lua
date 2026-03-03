@@ -2,6 +2,7 @@ return {
   { import = "editing.mini-ai" },
   { import = "editing.todo-comments" },
   { import = "editing.undotree" },
+  { import = "editing.nvim-toggler" },
   -- FIXME: Move to modules
   {
     "indent-blankline.nvim",
