@@ -31,17 +31,17 @@ return {
           ['<C-t>'] = { 'show_signature', 'hide_signature', 'fallback' },
 
           -- NOTE: c-e has some odd behavior, so is annoying if you over press
-          -- ['<C-e>'] = { 'hide', 'hide_documentation', 'hide_signature', }, --'fallback' },
+          ['<C-e>'] = { 'hide', 'hide_documentation', 'hide_signature', }, --'fallback' },
           ['<C-y>'] = { 'select_and_accept', 'fallback' },
 
-          ['<C-p>'] = { 'select_prev', 'fallback_to_mappings' },
-          ['<C-n>'] = { 'select_next', 'fallback_to_mappings' },
+          ['<C-k>'] = { 'select_prev', 'fallback_to_mappings' },
+          ['<C-j>'] = { 'select_next', 'fallback_to_mappings' },
 
           ['<C-b>'] = { 'scroll_documentation_up', 'fallback' },
           ['<C-f>'] = { 'scroll_documentation_down', 'fallback' },
 
-          ['<C-j>'] = { 'snippet_forward', 'fallback' },
-          ['<C-k>'] = { 'snippet_backward', 'fallback' },
+          ['<C-n>'] = { 'snippet_forward', 'fallback' },
+          ['<C-p>'] = { 'snippet_backward', 'fallback' },
 
         },
         cmdline = {
