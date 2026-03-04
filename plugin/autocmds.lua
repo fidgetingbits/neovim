@@ -1,9 +1,9 @@
 -- [[ Disable auto comment on enter ]]
 -- See :help formatoptions
-vim.api.nvim_create_autocmd("FileType", {
-  desc = "remove formatoptions",
+vim.api.nvim_create_autocmd('FileType', {
+  desc = 'remove formatoptions',
   callback = function()
-    vim.opt.formatoptions:remove({ "c", "r", "o" })
+    vim.opt.formatoptions:remove({ 'c', 'r', 'o' })
   end,
 })
 

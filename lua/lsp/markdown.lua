@@ -1,8 +1,8 @@
 return {
   {
-    "marksman",
+    'marksman',
     lsp = {
-      filetypes = { "markdown", "markdown.mdx" },
+      filetypes = { 'markdown', 'markdown.mdx' },
     },
   },
 }

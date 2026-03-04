@@ -1,4 +1,4 @@
 return {
-  { import = "completion.luasnip" },
-  { import = "completion.blink" },
+  { import = 'completion.luasnip' },
+  { import = 'completion.blink' },
 }

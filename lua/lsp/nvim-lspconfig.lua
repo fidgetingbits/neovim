@@ -5,9 +5,9 @@
 -- If you do provide a filetype, this will never be called.
 
 nixInfo.lze.h.lsp.set_ft_fallback(function(name)
-  local lspcfg = nixInfo.get_nix_plugin_path "nvim-lspconfig"
+  local lspcfg = nixInfo.get_nix_plugin_path('nvim-lspconfig')
   if lspcfg then
-    local ok, cfg = pcall(dofile, lspcfg .. "/lsp/" .. name .. ".lua")
+    local ok, cfg = pcall(dofile, lspcfg .. '/lsp/' .. name .. '.lua')
     return (ok and cfg or {}).filetypes or {}
   else
     -- the less performant thing we are trying to avoid at startup
@@ -17,8 +17,8 @@ end)
 
 return {
   {
-    "nvim-lspconfig",
-    on_require = { "lspconfig" },
+    'nvim-lspconfig',
+    on_require = { 'lspconfig' },
     -- NOTE: define a function for lsp,
     -- and it will run for all specs with type(plugin.lsp) == table
     -- when their filetype trigger loads them
@@ -46,13 +46,18 @@ return {
 
           nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
 
-
-          nmap('gr', function() require('telescope.builtin').lsp_references() end, '[G]oto [R]eferences')
-          nmap('gI', function() require('telescope.builtin').lsp_implementations() end, '[G]oto [I]mplementation')
-          nmap('<leader>lds', function() require('telescope.builtin').lsp_document_symbols() end,
-            '[D]ocument [S]ymbols')
-          nmap('<leader>lws', function() require('telescope.builtin').lsp_dynamic_workspace_symbols() end,
-            '[W]orkspace [S]ymbols')
+          nmap('gr', function()
+            require('telescope.builtin').lsp_references()
+          end, '[G]oto [R]eferences')
+          nmap('gI', function()
+            require('telescope.builtin').lsp_implementations()
+          end, '[G]oto [I]mplementation')
+          nmap('<leader>lds', function()
+            require('telescope.builtin').lsp_document_symbols()
+          end, '[D]ocument [S]ymbols')
+          nmap('<leader>lws', function()
+            require('telescope.builtin').lsp_dynamic_workspace_symbols()
+          end, '[W]orkspace [S]ymbols')
 
           nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
 
@@ -73,7 +78,7 @@ return {
           vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
             vim.lsp.buf.format()
           end, { desc = 'Format current buffer with LSP' })
-        end
+        end,
       })
     end,
   },

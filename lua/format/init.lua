@@ -1,7 +1,7 @@
 return {
-  { import = "format.conform" },
+  { import = 'format.conform' },
   {
-    "kdl.vim",
-    ft = "kdl",
+    'kdl.vim',
+    ft = 'kdl',
   },
 }

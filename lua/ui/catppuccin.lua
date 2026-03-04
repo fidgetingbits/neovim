@@ -1,12 +1,12 @@
 return {
-  "catppuccin/nvim",
-  name = "catppuccin-nvim", -- required for nixcats to recognize
+  'catppuccin/nvim',
+  name = 'catppuccin-nvim', -- required for nixcats to recognize
   lazy = false,
   priority = 1000,
   config = function()
     -- vim.cmd("highlight WinSeparator guifg=#EDC4E5 guibg=#171720")
 
-    require("catppuccin").setup({
+    require('catppuccin').setup({
       -- FIXME: This should maybe be a toggle from somewhere else
       transparent_background = true,
       integrations = {
@@ -23,6 +23,6 @@ return {
     })
   end,
   after = function(plugin)
-    vim.cmd.colorscheme("catppuccin")
+    vim.cmd.colorscheme('catppuccin')
   end,
 }

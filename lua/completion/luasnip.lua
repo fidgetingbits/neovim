@@ -1,8 +1,8 @@
 return {
   {
     -- NOTE: See blink for keymap
-    "luasnip",
-    dep_of = { "blink.cmp" },
+    'luasnip',
+    dep_of = { 'blink.cmp' },
     after = function(_)
       local luasnip = require('luasnip')
       require('luasnip.loaders.from_vscode').lazy_load()
@@ -10,9 +10,8 @@ return {
         -- Keeps the last snippet around, so you can jump back in if needed
         history = true,
         -- Updates as you type
-        updateevents = "TextChanged,TextChangedI",
-      }
-      )
+        updateevents = 'TextChanged,TextChangedI',
+      })
 
       -- FIXME: Move this to keys
       local ls = require('luasnip')
@@ -20,19 +19,19 @@ return {
       -- FIXME: tab is set to select entries instead of jumping to next part of snippet
 
       -- Prefer not to use tab for completions
-      vim.keymap.set({ "i", "s" }, "<c-k>", function()
+      vim.keymap.set({ 'i', 's' }, '<c-k>', function()
         if ls.expand_or_jumpable() then
           ls.expand_or_jump()
         end
       end, { silent = true })
 
-      vim.keymap.set({ "i", "s" }, "<c-j>", function()
+      vim.keymap.set({ 'i', 's' }, '<c-j>', function()
         if ls.jumpable(-1) then
           ls.jump(-1)
         end
       end, { silent = true })
 
-      vim.keymap.set({ "i", "s" }, "<c-l>", function()
+      vim.keymap.set({ 'i', 's' }, '<c-l>', function()
         if ls.choice_active() then
           ls.change_choice(1)
         end
@@ -44,7 +43,7 @@ return {
     end,
   },
   {
-    "friendly-snippets",
-    dep_of = { "luasnip" },
+    'friendly-snippets',
+    dep_of = { 'luasnip' },
   },
 }

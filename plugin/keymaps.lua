@@ -1,3 +1,4 @@
+-- stylua: ignore start
 -- [[ Basic Keymaps ]]
 
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
@@ -78,3 +79,5 @@ if vim.g.neovide then
   vim.keymap.set({ 'i', 'c', "n", "x", "v" }, '<C-S-v>', '<C-r>+',
     { noremap = true, silent = true, desc = 'Paste from clipboard from within all modes' })
 end
+
+-- stylua: ignore end

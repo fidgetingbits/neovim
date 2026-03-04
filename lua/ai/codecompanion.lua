@@ -1,19 +1,19 @@
 return {
-  "codecompanion.nvim",
-  cmd = { "CodeCompanion", "CodeCompanionChat", "CodeCompanionCmd", "CodeCompanionActions" },
+  'codecompanion.nvim',
+  cmd = { 'CodeCompanion', 'CodeCompanionChat', 'CodeCompanionCmd', 'CodeCompanionActions' },
   after = function(plugin)
-    require("codecompanion").setup({
+    require('codecompanion').setup({
       strategies = {
         chat = {
-          adapter = "openai",
+          adapter = 'openai',
         },
       },
       adapters = {
         openai = function()
-          return require("codecompanion.adapters").extend("openai", {
+          return require('codecompanion.adapters').extend('openai', {
             schema = {
               model = {
-                default = "deepseek-r1:8",
+                default = 'deepseek-r1:8',
               },
             },
           })
@@ -25,9 +25,9 @@ return {
         },
         -- FIXME: Use some config setting for if we have snacks enabled
         action_palette = {
-          provider = "telescope",
+          provider = 'telescope',
         },
       },
     })
-  end
+  end,
 }

@@ -14,17 +14,19 @@ local function find_git_root()
   local current_dir
   local cwd = vim.fn.getcwd()
   -- If the buffer is not associated with a file, return nil
-  if current_file == "" then
+  if current_file == '' then
     current_dir = cwd
   else
     -- Extract the directory from the current file's path
-    current_dir = vim.fn.fnamemodify(current_file, ":h")
+    current_dir = vim.fn.fnamemodify(current_file, ':h')
   end
 
   -- Find the Git root directory from the current file's path
-  local git_root = vim.fn.systemlist("git -C " .. vim.fn.escape(current_dir, " ") .. " rev-parse --show-toplevel")[1]
+  local git_root = vim.fn.systemlist(
+    'git -C ' .. vim.fn.escape(current_dir, ' ') .. ' rev-parse --show-toplevel'
+  )[1]
   if vim.v.shell_error ~= 0 then
-    print("Not a git repository. Searching on current working directory")
+    print('Not a git repository. Searching on current working directory')
     return cwd
   end
   return git_root
@@ -40,10 +42,9 @@ local function live_grep_git_root()
   end
 end
 
-
 local telescope_ignore_patterns = {
   -- Ignore nix lock files
-  "%.lock"
+  '%.lock',
 }
 
 -- Allows you to toggle the search to include hidden files
@@ -52,9 +53,9 @@ local function my_find_files(opts, no_ignore)
   opts = opts or {}
   no_ignore = vim.F.if_nil(no_ignore, false)
   opts.attach_mappings = function(_, map)
-    map({ "n", "i" }, "<C-h>", function(prompt_bufnr) -- <C-h> to toggle modes
-      local prompt = require("telescope.actions.state").get_current_line()
-      require("telescope.actions").close(prompt_bufnr)
+    map({ 'n', 'i' }, '<C-h>', function(prompt_bufnr) -- <C-h> to toggle modes
+      local prompt = require('telescope.actions.state').get_current_line()
+      require('telescope.actions').close(prompt_bufnr)
       no_ignore = not no_ignore
       my_find_files({ default_text = prompt }, no_ignore)
     end)
@@ -64,24 +65,23 @@ local function my_find_files(opts, no_ignore)
   if no_ignore then
     opts.no_ignore = true
     opts.hidden = true
-    opts.prompt_title = "Find Files <ALL>"
-    require("telescope.builtin").find_files(opts)
+    opts.prompt_title = 'Find Files <ALL>'
+    require('telescope.builtin').find_files(opts)
   else
-    opts.prompt_title = "Find Files"
-    require("telescope.builtin").find_files(opts)
+    opts.prompt_title = 'Find Files'
+    require('telescope.builtin').find_files(opts)
   end
 end
 
 return {
   {
-    "telescope.nvim",
+    'telescope.nvim',
     category = 'search',
-    cmd = { "Telescope", "LiveGrepGitRoot" },
+    cmd = { 'Telescope', 'LiveGrepGitRoot' },
     -- NOTE: our on attach function defines keybinds that call telescope.
     -- so, the on_require handler will load telescope when we use those.
-    on_require = { "telescope", },
-    -- event = "",
-    -- ft = "",
+    on_require = { 'telescope' },
+    -- stylua: ignore
     keys = {
       {
         "<leader>/",
@@ -125,13 +125,13 @@ return {
     -- FIXME: Should these be loaded via lze instead?
     load = function(name)
       vim.cmd.packadd(name)
-      vim.cmd.packadd("telescope-fzf-native.nvim")
-      vim.cmd.packadd("telescope-ui-select.nvim")
+      vim.cmd.packadd('telescope-fzf-native.nvim')
+      vim.cmd.packadd('telescope-ui-select.nvim')
     end,
 
     after = function(plugin)
-      local actions = require("telescope.actions")
-      require('telescope').setup {
+      local actions = require('telescope.actions')
+      require('telescope').setup({
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
@@ -154,7 +154,7 @@ return {
             vertical = {
               preview_height = 0.75,
               height = 0.95,
-            }
+            },
           },
         },
         -- pickers = {}
@@ -163,16 +163,16 @@ return {
             require('telescope.themes').get_dropdown(),
           },
         },
-      }
+      })
 
       -- FIXME: revisit this key
-      vim.keymap.set("n", "<leader>uI", function()
+      vim.keymap.set('n', '<leader>uI', function()
         vim.g.telescope_ignore_enabled = not vim.g.telescope_ignore_enabled
 
-        require("telescope.config").set_defaults({
+        require('telescope.config').set_defaults({
           file_ignore_patterns = vim.g.telescope_ignore_enabled and telescope_ignore_patterns or {},
         })
-      end, { noremap = true, desc = "Toggle telescope ignore patterns" })
+      end, { noremap = true, desc = 'Toggle telescope ignore patterns' })
 
       -- Enable telescope extensions, if they are installed
       pcall(require('telescope').load_extension, 'fzf')

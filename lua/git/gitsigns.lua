@@ -1,7 +1,7 @@
 return {
   {
-    "gitsigns.nvim",
-    event = "DeferredUIEnter",
+    'gitsigns.nvim',
+    event = 'DeferredUIEnter',
     after = function(plugin)
       require('gitsigns').setup({
         -- See `:help gitsigns.txt`
@@ -45,10 +45,10 @@ return {
           -- Actions
           -- visual mode
           map('v', '<leader>hs', function()
-            gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+            gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
           end, { desc = 'stage git hunk' })
           map('v', '<leader>hr', function()
-            gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
+            gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
           end, { desc = 'reset git hunk' })
           -- normal mode
           map('n', '<leader>gs', gs.stage_hunk, { desc = 'git stage hunk' })
@@ -58,11 +58,11 @@ return {
           map('n', '<leader>gR', gs.reset_buffer, { desc = 'git Reset buffer' })
           map('n', '<leader>gp', gs.preview_hunk, { desc = 'preview git hunk' })
           map('n', '<leader>gb', function()
-            gs.blame_line { full = false }
+            gs.blame_line({ full = false })
           end, { desc = 'git blame line' })
           map('n', '<leader>gd', gs.diffthis, { desc = 'git diff against index' })
           map('n', '<leader>gD', function()
-            gs.diffthis '~'
+            gs.diffthis('~')
           end, { desc = 'git diff against last commit' })
 
           -- Toggles
@@ -77,5 +77,5 @@ return {
       vim.cmd([[hi GitSignsChange guifg=#83fce6]])
       vim.cmd([[hi GitSignsDelete guifg=#fa2525]])
     end,
-  }
+  },
 }

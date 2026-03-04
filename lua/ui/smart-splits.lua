@@ -1,8 +1,8 @@
 return {
   {
     -- Better in and around targeting that includes treesitter support
-    "smart-splits.nvim",
-    event = "DeferredUIEnter",
+    'smart-splits.nvim',
+    event = 'DeferredUIEnter',
     after = function(plugin)
       require('smart-splits').setup()
       -- resizing splits
@@ -23,6 +23,6 @@ return {
       vim.keymap.set('n', '<C-S-j>', require('smart-splits').swap_buf_down)
       vim.keymap.set('n', '<C-S-k>', require('smart-splits').swap_buf_up)
       vim.keymap.set('n', '<C-S-l>', require('smart-splits').swap_buf_right)
-    end
+    end,
   },
 }

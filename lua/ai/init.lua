@@ -1,3 +1,3 @@
 return {
-  { import = "ai.codecompanion" }
+  { import = 'ai.codecompanion' },
 }

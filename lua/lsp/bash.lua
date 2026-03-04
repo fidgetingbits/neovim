@@ -1,10 +1,10 @@
 return {
   {
-    "bashls",
+    'bashls',
     lsp = {
       -- Add .zsh files as there is no dedicated zsh lsp afaik
       filetypes = { 'bash', 'sh', 'zsh' },
-      root_markers = { ".git", ".zshrc", ".bashrc", ".envrc" },
+      root_markers = { '.git', '.zshrc', '.bashrc', '.envrc' },
       single_file_support = true,
       settings = {
         -- Default globPattern isn't recursive
@@ -15,8 +15,8 @@ return {
         bashIde = {
           globPattern = '**/*@(.sh|.inc|.bash|.command)',
         },
-        bashls = {}
-      }
+        bashls = {},
+      },
     },
   },
 }

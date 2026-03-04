@@ -1,24 +1,24 @@
 return {
   {
-    "conform.nvim",
+    'conform.nvim',
     lazy = false,
     after = function(plugin)
-      local conform = require("conform")
+      local conform = require('conform')
 
       conform.setup({
         formatters_by_ft = {
           -- Conform will run multiple formatters sequentially
           -- FIXME: switch to treefmt
-          lua = { "stylua" },
-          kdl = { "kdlfmt" },
-          python = { "ruff" },
-          nix = { "nixfmt" },
-          rust = { "rustfmt" },
-          sh = { "shfmt", "shellharden" },
-          zsh = { "shfmt", "shellharden" },
-          json = { "prettier" },
-          yaml = { "prettier", "yamlfmt" },
-          toml = { "taplo" },
+          lua = { 'stylua' },
+          kdl = { 'kdlfmt' },
+          python = { 'ruff' },
+          nix = { 'nixfmt' },
+          rust = { 'rustfmt' },
+          sh = { 'shfmt', 'shellharden' },
+          zsh = { 'shfmt', 'shellharden' },
+          json = { 'prettier' },
+          yaml = { 'prettier', 'yamlfmt' },
+          toml = { 'taplo' },
           -- Use a sub-list to run only the first available formatter
           -- javascript = { { "prettierd", "prettier" } },
         },
@@ -28,17 +28,17 @@ return {
         format_on_save = {
           -- These options will be passed to conform.format()
           timeout_ms = 500,
-          lsp_format = "fallback",
+          lsp_format = 'fallback',
         },
       })
 
-      vim.keymap.set({ "n", "v" }, "<leader>FF", function()
+      vim.keymap.set({ 'n', 'v' }, '<leader>FF', function()
         conform.format({
           lsp_fallback = true,
           async = false,
           timeout_ms = 1000,
         })
-      end, { desc = "[F]ormat [F]ile" })
+      end, { desc = '[F]ormat [F]ile' })
 
       -- Setup format on save
       -- vim.api.nvim_create_autocmd("LspAttach", {

@@ -1,46 +1,46 @@
 return {
-  { import = "editing.mini-ai" },
-  { import = "editing.todo-comments" },
-  { import = "editing.undotree" },
-  { import = "editing.nvim-toggler" },
+  { import = 'editing.mini-ai' },
+  { import = 'editing.todo-comments' },
+  { import = 'editing.undotree' },
+  { import = 'editing.nvim-toggler' },
   -- FIXME: Move to modules
   {
-    "indent-blankline.nvim",
-    event = "DeferredUIEnter",
+    'indent-blankline.nvim',
+    event = 'DeferredUIEnter',
     after = function(plugin)
-      require("ibl").setup()
+      require('ibl').setup()
     end,
   },
   -- FIXME: Maybe replace with mini-comment?
   {
-    "comment.nvim",
-    event = "DeferredUIEnter",
+    'comment.nvim',
+    event = 'DeferredUIEnter',
     after = function(plugin)
-      require("Comment").setup()
+      require('Comment').setup()
     end,
   },
   {
-    "mini.surround",
-    event = "DeferredUIEnter",
+    'mini.surround',
+    event = 'DeferredUIEnter',
     -- keys = "",
     after = function(plugin)
-      require("mini.surround").setup()
+      require('mini.surround').setup()
     end,
   },
   {
-    "cutlass.nvim",
+    'cutlass.nvim',
     lazy = false,
     after = function(plugin)
-      require("cutlass").setup({
-        cut_key = "x",
+      require('cutlass').setup({
+        cut_key = 'x',
       })
     end,
   },
   {
-    "nvim-better-n",
+    'nvim-better-n',
     lazy = false,
     after = function(plugin)
-      require("better-n").setup({})
+      require('better-n').setup({})
     end,
   },
 }

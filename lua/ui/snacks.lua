@@ -1,11 +1,11 @@
 -- FIXME: lifted from EM
 return {
   {
-    "snacks.nvim",
+    'snacks.nvim',
     lazy = false,
-    event = "DeferredUIEnter",
+    event = 'DeferredUIEnter',
     after = function(plugin)
-      require("snacks").setup({
+      require('snacks').setup({
         -- Only showing enabled tools.
         -- See https://github.com/folke/snacks.nvim?tab=readme-ov-file#-features
         -- for available tools
@@ -35,38 +35,38 @@ return {
             pick = nil,
             keys = {
               {
-                icon = " ",
-                desc = "New File    :ene",
+                icon = ' ',
+                desc = 'New File    :ene',
                 -- key = "n",
                 -- action = ":ene | startinsert"
               },
               {
-                icon = " ",
-                desc = "Find File   <leader>ff",
+                icon = ' ',
+                desc = 'Find File   <leader>ff',
                 -- key = "f",
                 -- action = ":Telescope find_files",
               },
               {
-                icon = " ",
-                desc = "Find Buffer   <leader>fb",
+                icon = ' ',
+                desc = 'Find Buffer   <leader>fb',
                 -- key = "b",
                 -- action = ":Telescope buffers",
               },
               {
-                icon = " ",
-                desc = "Live grep   <leader>fg",
+                icon = ' ',
+                desc = 'Live grep   <leader>fg',
                 -- key = "g",
                 -- action = ":Telescope live_grep",
               },
               {
-                icon = " ",
-                desc = "Recent Files    <leader>fr",
+                icon = ' ',
+                desc = 'Recent Files    <leader>fr',
                 -- key = "r",
                 -- action = ":Telescope oldfiles",
               },
               {
-                icon = "󰮥 ",
-                desc = "Help tags     <leader>fh",
+                icon = '󰮥 ',
+                desc = 'Help tags     <leader>fh',
                 -- key = "r",
                 -- action = ":Telescope help_tags",
               },
@@ -108,31 +108,32 @@ return {
           },
           formats = {
             icon = function(item)
-              if item.file and item.icon == "file" or item.icon == "directory" then
+              if item.file and item.icon == 'file' or item.icon == 'directory' then
                 return Snacks.dashboard.icon(item.file, item.icon)
               end
-              return { item.icon, width = 2, hl = "icon" }
+              return { item.icon, width = 2, hl = 'icon' }
             end,
-            footer = { "%s", align = "center" },
-            header = { "%s", align = "center" },
+            footer = { '%s', align = 'center' },
+            header = { '%s', align = 'center' },
             file = function(item, ctx)
-              local fname = vim.fn.fnamemodify(item.file, ":~")
+              local fname = vim.fn.fnamemodify(item.file, ':~')
               fname = ctx.width and #fname > ctx.width and vim.fn.pathshorten(fname) or fname
               if #fname > ctx.width then
-                local dir = vim.fn.fnamemodify(fname, ":h")
-                local file = vim.fn.fnamemodify(fname, ":t")
+                local dir = vim.fn.fnamemodify(fname, ':h')
+                local file = vim.fn.fnamemodify(fname, ':t')
                 if dir and file then
                   file = file:sub(-(ctx.width - #dir - 2))
-                  fname = dir .. "/…" .. file
+                  fname = dir .. '/…' .. file
                 end
               end
-              local dir, file = fname:match("^(.*)/(.+)$")
-              return dir and { { dir .. "/", hl = "dir" }, { file, hl = "file" } } or { { fname, hl = "file" } }
+              local dir, file = fname:match('^(.*)/(.+)$')
+              return dir and { { dir .. '/', hl = 'dir' }, { file, hl = 'file' } }
+                or { { fname, hl = 'file' } }
             end,
           },
           sections = {
-            { section = "header" },
-            { section = "keys", gap = 1, padding = 1 },
+            { section = 'header' },
+            { section = 'keys', gap = 1, padding = 1 },
           },
         },
         -- picker/explorer

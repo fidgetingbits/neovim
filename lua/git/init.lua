@@ -1,4 +1,4 @@
 return {
-  { import = "git.gitsigns" },
-  { import = "git.neogit" },
+  { import = 'git.gitsigns' },
+  { import = 'git.neogit' },
 }

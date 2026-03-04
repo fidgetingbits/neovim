@@ -1,6 +1,6 @@
 return {
   {
-    "lua_ls",
+    'lua_ls',
     lsp = {
       filetypes = { 'lua' },
       settings = {
@@ -11,15 +11,15 @@ return {
           },
           signatureHelp = { enabled = true },
           diagnostics = {
-            globals = { "nixInfo", "vim", },
+            globals = { 'nixInfo', 'vim' },
             disable = { 'missing-fields' },
           },
           telemetry = { enabled = false },
           workspace = {
-          ignoreDir = { "result", },
-        },
-        },
+            ignoreDir = { 'result' },
+          },
         },
       },
     },
-  }
+  },
+}
