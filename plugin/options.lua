@@ -7,7 +7,7 @@
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.o.clipboard = 'unnamedplus'
+vim.o.clipboard = "unnamedplus"
 
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
@@ -19,7 +19,7 @@ vim.o.list = true
 vim.o.hlsearch = true
 
 -- Preview substitutions live, as you type!
-vim.o.inccommand = 'split'
+vim.o.inccommand = "split"
 
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.o.scrolloff = 10
@@ -30,14 +30,14 @@ vim.o.scrollback = -1
 vim.wo.number = true
 
 -- Enable mouse mode
-vim.o.mouse = 'a'
+vim.o.mouse = "a"
 
 -- Splits
 vim.o.equalalways = false
 
 -- Indent
 -- vim.o.smarttab = true
-vim.opt.cpoptions:append('I')
+vim.opt.cpoptions:append("I")
 vim.o.expandtab = true
 -- vim.o.smartindent = true
 -- vim.o.autoindent = true
@@ -56,7 +56,7 @@ vim.o.ignorecase = true
 vim.o.smartcase = true
 
 -- Keep signcolumn on by default
-vim.wo.signcolumn = 'yes'
+vim.wo.signcolumn = "yes"
 vim.wo.relativenumber = true
 
 -- Decrease update time
@@ -64,9 +64,16 @@ vim.o.updatetime = 250
 vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
-vim.o.completeopt = 'menu,preview,noselect'
+vim.o.completeopt = "menu,preview,noselect"
 
 vim.o.termguicolors = true
 
 vim.g.netrw_liststyle = 0
 vim.g.netrw_banner = 0
+
+-- Default: "ltToOCF"
+-- Disable:
+-- s - search hit TOP
+-- W - written messages
+-- I - intro messages
+vim.opt.shortmess:append("sIW")

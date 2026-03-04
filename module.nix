@@ -117,8 +117,8 @@ in
         snacks-nvim
         which-key-nvim
         smart-splits-nvim
-        wilder-nvim
         hardtime-nvim
+        todo-comments-nvim
         ;
     };
   };
@@ -221,15 +221,18 @@ in
       lib.attrValues {
         inherit (pkgs.vimPlugins)
           mini-ai
-          nvim-surround
+          mini-surround
           comment-nvim
           indent-blankline-nvim
           cutlass-nvim
 
           ;
+        inherit (config.nvim-lib.neovimPlugins)
+          nvim-toggler
+          nvim-better-n
+          ;
       }
       ++ [
-        config.nvim-lib.neovimPlugins.nvim-toggler
         (pkgs.vimPlugins.nvim-treesitter.withPlugins (
           plugins: with plugins; [
             nix

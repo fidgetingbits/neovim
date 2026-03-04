@@ -8,6 +8,7 @@ return {
       conform.setup({
         formatters_by_ft = {
           -- Conform will run multiple formatters sequentially
+          -- FIXME: switch to treefmt
           lua = { "stylua" },
           kdl = { "kdlfmt" },
           python = { "ruff" },

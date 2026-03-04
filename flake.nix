@@ -20,6 +20,10 @@
       url = "github:nguyenvukhang/nvim-toggler";
       flake = false;
     };
+    plugins-nvim-better-n = {
+      url = "github:jonatan-branting/nvim-better-n";
+      flake = false;
+    };
   };
 
   outputs =

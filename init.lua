@@ -15,10 +15,10 @@ nixInfo.lze.load({
     import = "completion",
     category = "completion",
   },
-    {
-      import = "editing",
-      category = "editing",
-    },
+  {
+    import = "editing",
+    category = "editing",
+  },
   {
     import = "format",
     category = "format",

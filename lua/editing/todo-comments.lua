@@ -1,7 +1,6 @@
 return {
   {
     "todo-comments.nvim",
-    auto_enable = true,
     event = { "BufReadPost", "BufNewFile" },
     after = function(name)
       require("todo-comments").setup({
@@ -21,12 +20,12 @@ return {
         },
         -- patterns from: https://github.com/folke/todo-comments.nvim/issues/10
         search = {
-          pattern = [[\b(KEYWORDS)(\([^\)]*\))?:]]
+          pattern = [[\b(KEYWORDS)(\([^\)]*\))?:]],
         },
         highlight = {
-          pattern = [[.*<((KEYWORDS)%(\(.{-1,}\))?):]]
+          pattern = [[.*<((KEYWORDS)%(\(.{-1,}\))?):]],
         },
       })
     end,
-  }
+  },
 }

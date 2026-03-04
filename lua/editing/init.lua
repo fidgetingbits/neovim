@@ -16,25 +16,31 @@ return {
     "comment.nvim",
     event = "DeferredUIEnter",
     after = function(plugin)
-      require('Comment').setup()
+      require("Comment").setup()
     end,
   },
-  -- FIXME: Probably replace with mini-surround?
   {
-    "nvim-surround",
+    "mini.surround",
     event = "DeferredUIEnter",
     -- keys = "",
     after = function(plugin)
-      require('nvim-surround').setup()
+      require("mini.surround").setup()
     end,
   },
   {
     "cutlass.nvim",
     lazy = false,
     after = function(plugin)
-      require('cutlass').setup({
-        cut_key = 'x',
+      require("cutlass").setup({
+        cut_key = "x",
       })
+    end,
+  },
+  {
+    "nvim-better-n",
+    lazy = false,
+    after = function(plugin)
+      require("better-n").setup({})
     end,
   },
 }

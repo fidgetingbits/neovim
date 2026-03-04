@@ -36,6 +36,22 @@
         "type": "github"
       }
     },
+    "plugins-nvim-better-n": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1767883445,
+        "narHash": "sha256-XMzC6CJ/Ku5gyBXccrvtE6dUt8aCgkZDhsg4YX/H7AA=",
+        "owner": "jonatan-branting",
+        "repo": "nvim-better-n",
+        "rev": "76fc575beafcf747d72ec33368d4034c9466328a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jonatan-branting",
+        "repo": "nvim-better-n",
+        "type": "github"
+      }
+    },
     "plugins-nvim-toggler": {
       "flake": false,
       "locked": {
@@ -56,6 +72,7 @@
       "inputs": {
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs",
+        "plugins-nvim-better-n": "plugins-nvim-better-n",
         "plugins-nvim-toggler": "plugins-nvim-toggler",
         "wrappers": "wrappers"
       }
