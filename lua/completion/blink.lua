@@ -115,7 +115,6 @@ return {
         },
         sources = {
           default = { "conventional_commits", "lsp", "path", "snippets", "buffer", "omni" },
-          -- FIXME: Revisit these values
           providers = {
             path = {
               score_offset = 50,
@@ -129,19 +128,16 @@ return {
             cmdline = {
               score_offset = -100,
             },
-            -- FIXME: Make sure this is actually needed
-              conventional_commits = {
-                name = "Conventional Commits",
-                module = "blink-cmp-conventional-commits",
-                enabled = function()
-                  return vim.bo.filetype == "gitcommit"
-                end,
-                ---@module 'blink-cmp-conventional-commits'
-                ---@type blink-cmp-conventional-commits.Options
-                opts = {
-                  -- See Configuration section below for available options
-                },
-              },
+            conventional_commits = {
+              name = "Conventional Commits",
+              module = "blink-cmp-conventional-commits",
+              enabled = function()
+                return vim.bo.filetype == "gitcommit"
+              end,
+              ---@module 'blink-cmp-conventional-commits'
+              ---@type blink-cmp-conventional-commits.Options
+              opts = {},
+            },
           },
         },
       })

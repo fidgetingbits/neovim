@@ -15,8 +15,11 @@ return {
             disable = { 'missing-fields' },
           },
           telemetry = { enabled = false },
+          workspace = {
+          ignoreDir = { "result", },
+        },
+        },
         },
       },
     },
   }
-}
