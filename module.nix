@@ -118,6 +118,7 @@ in
         which-key-nvim
         smart-splits-nvim
         wilder-nvim
+        hardtime-nvim
         ;
     };
   };

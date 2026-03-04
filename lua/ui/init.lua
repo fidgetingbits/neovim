@@ -10,6 +10,7 @@ return {
   { import = "ui.which-key" },
   { import = "ui.zen-mode" },
   { import = "ui.trouble" },
+  { import = "ui.hardtime" },
   -- FIXME: revisit this later, some python error
   -- { import = "ui.wilder" },
 }
