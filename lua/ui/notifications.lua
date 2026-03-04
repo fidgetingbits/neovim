@@ -1,11 +1,12 @@
 return {
-  {
-    "fidget.nvim",
-    event = "LspAttach",
-    after = function(plugin)
-      require("fidget").setup({})
-    end,
-  },
+  -- Using noice now
+  -- {
+  --   "fidget.nvim",
+  --   event = "LspAttach",
+  --   after = function(plugin)
+  --     require("fidget").setup({})
+  --   end,
+  -- },
   {
     "nvim-notify",
     priority = 1000,
@@ -37,6 +38,8 @@ return {
             ["vim.lsp.util.stylize_markdown"] = true,
             ["cmp.entry.get_documentation"] = true,
           },
+          -- Conflicts with blink
+          signature = { enabled = false, },
         },
         presets = {
           bottom_search = true,
