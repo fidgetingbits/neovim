@@ -43,6 +43,11 @@ in
     else
       config.settings.wrapped_config;
 
+  config.settings.aliases = [
+    "vi"
+    "vim"
+  ];
+
   # NOTE: Specs are enabled by default
   config.specs.core = {
     data = lib.attrValues {
