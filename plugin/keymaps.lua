@@ -9,11 +9,11 @@ vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = 'Moves Line Down' })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = 'Moves Line Up' })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = 'Scroll Down' })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = 'Scroll Up' })
+-- FIXME: since flash remaps n for some stuff, not sure if this is still relevant
 vim.keymap.set("n", "n", "nzzzv", { desc = 'Next Search Result' })
 vim.keymap.set("n", "N", "Nzzzv", { desc = 'Previous Search Result' })
 
-
--- see help sticky keys on windows
+-- typo tolerance for :W and friends
 vim.cmd([[command! W w]])
 vim.cmd([[command! Wq wq]])
 vim.cmd([[command! WQ wq]])
@@ -74,6 +74,13 @@ vim.keymap.set("n", l .. "<tab>", ":tabnew<CR>", { noremap = true, silent = true
 vim.keymap.set("n", l .. "x", ":tabclose", { noremap = true, silent = true, desc = 'Close current tab' })
 vim.keymap.set("n", l .. "H", ":-tabmove", { noremap = true, silent = true, desc = 'Move tab to left' })
 vim.keymap.set("n", l .. "L", ":+tabmove", { noremap = true, silent = true, desc = 'Move tab to right' })
+
+--[[
+ Experimental keymaps
+
+ Stuff I'm trying, but don't know if I'll keep
+]]
+vim.keymap.set('i', 'jk', '<ESC>:w<CR>', {noremap=true, silent=true})
 
 if vim.g.neovide then
   vim.keymap.set({ 'i', 'c', "n", "x", "v" }, '<C-S-v>', '<C-r>+',
