@@ -10,12 +10,13 @@ return {
             ignoreComments = true,
           },
           signatureHelp = { enabled = true },
+          -- See per-project .luarc.json for extras
           diagnostics = {
-            globals = { 'nixInfo', 'vim' },
             disable = { 'missing-fields' },
           },
           telemetry = { enabled = false },
           workspace = {
+            -- Don't want to always parse nix build result folder
             ignoreDir = { 'result' },
           },
         },
