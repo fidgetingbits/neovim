@@ -55,14 +55,14 @@ vim.keymap.set("n", l .. "o", ":LspStart<CR>", { desc = 'Turn on LSP' })
 -- See smart-splits.nvim maps instead
 
 -- Buffer motions
-local l = "<leader>b"
+l = "<leader>b"
 vim.keymap.set("n", l .. "h", "<cmd>bprev<CR>", { desc = 'Previous buffer' })
 vim.keymap.set("n", l .. "l", "<cmd>bnext<CR>", { desc = 'Next buffer' })
 vim.keymap.set("n", l .. ".", "<cmd>b#<CR>", { desc = 'Most recent buffer' })
 vim.keymap.set("n", l .. "s", "<cmd>ls<CR>", { desc = 'List buffers' })
 vim.keymap.set("n", l .. "x", "<cmd>bdelete<CR>", { desc = 'Delete buffer' })
 
--- Tab motions (FIXME: revisit)
+-- Tab motions
 l = "<leader><tab>"
 
 vim.keymap.set("n", l .. "e", ":tablast", { noremap = true, silent = true, desc = 'Go to last tab' })
@@ -83,8 +83,11 @@ vim.keymap.set("n", l .. "L", ":+tabmove", { noremap = true, silent = true, desc
 vim.keymap.set('i', 'jk', '<ESC>:w<CR>', {noremap=true, silent=true})
 
 if vim.g.neovide then
-  vim.keymap.set({ 'i', 'c', "n", "x", "v" }, '<C-S-v>', '<C-r>+',
+  vim.keymap.set({ 'i', "n", "x", "v" }, '<C-S-v>', '<C-r>+',
     { noremap = true, silent = true, desc = 'Paste from clipboard from within all modes' })
+  -- IMPORTANT: without `silent = false` pasting into cmdline mode won't show up immediately in neovide
+  vim.keymap.set({ 'c', }, '<C-S-v>', '<C-r>+',
+    { noremap = true, silent = false, desc = 'Paste from clipboard from within all modes' })
 end
 
 -- stylua: ignore end
