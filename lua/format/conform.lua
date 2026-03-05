@@ -2,7 +2,7 @@ return {
   {
     'conform.nvim',
     lazy = false,
-    after = function(plugin)
+    after = function(_)
       local conform = require('conform')
 
       conform.setup({
@@ -22,14 +22,56 @@ return {
           -- Use a sub-list to run only the first available formatter
           -- javascript = { { "prettierd", "prettier" } },
         },
+        format_on_save = function(bufnr)
+          -- Disable with a global or buffer-local variable
+          if vim.g.disable_autoformat or vim.b[bufnr].disable_autoformat then
+            return
+          end
+          return { timeout_ms = 500, lsp_format = 'fallback' }
+        end,
+      })
 
-        -- FIXME: Add a toggle that allows disabling formatting on some projects
-        -- https://github.com/stevearc/conform.nvim/blob/master/doc/recipes.md#command-to-toggle-format-on-save
-        format_on_save = {
-          -- These options will be passed to conform.format()
-          timeout_ms = 500,
-          lsp_format = 'fallback',
-        },
+      vim.api.nvim_create_user_command('FormatDisable', function(args)
+        if args.bang then
+          -- FormatDisable! will disable formatting just for this buffer
+          vim.b.disable_autoformat = true
+          vim.notify('Conform buffer auto-format disabled')
+        else
+          vim.g.disable_autoformat = true
+          vim.notify('Conform global auto-format disabled')
+        end
+      end, {
+        desc = 'Disable autoformat-on-save',
+        bang = true,
+      })
+      vim.api.nvim_create_user_command('FormatEnable', function()
+        vim.b.disable_autoformat = false
+        vim.g.disable_autoformat = false
+        vim.notify('Conform auto-format enabled')
+      end, {
+        desc = 'Re-enable autoformat-on-save',
+      })
+      vim.api.nvim_create_user_command('FormatToggle', function(args)
+        if args.buffer then
+          vim.b.disable_autoformat = not vim.b.disable_autoformat
+          vim.notify(
+            'Conform buffer auto-format ' .. (vim.b.disable_autoformat and 'disabled' or 'enabled')
+          )
+        elseif args.global then
+          vim.g.disable_autoformat = not vim.g.disable_autoformat
+          vim.notify(
+            'Conform global auto-format ' .. (vim.g.disable_autoformat and 'disabled' or 'enabled')
+          )
+        else
+          vim.b.disable_autoformat = not vim.b.disable_autoformat
+          vim.g.disable_autoformat = not vim.g.disable_autoformat
+          vim.notify(
+            'Conform auto-format ' .. (vim.g.disable_autoformat and 'disabled' or 'enabled')
+          )
+        end
+      end, {
+        nargs = '?',
+        desc = 'Toggle autoformat-on-save',
       })
 
       vim.keymap.set({ 'n', 'v' }, '<leader>FF', function()
@@ -40,30 +82,24 @@ return {
         })
       end, { desc = '[F]ormat [F]ile' })
 
-      -- Setup format on save
-      -- vim.api.nvim_create_autocmd("LspAttach", {
-      --   callback = function(args)
-      --     local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-      --     if client:supports_method("textDocument/formatting") then
-      --       vim.api.nvim_create_autocmd("BufWritePre", {
-      --         buffer = args.buf,
-      --         callback = function()
-      --           -- Allow per-project shut off via vim.o.exrc files
-      --           -- FIXME: Add a function to write such a file to the root of a project
-      --           if vim.b.disable_autoformat then
-      --             return
-      --           end
-      --
-      --           vim.lsp.buf.format({
-      --             async = false,
-      --             bufnr = args.buf,
-      --             id = client.id,
-      --           })
-      --         end,
-      --       })
-      --     end
-      --   end,
-      -- })
+      vim.keymap.set(
+        { 'n', 'v' },
+        '<leader>Fb',
+        '<cmd>FormatToggle buffer<CR>',
+        { desc = '[Format] toggle buffer' }
+      )
+      vim.keymap.set(
+        { 'n', 'v' },
+        '<leader>Fg',
+        '<cmd>FormatToggle global<CR>',
+        { desc = '[Format] toggle global' }
+      )
+      vim.keymap.set(
+        { 'n', 'v' },
+        '<leader>Ft',
+        '<cmd>FormatToggle<CR>',
+        { desc = '[Format] toggle' }
+      )
     end,
   },
 }
