@@ -77,3 +77,11 @@ vim.g.netrw_banner = 0
 -- W - written messages
 -- I - intro messages
 vim.opt.shortmess:append('sIW')
+
+if vim.g.neovide then
+  -- When using rounded borders lualine/tabs clip
+  vim.g.neovide_padding_top = 4
+  vim.g.neovide_padding_bottom = 0
+  vim.g.neovide_padding_right = 2
+  vim.g.neovide_padding_left = 7
+end
