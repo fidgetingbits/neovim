@@ -27,6 +27,7 @@ return {
           { '<leader>x', group = 'quickfi[x] & diagnostics' },
           { '<leader>y', group = '[y]ank' },
           { '<leader>z', group = 'folds/zen' },
+          { '<leader>F', group = '[F]ormatting' },
           { '<leader><tab>', group = 'tabs' },
         },
       })
