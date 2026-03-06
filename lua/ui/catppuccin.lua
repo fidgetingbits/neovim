@@ -7,18 +7,16 @@ return {
     -- vim.cmd("highlight WinSeparator guifg=#EDC4E5 guibg=#171720")
 
     require('catppuccin').setup({
-      -- FIXME: This should maybe be a toggle from somewhere else
       transparent_background = true,
+      auto_integrations = true,
+      -- FIXME: not sure if auto integration works with lze
       integrations = {
-        cmp = true,
         gitsigns = true,
         neotree = true,
         notify = true,
         treesitter = true,
-        barbar = true,
         ufo = true,
         which_key = true,
-        leap = true,
       },
     })
   end,
