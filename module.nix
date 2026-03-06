@@ -267,6 +267,7 @@ in
             # FIXME: see if we want any other blink-cmp sources
             blink-cmp
             blink-cmp-conventional-commits
+            blink-cmp-spell
             colorful-menu-nvim # provide additional info for completion suggestions
             friendly-snippets
             luasnip

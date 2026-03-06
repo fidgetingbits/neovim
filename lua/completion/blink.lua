@@ -4,6 +4,10 @@ return {
     dep_of = { 'blink.cmp' },
   },
   {
+    'blink-cmp-spell',
+    dep_of = { 'blink.cmp' },
+  },
+  {
     'colorful-menu.nvim',
     on_plugin = { 'blink.cmp' },
   },
@@ -114,7 +118,7 @@ return {
           end,
         },
         sources = {
-          default = { 'conventional_commits', 'lsp', 'path', 'snippets', 'buffer', 'omni' },
+          default = { 'spell', 'conventional_commits', 'lsp', 'path', 'snippets', 'buffer', 'omni' },
           providers = {
             path = {
               score_offset = 50,
@@ -137,6 +141,30 @@ return {
               ---@module 'blink-cmp-conventional-commits'
               ---@type blink-cmp-conventional-commits.Options
               opts = {},
+            },
+            spell = {
+              name = 'Spell',
+              module = 'blink-cmp-spell',
+              opts = {
+                use_cmp_spell_sorting = true,
+                -- Taken from https://github.com/ribru17/blink-cmp-spell README
+                -- Only enable source in `@spell` captures, and disable it
+                -- in tree-sitter `@nospell` captures.
+                enable_in_context = function()
+                  local curpos = vim.api.nvim_win_get_cursor(0)
+                  local captures =
+                    vim.treesitter.get_captures_at_pos(0, curpos[1] - 1, curpos[2] - 1)
+                  local in_spell_capture = false
+                  for _, cap in ipairs(captures) do
+                    if cap.capture == 'spell' then
+                      in_spell_capture = true
+                    elseif cap.capture == 'nospell' then
+                      return false
+                    end
+                  end
+                  return in_spell_capture
+                end,
+              },
             },
           },
         },
