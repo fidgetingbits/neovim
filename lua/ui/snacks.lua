@@ -133,7 +133,8 @@ return {
           },
           sections = {
             { section = 'header' },
-            { section = 'keys', gap = 1, padding = 1 },
+            -- FIXME: Disabled until I fix the hints
+            -- { section = 'keys', gap = 1, padding = 1 },
           },
         },
         -- picker/explorer
