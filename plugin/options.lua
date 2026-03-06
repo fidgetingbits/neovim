@@ -69,6 +69,9 @@ vim.o.completeopt = 'menu,preview,noselect'
 -- Show the current cursor line
 vim.o.cursorline = true
 
+-- Spelling
+vim.o.spell = true
+
 vim.o.termguicolors = true
 
 vim.g.netrw_liststyle = 0

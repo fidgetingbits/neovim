@@ -104,8 +104,8 @@ if vim.g.neovide then
 
 end
 
--- stylua: ignore end
+vim.keymap.set("n", "<leader>ts", function()
+	vim.opt.spell = not vim.opt.spell:get()
+end, { desc = "Toggle spell checking" })
 
-vim.keymap.set('n', '<leader>K', function()
-  print('test')
-end, { noremap = true, silent = true })
+-- stylua: ignore end
