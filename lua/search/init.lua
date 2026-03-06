@@ -1,4 +1,4 @@
 return {
-  { import = 'search.telescope' },
   { import = 'search.flash' },
+  { import = 'search.telescope' },
 }
