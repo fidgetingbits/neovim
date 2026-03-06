@@ -30,6 +30,10 @@
       # url = "path:/home/aa/dev/neovim/lua-console.nvim";
       flake = false;
     };
+    plugins-telescope-luasnip = {
+      url = "github:benfowler/telescope-luasnip.nvim";
+      flake = false;
+    };
   };
 
   outputs =

@@ -149,14 +149,22 @@ in
       search = {
         after = [ "core" ];
         lazy = true;
-        data = lib.attrValues {
-          inherit (pkgs.vimPlugins)
-            telescope-nvim
-            telescope-fzf-native-nvim
-            telescope-ui-select-nvim
-            flash-nvim
-            ;
-        };
+        data =
+          lib.attrValues {
+            inherit (pkgs.vimPlugins)
+              telescope-nvim
+              telescope-fzf-native-nvim
+              telescope-ui-select-nvim
+              flash-nvim
+              ;
+          }
+          ++ lib.optionals config.settings.devMode (
+            lib.attrValues {
+              inherit (config.nvim-lib.neovimPlugins)
+                telescope-luasnip
+                ;
+            }
+          );
       };
 
       ui = {

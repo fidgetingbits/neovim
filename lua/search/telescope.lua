@@ -75,6 +75,25 @@ end
 
 return {
   {
+    'telescope-luasnip',
+    lazy = true,
+    dep_of = { 'telescope.nvim' },
+    keys = {
+      {
+        '<leader>sL',
+        function()
+          require('telescope').extensions.luasnip.luasnip({})
+        end,
+        mode = { 'n' },
+        desc = 'Telescope luasnip',
+      },
+    },
+    after = function()
+      require('telescope').load_extension('luasnip')
+    end,
+  },
+
+  {
     'telescope.nvim',
     category = 'search',
     cmd = { 'Telescope', 'LiveGrepGitRoot' },
@@ -112,25 +131,26 @@ return {
       { "<leader>sd", function() return require('telescope.builtin').diagnostics() end, mode = { "n" }, desc = '[S]earch [D]iagnostics', },
       { "<leader>sf", function() return require('telescope.builtin').find_files() end,  mode = { "n" }, desc = '[S]earch [F]iles', },
       { "<leader>sg", function() return require('telescope.builtin').live_grep() end,   mode = { "n" }, desc = '[S]earch by [G]rep', },
+      { "<leader>sG", live_grep_git_root,                                               mode = { "n" }, desc = '[S]earch git [P]roject root', },
       { "<leader>sh", function() return require('telescope.builtin').help_tags() end,   mode = { "n" }, desc = '[S]earch [H]elp', },
       { "<leader>sk", function() return require('telescope.builtin').keymaps() end,     mode = { "n" }, desc = '[S]earch [K]eymaps', },
+      { "<leader>sl", function() return require('telescope.builtin').builtin({include_extensions = true}) end, mode = { "n" }, desc = "[S]earch telescope commands", },
       { "<leader>sn", '<cmd>Telescope notify<CR>',                                      mode = { "n" }, desc = '[S]earch [N]otifications', },
       { "<leader>sp", function() return require('telescope.builtin').git_files() end,   mode = { "n" }, desc = '[S]earch [P]roject Root Files', },
-      { "<leader>sp", live_grep_git_root,                                               mode = { "n" }, desc = '[S]earch git [P]roject root', },
       { "<leader>sr", function() return require('telescope.builtin').resume() end,      mode = { "n" }, desc = '[S]earch [R]esume', },
       { "<leader>ss", function() return require('telescope.builtin').builtin() end,     mode = { "n" }, desc = '[S]earch [S]elect Telescope', },
       { "<leader>sw", function() return require('telescope.builtin').grep_string() end, mode = { "n" }, desc = '[S]earch current [W]ord', },
       { "<leader>sz", function() return require('telescope.builtin').spell_suggest() end, mode = { "n" }, desc = '[S]earch spelling suggestion', }, -- z because of z=
     },
-    -- colorscheme = "",
-    -- FIXME: Should these be loaded via lze instead?
     load = function(name)
-      vim.cmd.packadd(name)
-      vim.cmd.packadd('telescope-fzf-native.nvim')
-      vim.cmd.packadd('telescope-ui-select.nvim')
+      nixInfo.lze.loaders.multi({
+        name,
+        'telescope-fzf-native.nvim',
+        'telescope-ui-select.nvim',
+      })
     end,
 
-    after = function(plugin)
+    after = function(_)
       local actions = require('telescope.actions')
       require('telescope').setup({
         -- You can put your default mappings / updates / etc. in here
@@ -166,8 +186,8 @@ return {
         },
       })
 
-      -- FIXME: revisit this key
-      vim.keymap.set('n', '<leader>uI', function()
+      -- Toggle telescope ignore
+      vim.keymap.set('n', '<leader>tti', function()
         vim.g.telescope_ignore_enabled = not vim.g.telescope_ignore_enabled
 
         require('telescope.config').set_defaults({
