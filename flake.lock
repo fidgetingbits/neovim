@@ -36,6 +36,19 @@
         "type": "github"
       }
     },
+    "plugins-lua-console": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1772785583,
+        "narHash": "sha256-c5+CkSQT3iJx2mdENwvGBV74Blw+k1ITtxtY5LBUXtE=",
+        "path": "/home/aa/dev/neovim/lua-console.nvim",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/aa/dev/neovim/lua-console.nvim",
+        "type": "path"
+      }
+    },
     "plugins-nvim-better-n": {
       "flake": false,
       "locked": {
@@ -72,6 +85,7 @@
       "inputs": {
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs",
+        "plugins-lua-console": "plugins-lua-console",
         "plugins-nvim-better-n": "plugins-nvim-better-n",
         "plugins-nvim-toggler": "plugins-nvim-toggler",
         "wrappers": "wrappers"

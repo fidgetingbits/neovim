@@ -162,23 +162,31 @@ in
       ui = {
         after = [ "core" ];
         lazy = true;
-        data = lib.attrValues {
-          inherit (pkgs.vimPlugins)
-            catppuccin-nvim
-            fidget-nvim
-            hardtime-nvim
-            lualine-nvim
-            neo-tree-nvim
-            noice-nvim
-            nvim-notify
-            smart-splits-nvim
-            snacks-nvim
-            todo-comments-nvim
-            trouble-nvim
-            which-key-nvim
-            zen-mode-nvim
-            ;
-        };
+        data =
+          lib.attrValues {
+            inherit (pkgs.vimPlugins)
+              catppuccin-nvim
+              fidget-nvim
+              hardtime-nvim
+              lualine-nvim
+              neo-tree-nvim
+              noice-nvim
+              nvim-notify
+              smart-splits-nvim
+              snacks-nvim
+              todo-comments-nvim
+              trouble-nvim
+              which-key-nvim
+              zen-mode-nvim
+              ;
+          }
+          ++ (lib.optionals config.settings.devMode (
+            lib.attrValues {
+              inherit (config.nvim-lib.neovimPlugins)
+                lua-console
+                ;
+            }
+          ));
       };
 
       git = {

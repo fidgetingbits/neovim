@@ -1,7 +1,11 @@
 -- stylua: ignore start
 -- [[ Basic Keymaps ]]
 
+-- FIXME: Revisit this, as we may want to overload it to dismiss all notifications, etc
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
+
+-- Reload config. Only applicable if devMode is set
+vim.api.nvim_set_keymap("n", "<leader><leader>r", ":ReloadConfig<CR>", {noremap = true, silent = true})
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
@@ -75,6 +79,7 @@ vim.keymap.set("n", l .. "x", ":tabclose", { noremap = true, silent = true, desc
 vim.keymap.set("n", l .. "H", ":-tabmove", { noremap = true, silent = true, desc = 'Move tab to left' })
 vim.keymap.set("n", l .. "L", ":+tabmove", { noremap = true, silent = true, desc = 'Move tab to right' })
 
+
 --[[
  Experimental keymaps
 
@@ -88,6 +93,19 @@ if vim.g.neovide then
   -- IMPORTANT: without `silent = false` pasting into cmdline mode won't show up immediately in neovide
   vim.keymap.set({ 'c', }, '<C-S-v>', '<C-r>+',
     { noremap = true, silent = false, desc = 'Paste from clipboard from within all modes' })
+
+  -- Tweak font sizes
+  vim.keymap.set({ "n", "v" }, "<C-+>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>")
+  vim.keymap.set({ "n", "v" }, "<C-->", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>")
+  vim.keymap.set({ "n", "v" }, "<C-0>", ":lua vim.g.neovide_scale_factor = 1<CR>")
+  -- FIXME:These aren't working yet
+  vim.keymap.set({ "n", "v" }, "<C-ScrollWheelUp>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>")
+  vim.keymap.set({ "n", "v" }, "<C-ScrollWheelDown>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>")
+
 end
 
 -- stylua: ignore end
+
+vim.keymap.set('n', '<leader>K', function()
+  print('test')
+end, { noremap = true, silent = true })

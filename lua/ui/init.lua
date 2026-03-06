@@ -4,6 +4,7 @@ return {
 
   { import = 'ui.hardtime' },
   { import = 'ui.lualine' },
+  { import = 'ui.lua-console' },
   { import = 'ui.neo-tree' },
   { import = 'ui.noice' },
   { import = 'ui.notifications' },

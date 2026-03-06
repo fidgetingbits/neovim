@@ -25,6 +25,11 @@
       url = "github:jonatan-branting/nvim-better-n";
       flake = false;
     };
+    plugins-lua-console = {
+      url = "github:yarospace/lua-console.nvim";
+      # url = "path:/home/aa/dev/neovim/lua-console.nvim";
+      flake = false;
+    };
   };
 
   outputs =
@@ -40,12 +45,21 @@
       systems = nixpkgs.lib.platforms.all;
 
       perSystem =
-        { pkgs, ... }:
+        { pkgs, config, ... }:
         {
-          # wrappers.pkgs = pkgs; # choose a different `pkgs`
-          wrappers.control_type = "exclude"; # | "build"  (default: "exclude")
-          wrappers.packages = { };
+          packages = {
+            full = config.packages.neovim.wrap {
+              settings = {
+                devMode = true;
+                neovide = true;
+              };
+            };
+          };
         };
-      flake.wrappers.default = nixpkgs.lib.modules.importApply ./module.nix inputs;
+
+      flake.wrappers = {
+        neovim = nixpkgs.lib.modules.importApply ./module.nix inputs;
+        default = self.wrapperModules.neovim;
+      };
     };
 }
