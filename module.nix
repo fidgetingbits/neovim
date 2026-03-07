@@ -27,6 +27,11 @@ in
         default = false;
       };
 
+      terminalMode = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+      };
+
       # Have neovim use immutable config from /nix/store
       wrappedConfig = lib.mkOption {
         type = lib.types.either wlib.types.stringable lib.types.luaInline;

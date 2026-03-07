@@ -32,6 +32,10 @@ vim.wo.number = true
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
+-- Try to fix mouse clicks between panes
+-- FIXME: disable? doesn't work
+vim.opt.focusable = true
+
 -- Splits
 vim.o.equalalways = false
 
@@ -61,7 +65,10 @@ vim.wo.relativenumber = true
 
 -- Decrease update time
 vim.o.updatetime = 250
-vim.o.timeoutlen = 300
+-- vim.o.timeoutlen = 300
+-- Longer timeouts for when I brain fog
+vim.o.timeoutlen = 3000
+vim.o.ttimeoutlen = 100
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menu,preview,noselect'
@@ -69,12 +76,16 @@ vim.o.completeopt = 'menu,preview,noselect'
 -- Show the current cursor line
 vim.o.cursorline = true
 
+-- Visual markers for hanging characters
+vim.o.list = true
+vim.o.listchars = 'tab:»·,trail:·'
+
 -- Spelling
 -- FIXME: Would be nice to sync this across systems somehow
 -- Maybe use https://github.com/minhanghuang/spell.nvim too
 local spell_path = vim.fn.stdpath('data') .. '/spell/en.utf-8.add'
 vim.fn.mkdir(vim.fn.fnamemodify(spell_path, ':h'), 'p')
-vim.o.spellpath = spell_path
+vim.o.spellfile = spell_path
 vim.o.spell = true
 
 vim.o.termguicolors = true
@@ -89,36 +100,9 @@ vim.g.netrw_banner = 0
 -- I - intro messages
 vim.opt.shortmess:append('sIW')
 
-if vim.g.neovide then
-  -- When using rounded borders lualine/tabs clip
-  vim.g.neovide_padding_top = 10
-  vim.g.neovide_padding_bottom = 10
-  vim.g.neovide_padding_right = 10
-  vim.g.neovide_padding_left = 10
+-- Stop modifying none vim files every time there opened and we :wq. This is
+-- mostly to stop git detecting modifications
+vim.o.endofline = false
 
-  local utils = require('utils')
-  if vim.g.colors_name == 'catppuccin-mocha' then
-    local colors = require('catppuccin.palettes').get_palette('mocha')
-    vim.api.nvim_set_hl(0, 'Normal', { bg = colors.base })
-    utils.set_cursor_colors(colors)
-    utils.set_term_colors(colors)
-  end
-  vim.g.neovide_cursor_smooth_blink = true
-
-  -- FIXME: tweak this
-  local blink = 'blinkwait777-blinkon1111-blinkoff666-Cursor'
-  local normal_cursor = 'c-n-v-ve:block-' .. blink
-  local insert_cursor = 'i-ci:ver25-' .. blink
-  local replace_cursor = 'r-cr:hor20-' .. blink
-  local operator_cursor = 'o:hor50-' .. blink
-  local showmatch_cursor = 'sm:block-' .. blink
-
-  -- Follow: https://github.com/neovim/neovim/pull/31562
-  vim.o.guicursor = table.concat({
-    normal_cursor,
-    insert_cursor,
-    replace_cursor,
-    operator_cursor,
-    showmatch_cursor,
-  }, ',')
-end
+-- Single status line at bottom of window for all windows
+vim.opt.laststatus = 3
