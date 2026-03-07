@@ -70,6 +70,11 @@ vim.o.completeopt = 'menu,preview,noselect'
 vim.o.cursorline = true
 
 -- Spelling
+-- FIXME: Would be nice to sync this across systems somehow
+-- Maybe use https://github.com/minhanghuang/spell.nvim too
+local spell_path = vim.fn.stdpath('data') .. '/spell/en.utf-8.add'
+vim.fn.mkdir(vim.fn.fnamemodify(spell_path, ':h'), 'p')
+vim.o.spellpath = spell_path
 vim.o.spell = true
 
 vim.o.termguicolors = true
