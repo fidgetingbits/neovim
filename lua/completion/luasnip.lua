@@ -13,12 +13,8 @@ return {
         updateevents = 'TextChanged,TextChangedI',
       })
 
-      -- FIXME: Move this to keys
       local ls = require('luasnip')
 
-      -- FIXME: tab is set to select entries instead of jumping to next part of snippet
-
-      -- Prefer not to use tab for completions
       vim.keymap.set({ 'i', 's' }, '<c-k>', function()
         if ls.expand_or_jumpable() then
           ls.expand_or_jump()
@@ -36,10 +32,6 @@ return {
           ls.change_choice(1)
         end
       end, { silent = true })
-
-      -- reload snippets
-      -- FIXME: Figure out what path to use to reload snippets from neovim wrapper
-      -- vim.keymap.set("n", "<leader><leader>ls", "<cmd>source ~/...<CR>")
     end,
   },
   {
