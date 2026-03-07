@@ -1,0 +1,7 @@
+{
+  "nixtest": {
+    "prefix": "nixttest",
+    "body": ["test = foo;"],
+    "description": "Nix snippet test"
+  }
+}

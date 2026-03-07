@@ -1,0 +1,7 @@
+{
+  "globaltest": {
+    "prefix": "globaltest",
+    "body": ["Test"],
+    "description": "Test globals working"
+  }
+}
