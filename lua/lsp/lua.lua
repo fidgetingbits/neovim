@@ -3,6 +3,12 @@ return {
     'lua_ls',
     lsp = {
       filetypes = { 'lua' },
+
+      on_attach = function(client, bufnr)
+        -- Disable the LSP's formatting expression so 'gqgc' works (gwgc also works without this fix)
+        -- https://vi.stackexchange.com/questions/39200/wrapping-comment-in-visual-mode-not-working-with-gq
+        vim.bo[bufnr].formatexpr = nil
+      end,
       settings = {
         Lua = {
           runtime = { version = 'LuaJIT' },
