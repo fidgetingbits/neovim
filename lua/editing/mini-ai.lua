@@ -1,6 +1,7 @@
 return {
   {
-    -- Better in and around targeting that includes treesitter support. Replaces nvim-treesitter-textobjects
+    -- Better in and around targeting that includes treesitter support. Replaces
+    -- nvim-treesitter-textobjects
     'mini.ai',
     event = 'DeferredUIEnter',
     after = function(plugin)
