@@ -1,7 +1,7 @@
 -- Reloads /plugin files for now only
 vim.api.nvim_create_user_command('ReloadConfig', function()
   -- Source init.lua
-  config_folder = nixInfo(false, 'settings', 'unwrappedConfig')
+  config_folder = nixInfo(false, 'settings', 'config_directory')
   -- FIXME:LZE complains on reload, with 'attempted to add <foo> twice' error spam
   -- need to figure out if there is a way to do that
   -- dofile(config_folder .. '/init.lua')
@@ -24,6 +24,8 @@ vim.api.nvim_create_user_command('ReloadConfig', function()
 
   -- Force re-detection of filetype for the current buffer
   vim.cmd('filetype detect')
+
+  vim.cmd('ReloadSnippets')
 
   print('Configuration reloaded!')
 end, {})

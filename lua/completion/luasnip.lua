@@ -1,19 +1,38 @@
+function load_snippets()
+  local config_dir = nixInfo(false, 'settings', 'config_directory')
+  require('luasnip.loaders.from_vscode').load({
+    paths = config_dir .. '/snippets/luasnip',
+  })
+  require('luasnip.loaders.from_lua').load({
+    paths = config_dir .. '/snippets/luasnip',
+  })
+end
+
 return {
   {
     -- NOTE: See blink for keymap
     'luasnip',
     dep_of = { 'blink.cmp' },
     after = function(_)
-      local luasnip = require('luasnip')
-      require('luasnip.loaders.from_vscode').lazy_load()
-      luasnip.config.setup({
+      local ls = require('luasnip')
+
+      ls.config.setup({
         -- Keeps the last snippet around, so you can jump back in if needed
         history = true,
         -- Updates as you type
         updateevents = 'TextChanged,TextChangedI',
       })
 
-      local ls = require('luasnip')
+      -- Load friendly-snippets
+      require('luasnip.loaders.from_vscode').lazy_load()
+
+      -- Load snipmate snippets
+      -- FIXME: There is a lot of duplication with friendly-snippets
+      -- so may need to reconsider
+      ls.filetype_extend('all', { '_' })
+      require('luasnip.loaders.from_snipmate').lazy_load()
+
+      load_snippets()
 
       vim.keymap.set({ 'i', 's' }, '<c-k>', function()
         if ls.expand_or_jumpable() then
@@ -32,10 +51,22 @@ return {
           ls.change_choice(1)
         end
       end, { silent = true })
+
+      vim.api.nvim_create_user_command(
+        'ReloadSnippets',
+        load_snippets,
+        { desc = '(Re)Loads luasnip snippets' }
+      )
     end,
   },
   {
     'friendly-snippets',
+    lazy = true,
+    dep_of = { 'luasnip' },
+  },
+  {
+    'vim-snippets',
+    lazy = true,
     dep_of = { 'luasnip' },
   },
 }

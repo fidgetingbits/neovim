@@ -6,31 +6,13 @@ return {
     event = 'DeferredUIEnter',
     after = function(plugin)
       require('snacks').setup({
-        -- Only showing enabled tools.
-        -- See https://github.com/folke/snacks.nvim?tab=readme-ov-file#-features
-        -- for available tools
-        -- FIXME: seriously consider the following:
-        -- GitHub CLI integration
-        -- gh = { enabled = true },
-        -- Gitbrowse
-        -- gitbrowse = { enabled = true },
-        -- Image viewer
-        -- image = { enabled = true},
-        -- Quick load
-        -- quickfile = { enabled = true },
-
-        -- prevent lsp attaching to big files. default is 1.5MB
-        bigfile = { enabled = true },
-
-        -- dashboard
         dashboard = {
           enabled = true,
           width = 60,
           row = nil,
           col = nil,
           pane_gap = 4,
-          --NOTE: Use the actual binds instead of this shit.
-          -- autokeys = "1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
+          autokeys = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
           preset = {
             pick = nil,
             keys = {
@@ -113,8 +95,8 @@ return {
               end
               return { item.icon, width = 2, hl = 'icon' }
             end,
-            footer = { '%s', align = 'center' },
             header = { '%s', align = 'center' },
+            footer = { '%s', align = 'center' },
             file = function(item, ctx)
               local fname = vim.fn.fnamemodify(item.file, ':~')
               fname = ctx.width and #fname > ctx.width and vim.fn.pathshorten(fname) or fname
@@ -133,8 +115,6 @@ return {
           },
           sections = {
             { section = 'header' },
-            -- FIXME: Disabled until I fix the hints
-            -- { section = 'keys', gap = 1, padding = 1 },
           },
         },
         -- picker/explorer

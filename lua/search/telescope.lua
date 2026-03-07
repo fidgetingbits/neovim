@@ -77,7 +77,7 @@ return {
   {
     'telescope-luasnip',
     lazy = true,
-    dep_of = { 'telescope.nvim' },
+    dep_of = { 'telescope.nvim', 'luasnip' },
     keys = {
       {
         '<leader>sL',
@@ -88,11 +88,7 @@ return {
         desc = 'Telescope luasnip',
       },
     },
-    after = function()
-      require('telescope').load_extension('luasnip')
-    end,
   },
-
   {
     'telescope.nvim',
     category = 'search',
@@ -147,6 +143,7 @@ return {
         name,
         'telescope-fzf-native.nvim',
         'telescope-ui-select.nvim',
+        'telescope-luasnip',
       })
     end,
 
@@ -198,6 +195,8 @@ return {
       -- Enable telescope extensions, if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
+      -- FIX: If you do this in the after for luasnip entry above, you get a stack overflow
+      pcall(require('telescope').load_extension, 'luasnip')
 
       vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
     end,

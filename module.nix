@@ -272,12 +272,13 @@ in
         lazy = true;
         data = lib.attrValues {
           inherit (pkgs.vimPlugins)
-            # FIXME: see if we want any other blink-cmp sources
             blink-cmp
             blink-cmp-conventional-commits
             blink-cmp-spell
             colorful-menu-nvim # provide additional info for completion suggestions
+            # FIXME: should snippets be on dev only?
             friendly-snippets
+            vim-snippets
             luasnip
             ;
         };
