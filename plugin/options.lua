@@ -1,9 +1,5 @@
 -- See `:help vim.o`
 
--- Hide the message output line below the status bar
--- FIXME: We probably only want this in terminal mode
--- vim.o.cmdheight = 0
-
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
@@ -13,7 +9,7 @@ vim.o.clipboard = 'unnamedplus'
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 vim.o.list = true
---vim.o.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.o.listchars = 'tab:»·,trail:·'
 
 -- Set highlight on search
 vim.o.hlsearch = true
@@ -31,10 +27,6 @@ vim.wo.number = true
 
 -- Enable mouse mode
 vim.o.mouse = 'a'
-
--- Try to fix mouse clicks between panes
--- FIXME: disable? doesn't work
-vim.opt.focusable = true
 
 -- Splits
 vim.o.equalalways = false
@@ -75,10 +67,6 @@ vim.o.completeopt = 'menu,preview,noselect'
 
 -- Show the current cursor line
 vim.o.cursorline = true
-
--- Visual markers for hanging characters
-vim.o.list = true
-vim.o.listchars = 'tab:»·,trail:·'
 
 -- Spelling
 -- FIXME: Would be nice to sync this across systems somehow
