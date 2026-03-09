@@ -38,4 +38,9 @@ if vim.g.neovide then
     operator_cursor,
     showmatch_cursor,
   }, ',')
+
+  local font = nixInfo(false, 'settings', 'guifont')
+  if font ~= '' then
+    vim.o.guifont = font
+  end
 end

@@ -49,6 +49,12 @@ in
         default = true;
       };
 
+      guifont = lib.mkOption {
+        type = lib.types.str;
+        default = "";
+        description = "Font to set from external nix config";
+      };
+
       # Inform lua which top level specs are enabled
       cats = lib.mkOption {
         readOnly = true;
