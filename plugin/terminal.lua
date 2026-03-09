@@ -8,7 +8,11 @@ if nixInfo(false, 'settings', 'terminalMode') then
     vim.opt_local.signcolumn = 'no'
     vim.opt_local.foldcolumn = '0'
     vim.opt_local.number = false
-    vim.opt.mouse = vim.opt.mouse - 'a'
+    -- This is scheduled as it needs to come after lualine
+    vim.schedule(function()
+      vim.opt.laststatus = 0
+    end)
+    -- vim.opt.mouse = vim.opt.mouse - 'a'
   end
 
   local terminal_group = vim.api.nvim_create_augroup('Terminal', { clear = true })
@@ -45,7 +49,7 @@ if nixInfo(false, 'settings', 'terminalMode') then
       else
         -- FIXME: Set this to a global we set for laststatus elsewhere
         vim.opt_local.laststatus = 2 -- Show global statusline (or 2 for split-local)
-        vim.opt_local.number = false
+        vim.opt_local.number = true
         vim.opt_local.signcolumn = 'yes'
       end
     end,
@@ -99,6 +103,6 @@ if nixInfo(false, 'settings', 'terminalMode') then
 
   -- stylua: ignore start
   vim.keymap.set({ 't', }, '<C-o>', '<C-\\><C-n>',
-    { noremap = true, silent = false, desc = 'Paste from clipboard from within all modes' })
+    { noremap = true, silent = false, desc = 'Convenience from breaking out of terminal mode' })
   -- stylua: ignore end
 end
