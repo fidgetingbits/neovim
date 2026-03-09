@@ -193,6 +193,7 @@ in
               nvim-notify
               smart-splits-nvim
               snacks-nvim
+              tabby-nvim
               todo-comments-nvim
               trouble-nvim
               which-key-nvim

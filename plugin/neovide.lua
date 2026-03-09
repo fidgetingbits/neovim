@@ -87,11 +87,9 @@ if vim.g.neovide then
     'n',
     '<LeftMouse>',
     '<LeftMouse><cmd>lua vim.api.nvim_set_current_win(vim.fn.getmousepos().winid)<CR>',
-    { silent = true }
+    { silent = true })
   -- stylua: ignore end
 
   -- FIXME: This should match a setting that is tied to monitor in the neovim config
   -- vim.g.neovide_refresh_rate = 75
-
-  )
 end

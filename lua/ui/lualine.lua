@@ -8,6 +8,11 @@ return {
           icons_enabled = false,
           component_separators = '|',
           section_separators = '',
+          -- FIXME: Remove this probably, was for fixing status line
+          -- disabled_filetypes = {
+          --   statusline = { 'terminal', 'toggleterm' },
+          --   winbar = { 'terminal' },
+          -- },
         },
         sections = {
           lualine_c = {

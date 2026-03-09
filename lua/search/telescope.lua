@@ -183,8 +183,8 @@ return {
         },
       })
 
-      -- Toggle telescope ignore
-      vim.keymap.set('n', '<leader>tti', function()
+      -- Toggle search ignore
+      vim.keymap.set('n', '<leader>tsi', function()
         vim.g.telescope_ignore_enabled = not vim.g.telescope_ignore_enabled
 
         require('telescope.config').set_defaults({

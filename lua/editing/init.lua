@@ -40,7 +40,10 @@ return {
     'nvim-better-n',
     lazy = false,
     after = function(plugin)
-      require('better-n').setup({})
+      local better_n = require('better-n')
+      better_n.setup({})
+      -- better_n.set('[[', { next = '[[', prev = ']]' })
+      better_n.listen('(%d-)%]%]', { next = ']]', prev = '[[', remap = true, expr = true })
     end,
   },
 }

@@ -4,7 +4,19 @@ return {
     'smart-splits.nvim',
     event = 'DeferredUIEnter',
     after = function(plugin)
-      require('smart-splits').setup()
+      require('smart-splits').setup({
+        -- FIXME: This should only be for vim terminals where we don't want to
+        -- toggle zellij panes. Which isn't enabled yet anyway
+        at_edge = function(ctx)
+          if ctx.direction == 'left' then
+            vim.cmd('tabprevious')
+          elseif ctx.direction == 'right' then
+            vim.cmd('tabnext')
+          end
+        end,
+      })
+
+      -- FIXME: These are specific to if we're using zellij, which then handles pane transfers using alt, and vim uses ctrl. We should have a setting that switches between.
       -- resizing splits
       -- these keymaps will also accept a range,
       -- for example `10<C-h>` will `resize_left` by `(10 * config.default_amount)`
