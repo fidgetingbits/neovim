@@ -8,6 +8,7 @@ if nixInfo(false, 'settings', 'terminalMode') then
     vim.opt_local.signcolumn = 'no'
     vim.opt_local.foldcolumn = '0'
     vim.opt_local.number = false
+    vim.opt.mouse = vim.opt.mouse - 'a'
   end
 
   local terminal_group = vim.api.nvim_create_augroup('Terminal', { clear = true })
@@ -16,11 +17,19 @@ if nixInfo(false, 'settings', 'terminalMode') then
     callback = function()
       vim.cmd('startinsert')
       vim.opt_local.spell = false
+      -- FIXME: For some reason this doesn't change the laststatus, only once we enter/exit again
       term_settings()
 
       -- insert mode when clicking in terminal
       -- https://vi.stackexchange.com/questions/22307/neovim-go-into-insert-mode-when-clicking-in-a-terminal-in-a-pane
-      -- vim.api.nvim_buf_set_keymap(0, 'n', '<LeftRelease>', '<LeftRelease>i', { noremap = true })
+      vim.api.nvim_buf_set_keymap(0, 'n', '<LeftRelease>', '<LeftRelease>i', { noremap = true })
+    end,
+    group = terminal_group,
+    pattern = 'term://*',
+  })
+  vim.api.nvim_create_autocmd('TermEnter', {
+    callback = function()
+      term_settings()
     end,
     group = terminal_group,
     pattern = 'term://*',
@@ -73,7 +82,8 @@ if nixInfo(false, 'settings', 'terminalMode') then
     group = terminal_group,
   })
 
-  vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter' }, {
+  -- FIXME: Is TermEnter needed or will BufEnter always trigger
+  vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWinEnter', 'TermEnter' }, {
     pattern = 'term://*',
     callback = function()
       local ok, terminal_mode = pcall(vim.api.nvim_buf_get_var, 0, 'terminal_mode')
@@ -86,4 +96,9 @@ if nixInfo(false, 'settings', 'terminalMode') then
     end,
     group = terminal_group,
   })
+
+  -- stylua: ignore start
+  vim.keymap.set({ 't', }, '<C-o>', '<C-\\><C-n>',
+    { noremap = true, silent = false, desc = 'Paste from clipboard from within all modes' })
+  -- stylua: ignore end
 end

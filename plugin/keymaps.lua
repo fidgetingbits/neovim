@@ -87,23 +87,6 @@ vim.keymap.set("n", l .. "L", ":+tabmove", { noremap = true, silent = true, desc
 ]]
 vim.keymap.set('i', 'jk', '<ESC>:w<CR>', {noremap=true, silent=true})
 
-if vim.g.neovide then
-  vim.keymap.set({ 'i', "n", "x", "v" }, '<C-S-v>', '<C-r>+',
-    { noremap = true, silent = true, desc = 'Paste from clipboard from within all modes' })
-  -- IMPORTANT: without `silent = false` pasting into cmdline mode won't show up immediately in neovide
-  vim.keymap.set({ 'c', }, '<C-S-v>', '<C-r>+',
-    { noremap = true, silent = false, desc = 'Paste from clipboard from within all modes' })
-
-  -- Tweak font sizes
-  vim.keymap.set({ "n", "v" }, "<C-+>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>")
-  vim.keymap.set({ "n", "v" }, "<C-->", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>")
-  vim.keymap.set({ "n", "v" }, "<C-0>", ":lua vim.g.neovide_scale_factor = 1<CR>")
-  -- FIXME:These aren't working yet
-  vim.keymap.set({ "n", "v" }, "<C-ScrollWheelUp>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1<CR>")
-  vim.keymap.set({ "n", "v" }, "<C-ScrollWheelDown>", ":lua vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1<CR>")
-
-end
-
 vim.keymap.set("n", "<leader>ts", function()
 	vim.opt.spell = not vim.opt.spell:get()
 end, { desc = "Toggle spell checking" })
