@@ -70,3 +70,15 @@ vim.api.nvim_create_autocmd('BufNewFile,BufRead,BufEnter', {
   pattern = '*',
 })
 ]]
+
+-- From https://loosh.ch/blog/neovidenal, which is to
+-- stop git hanging once we close the buffer
+-- FIXME: revisit if this is necessary
+vim.api.nvim_create_autocmd('FileType', {
+  -- Git waits for all the buffers it has created to
+  -- be closed.
+  pattern = { 'git*' },
+  callback = function()
+    vim.bo.bufhidden = 'delete'
+  end,
+})
