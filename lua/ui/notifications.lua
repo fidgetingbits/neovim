@@ -13,9 +13,6 @@ return {
         background_colour = '#000000',
       })
       vim.notify = notify
-      vim.keymap.set('n', '<Esc>', function()
-        notify.dismiss({ silent = true })
-      end, { desc = 'dismiss notify popup and clear hlsearch' })
     end,
   },
 }

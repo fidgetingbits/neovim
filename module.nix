@@ -110,6 +110,18 @@ in
       "vim"
     ];
 
+    # Serves the purpose of old nvr-style tools
+    addFlag = [
+      [
+        "--server"
+        "\"\${NVIM:-}\""
+      ]
+      "--remote"
+    ];
+
+    # Disable the shell escape function because we want $NVIM
+    escapingFunction = arg: arg;
+
     # NOTE: Specs are enabled by default
     specs = {
       core = {
@@ -199,6 +211,9 @@ in
               which-key-nvim
               zen-mode-nvim
               ;
+            inherit (config.nvim-lib.neovimPlugins)
+              taboo # FIXME: replace with barbar
+              ;
           }
           ++ (lib.optionals config.settings.devMode (
             lib.attrValues {
@@ -206,7 +221,15 @@ in
                 lua-console
                 ;
             }
-          ));
+          ))
+          ++ lib.optionals config.settings.neovide (
+            lib.attrValues {
+              inherit (config.nvim-lib.neovimPlugins)
+                # Only in neovide because quitting leaves *
+                confirm-quit
+                ;
+            }
+          );
       };
 
       git = {

@@ -17,11 +17,14 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = 'Scroll Up' })
 vim.keymap.set("n", "n", "nzzzv", { desc = 'Next Search Result' })
 vim.keymap.set("n", "N", "Nzzzv", { desc = 'Previous Search Result' })
 
--- typo tolerance for :W and friends
-vim.cmd([[command! W w]])
-vim.cmd([[command! Wq wq]])
-vim.cmd([[command! WQ wq]])
-vim.cmd([[command! Q q]])
+-- typo tolerant command abbreviations for :W and friends
+-- neovide will use confirm-quit.nvim version
+vim.keymap.set("ca", "W", "w")
+if not vim.g.neovide then
+  vim.keymap.set("ca", "Wq", "wq")
+  vim.keymap.set("ca", "WQ", "wq")
+  vim.keymap.set("ca", "Q", "q")
+end
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -78,6 +81,7 @@ vim.keymap.set("n", l .. "<tab>", ":tabnew<CR>", { noremap = true, silent = true
 vim.keymap.set("n", l .. "x", ":tabclose", { noremap = true, silent = true, desc = 'Close current tab' })
 vim.keymap.set("n", l .. "H", ":-tabmove", { noremap = true, silent = true, desc = 'Move tab to left' })
 vim.keymap.set("n", l .. "L", ":+tabmove", { noremap = true, silent = true, desc = 'Move tab to right' })
+vim.keymap.set("n", l .. "r", ":Taboo rename", { noremap = true, silent = true, desc = 'Rename tab' })
 
 
 --[[
@@ -90,5 +94,11 @@ vim.keymap.set('i', 'jk', '<ESC>:w<CR>', {noremap=true, silent=true})
 vim.keymap.set("n", "<leader>ts", function()
 	vim.opt.spell = not vim.opt.spell:get()
 end, { desc = "Toggle spell checking" })
+
+vim.keymap.set("n", "<Esc>", function()
+  require("noice").cmd("dismiss")
+  require("notify").dismiss({ silent = true })
+  vim.cmd("noh")
+end, { desc = "Dismiss all notifications and clear hlsearch" })
 
 -- stylua: ignore end

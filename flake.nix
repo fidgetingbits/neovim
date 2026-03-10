@@ -34,6 +34,16 @@
       url = "github:benfowler/telescope-luasnip.nvim";
       flake = false;
     };
+
+    plugins-confirm-quit = {
+      url = "github:yutkat/confirm-quit.nvim";
+      flake = false;
+    };
+
+    plugins-taboo = {
+      url = "github:gcmt/taboo.vim";
+      flake = false;
+    };
   };
 
   outputs =

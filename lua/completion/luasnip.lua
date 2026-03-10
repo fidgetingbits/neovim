@@ -21,6 +21,16 @@ return {
         history = true,
         -- Updates as you type
         updateevents = 'TextChanged,TextChangedI',
+
+        -- FIXME: Revisit this
+        -- This highlights the choice node with a specific color
+        ext_opts = {
+          [require('luasnip.util.types').choiceNode] = {
+            active = {
+              virt_text = { { ' ← Choice ', 'ErrorMsg' } },
+            },
+          },
+        },
       })
 
       -- Load friendly-snippets
@@ -51,6 +61,12 @@ return {
           ls.change_choice(1)
         end
       end, { silent = true })
+
+      vim.keymap.set({ 'i', 's' }, '<C-f>', function()
+        if ls.choice_active() then
+          require('luasnip.extras.select_choice')()
+        end
+      end, { desc = 'Select luasnip choice' })
 
       vim.api.nvim_create_user_command(
         'ReloadSnippets',
