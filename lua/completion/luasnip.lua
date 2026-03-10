@@ -22,8 +22,8 @@ return {
         -- Updates as you type
         updateevents = 'TextChanged,TextChangedI',
 
-        -- FIXME: Revisit this
         -- This highlights the choice node with a specific color
+        -- FIXME: This will sometimes leave a stail choice line when we aren't even in the snippet anymore
         ext_opts = {
           [require('luasnip.util.types').choiceNode] = {
             active = {
