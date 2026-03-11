@@ -1,14 +1,16 @@
 if vim.g.neovide then
   vim.opt.mouse = 'a'
-  vim.api.nvim_create_autocmd('OptionSet', {
-    pattern = 'mouse',
-    callback = function()
-      local info = debug.getinfo(2, 'S')
-      print(
-        'Mouse changed to: ' .. vim.v.option_new .. ' by ' .. (info and info.source or 'unknown')
-      )
-    end,
-  })
+  -- FIXME: renable for debugging
+  -- vim.api.nvim_create_autocmd('OptionSet', {
+  --   pattern = 'mouse',
+  --   callback = function()
+  --     local info = debug.getinfo(2, 'S')
+  --     print(
+  --       'Mouse changed to: ' .. vim.v.option_new .. ' by ' .. (info and info.source or 'unknown')
+  --     )
+  --   end,
+  -- })
+
   -- When using rounded borders in niri the lualine/tabs blocks clip at the edges
   vim.g.neovide_padding_top = 10
   vim.g.neovide_padding_bottom = 10
