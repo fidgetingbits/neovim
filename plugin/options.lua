@@ -18,7 +18,9 @@ vim.o.hlsearch = true
 vim.o.inccommand = 'split'
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.o.scrolloff = 10
+-- See zT/zB for bypass
+vim.o.scrolloff = 5
+
 -- Unlimited scrollback in terminal
 vim.o.scrollback = -1
 

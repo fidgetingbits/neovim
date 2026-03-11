@@ -83,6 +83,20 @@ vim.keymap.set("n", l .. "H", ":-tabmove", { noremap = true, silent = true, desc
 vim.keymap.set("n", l .. "L", ":+tabmove", { noremap = true, silent = true, desc = 'Move tab to right' })
 vim.keymap.set("n", l .. "r", ":Taboo rename", { noremap = true, silent = true, desc = 'Rename tab' })
 
+local function scroll(cmd)
+  local current_so = vim.opt.scrolloff:get()
+  vim.opt.scrolloff = 0
+  vim.cmd('normal! ' .. cmd)
+  vim.opt.scrolloff = current_so
+end
+
+-- Put line to actual top/bottom (ignores scrolloff)
+vim.keymap.set('n', 'zT', function()
+  scroll('zt')
+end, { desc = "Force zt ignoring scrolloff" })
+vim.keymap.set('n', 'zB', function()
+  scroll('zb')
+end, { desc = "Force zt ignoring scrolloff" })
 
 --[[
  Experimental keymaps
