@@ -44,6 +44,17 @@ in
         default = lib.generators.mkLuaInline "vim.uv.os_homedir() .. '/dev/nix/neovim'";
       };
 
+      defaultCommand = lib.mkOption rec {
+        type = lib.types.str;
+        default = "luaeval('Snacks.dashboard()')";
+        example = "execute('enew')";
+        description = ''
+          A default expression to be run when invoking bare nvim/vim/vi command
+          while already nested inside a neovim terminal. The expression will be
+          passed through lib.escapeShellArg.
+        '';
+      };
+
       neovide = lib.mkOption {
         type = lib.types.bool;
         default = true;
@@ -110,7 +121,8 @@ in
       "vim"
     ];
 
-    # Serves the purpose of old nvr-style tools
+    # Causes neovim to either run a new copy, or connect to the "outer" neovim
+    # instance via rpc
     addFlag = [
       [
         "--server"
@@ -119,7 +131,23 @@ in
       "--remote"
     ];
 
-    # Disable the shell escape function because we want $NVIM
+    # If the nvim command is run inside a parent instance, some command-line argument
+    # is expected (maybe a bug?), otherwise you will get an error. Muscle memory often
+    # results in me typing vi while inside a terminal and expecting that to drop me to
+    # an empty buffer or similar. However, RPC will `:drop` which expects an argument.
+    # We fix this by specifying a default argument in case none was provided
+    runShell = [
+      # bash
+      ''
+        # If we are nested in nvim already, and didn't provide arguments, run
+        # some sane default
+        if [ -n ''${NVIM+x} ] && [ $# -eq 0 ]; then
+          set -- --remote-expr ${lib.escapeShellArg config.settings.defaultCommand}
+        fi
+      ''
+    ];
+
+    # Disable the shell escape function because we need $NVIM not escaped
     escapingFunction = arg: arg;
 
     # NOTE: Specs are enabled by default
