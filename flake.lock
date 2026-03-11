@@ -36,17 +36,36 @@
         "type": "github"
       }
     },
+    "plugins-confirm-quit": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1745545235,
+        "narHash": "sha256-EGwSPxHCZaHWeeN8M+d3UXOor9ME7R6skpkcENVENRw=",
+        "owner": "yutkat",
+        "repo": "confirm-quit.nvim",
+        "rev": "a1dbd9b553e8d6770cd6a879a3ee8ffad292c70c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "yutkat",
+        "repo": "confirm-quit.nvim",
+        "type": "github"
+      }
+    },
     "plugins-lua-console": {
       "flake": false,
       "locked": {
-        "lastModified": 1772785583,
-        "narHash": "sha256-c5+CkSQT3iJx2mdENwvGBV74Blw+k1ITtxtY5LBUXtE=",
-        "path": "/home/aa/dev/neovim/lua-console.nvim",
-        "type": "path"
+        "lastModified": 1762068336,
+        "narHash": "sha256-gw/4oxLj9DMfjq3YEf0Q+mHfumO3ljncHeNt+1p0E+w=",
+        "owner": "yarospace",
+        "repo": "lua-console.nvim",
+        "rev": "9ce346626ef13b7123617587544fdf0f9f672002",
+        "type": "github"
       },
       "original": {
-        "path": "/home/aa/dev/neovim/lua-console.nvim",
-        "type": "path"
+        "owner": "yarospace",
+        "repo": "lua-console.nvim",
+        "type": "github"
       }
     },
     "plugins-nvim-better-n": {
@@ -81,13 +100,48 @@
         "type": "github"
       }
     },
+    "plugins-taboo": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1729184442,
+        "narHash": "sha256-BtxyORvocIrxMmcZkGZPAfaYsM3cl8xjhWt7/eJUMGc=",
+        "owner": "gcmt",
+        "repo": "taboo.vim",
+        "rev": "937f67ab9dc2ba1861fabc40ca367e5622c30d36",
+        "type": "github"
+      },
+      "original": {
+        "owner": "gcmt",
+        "repo": "taboo.vim",
+        "type": "github"
+      }
+    },
+    "plugins-telescope-luasnip": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1734145237,
+        "narHash": "sha256-9XsV2hPjt05q+y5FiSbKYYXnznDKYOsDwsVmfskYd3M=",
+        "owner": "benfowler",
+        "repo": "telescope-luasnip.nvim",
+        "rev": "07a2a2936a7557404c782dba021ac0a03165b343",
+        "type": "github"
+      },
+      "original": {
+        "owner": "benfowler",
+        "repo": "telescope-luasnip.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
         "nixpkgs": "nixpkgs",
+        "plugins-confirm-quit": "plugins-confirm-quit",
         "plugins-lua-console": "plugins-lua-console",
         "plugins-nvim-better-n": "plugins-nvim-better-n",
         "plugins-nvim-toggler": "plugins-nvim-toggler",
+        "plugins-taboo": "plugins-taboo",
+        "plugins-telescope-luasnip": "plugins-telescope-luasnip",
         "wrappers": "wrappers"
       }
     },
