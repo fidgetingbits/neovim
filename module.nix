@@ -386,6 +386,7 @@ in
                 indent-blankline-nvim
                 mini-ai
                 mini-surround
+                persistence-nvim
                 ;
               inherit (config.nvim-lib.neovimPlugins)
                 nvim-toggler

@@ -15,10 +15,4 @@ return {
   { import = 'ui.trouble' },
   { import = 'ui.which-key' },
   { import = 'ui.zen-mode' },
-  {
-    'taboo',
-    after = function()
-      vim.opt.sessionoptions:append({ 'globals', 'tabpages' })
-    end,
-  },
 }
