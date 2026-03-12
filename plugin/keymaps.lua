@@ -98,12 +98,16 @@ vim.keymap.set('n', 'zB', function()
   scroll('zb')
 end, { desc = "Force zt ignoring scrolloff" })
 
+-- Remap marks since m is used elsewhere
+vim.keymap.set('n', '<leader>m', 'm', {noremap=true, silent=true, desc = "Marks: Set [a-z] (Built-in)"})
+
 --[[
  Experimental keymaps
 
  Stuff I'm trying, but don't know if I'll keep
 ]]
 vim.keymap.set('i', 'jk', '<ESC>:w<CR>', {noremap=true, silent=true})
+
 
 vim.keymap.set("n", "<leader>ts", function()
 	vim.opt.spell = not vim.opt.spell:get()
