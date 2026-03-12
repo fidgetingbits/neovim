@@ -19,14 +19,12 @@ let
 in
 {
   imports = [ wlib.wrapperModules.neovim ];
-
   options = {
     settings = {
       devMode = lib.mkOption {
         type = lib.types.bool;
         default = false;
       };
-
       terminalMode = lib.mkOption {
         type = lib.types.bool;
         default = false;
@@ -65,6 +63,12 @@ in
         default = "";
         description = "Font to set from external nix config";
       };
+
+      # extraSpecs = lib.mkOption {
+      #   type = lib.types.attrsOf lib.types.any;
+      #   default = { };
+      #   description = "Extra specs to integrate";
+      # };
 
       # Inform lua which top level specs are enabled
       cats = lib.mkOption {
@@ -121,34 +125,24 @@ in
       "vim"
     ];
 
-    # Causes neovim to either run a new copy, or connect to the "outer" neovim
-    # instance via rpc
-    addFlag = [
-      [
-        "--server"
-        "\"\${NVIM:-}\""
-      ]
-      "--remote"
-    ];
-
-    # If the nvim command is run inside a parent instance, some command-line argument
-    # is expected (maybe a bug?), otherwise you will get an error. Muscle memory often
-    # results in me typing vi while inside a terminal and expecting that to drop me to
-    # an empty buffer or similar. However, RPC will `:drop` which expects an argument.
-    # We fix this by specifying a default argument in case none was provided
+    # If run nested inside a neovim terminal, deal with it appropriately. --remote will pass args
+    # to ':drop', but if no argument was specified it will error, so just run some default expression.
+    # Otherwise, pass all the args through --remote. If not in nvim, just run as normal.
     runShell = [
       # bash
       ''
         # If we are nested in nvim already, and didn't provide arguments, run
-        # some sane default
-        if [ -n ''${NVIM+x} ] && [ $# -eq 0 ]; then
-          set -- --remote-expr ${lib.escapeShellArg config.settings.defaultCommand}
+        # some sane default. 
+        # If neovide is trying to run us, don't bother using rpc
+        if ! ps -o ppid,comm -p $PPID | grep -q neovide && [[ $NVIM ]]; then
+          if [ $# -eq 0 ]; then
+            set -- --server $NVIM --remote-expr ${lib.escapeShellArg config.settings.defaultCommand} 
+          else
+            set -- --server $NVIM --remote "$@"
+          fi
         fi
       ''
     ];
-
-    # Disable the shell escape function because we need $NVIM not escaped
-    escapingFunction = arg: arg;
 
     # NOTE: Specs are enabled by default
     specs = {
@@ -206,6 +200,7 @@ in
               telescope-nvim
               telescope-fzf-native-nvim
               telescope-ui-select-nvim
+              telescope-zoxide
               flash-nvim
               ;
           }
@@ -216,6 +211,11 @@ in
                 ;
             }
           );
+        extraPackages = lib.attrValues {
+          inherit (pkgs)
+            zoxide
+            ;
+        };
       };
 
       ui = {
@@ -239,9 +239,8 @@ in
               which-key-nvim
               zen-mode-nvim
               ;
-            inherit (config.nvim-lib.neovimPlugins)
-              taboo # FIXME: replace with barbar
-              ;
+            # inherit (config.nvim-lib.neovimPlugins)
+            #   ;
           }
           ++ (lib.optionals config.settings.devMode (
             lib.attrValues {
@@ -257,7 +256,18 @@ in
                 confirm-quit
                 ;
             }
+          )
+          ++ lib.optionals config.settings.terminalMode (
+            lib.attrValues {
+              inherit (pkgs.vimPlugins)
+                toggleterm-nvim
+                ;
+              inherit (config.nvim-lib.neovimPlugins)
+                telescope-toggleterm
+                ;
+            }
           );
+
       };
 
       git = {

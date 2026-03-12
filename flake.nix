@@ -40,8 +40,8 @@
       flake = false;
     };
 
-    plugins-taboo = {
-      url = "github:gcmt/taboo.vim";
+    plugins-telescope-toggleterm = {
+      url = "github:da-moon/telescope-toggleterm.nvim";
       flake = false;
     };
   };
@@ -66,6 +66,7 @@
               settings = {
                 devMode = true;
                 neovide = true;
+                terminalMode = true;
               };
             };
           };

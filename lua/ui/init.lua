@@ -11,7 +11,7 @@ return {
   { import = 'ui.notifications' },
   { import = 'ui.smart-splits' },
   { import = 'ui.snacks' },
-  -- { import = 'ui.tabby' },
+  { import = 'ui.toggleterm' },
   { import = 'ui.trouble' },
   { import = 'ui.which-key' },
   { import = 'ui.zen-mode' },

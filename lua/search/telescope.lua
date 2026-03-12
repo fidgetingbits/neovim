@@ -49,7 +49,7 @@ local telescope_ignore_patterns = {
 
 -- Allows you to toggle the search to include hidden files
 -- From https://github.com/nvim-telescope/telescope.nvim/issues/2874#issuecomment-1900967890
-local function my_find_files(opts, no_ignore)
+local function custom_find_files(opts, no_ignore)
   opts = opts or {}
   no_ignore = vim.F.if_nil(no_ignore, false)
   opts.attach_mappings = function(_, map)
@@ -57,7 +57,7 @@ local function my_find_files(opts, no_ignore)
       local prompt = require('telescope.actions.state').get_current_line()
       require('telescope.actions').close(prompt_bufnr)
       no_ignore = not no_ignore
-      my_find_files({ default_text = prompt }, no_ignore)
+      custom_find_files({ default_text = prompt }, no_ignore)
     end)
     return true
   end
@@ -73,21 +73,27 @@ local function my_find_files(opts, no_ignore)
   end
 end
 
+local t = '<leader>f'
+
 return {
   {
     'telescope-luasnip',
     lazy = true,
     dep_of = { 'telescope.nvim', 'luasnip' },
+    -- stylua: ignore
     keys = {
       {
-        '<leader>sL',
-        function()
-          require('telescope').extensions.luasnip.luasnip({})
-        end,
-        mode = { 'n' },
-        desc = 'Telescope luasnip',
+        t .. 'L', function() require('telescope').extensions.luasnip.luasnip({}) end, mode = { 'n' }, desc = '[F]ind Snippets',
       },
     },
+  },
+  {
+    'telescope-toggleterm',
+    dep_of = { 'telescope.nvim' },
+  },
+  {
+    'telescope-zoxide',
+    dep_of = { 'telescope.nvim' },
   },
   {
     'telescope.nvim',
@@ -112,7 +118,7 @@ return {
         desc = '[/] Fuzzily search in current buffer',
       },
       {
-        "<leader>s/",
+        t .. "/",
         function()
           require('telescope.builtin').live_grep {
             grep_open_files = true,
@@ -120,23 +126,30 @@ return {
           }
         end,
         mode = { "n" },
-        desc = '[S]earch [/] in Open Files'
+        desc = '[F]ind [/] in Open Files'
       },
-      { "<leader>s.", function() return require('telescope.builtin').oldfiles() end,    mode = { "n" }, desc = '[S]earch Recent Files ("." for repeat)', },
-      { "<leader>sb", function() return require('telescope.builtin').buffers() end,     mode = { "n" }, desc = '[S]earch existing [B]uffers', },
-      { "<leader>sd", function() return require('telescope.builtin').diagnostics() end, mode = { "n" }, desc = '[S]earch [D]iagnostics', },
-      { "<leader>sf", function() return require('telescope.builtin').find_files() end,  mode = { "n" }, desc = '[S]earch [F]iles', },
-      { "<leader>sg", function() return require('telescope.builtin').live_grep() end,   mode = { "n" }, desc = '[S]earch by [G]rep', },
-      { "<leader>sG", live_grep_git_root,                                               mode = { "n" }, desc = '[S]earch git [P]roject root', },
-      { "<leader>sh", function() return require('telescope.builtin').help_tags() end,   mode = { "n" }, desc = '[S]earch [H]elp', },
-      { "<leader>sk", function() return require('telescope.builtin').keymaps() end,     mode = { "n" }, desc = '[S]earch [K]eymaps', },
-      { "<leader>sl", function() return require('telescope.builtin').builtin({include_extensions = true}) end, mode = { "n" }, desc = "[S]earch telescope commands", },
-      { "<leader>sn", '<cmd>Telescope notify<CR>',                                      mode = { "n" }, desc = '[S]earch [N]otifications', },
-      { "<leader>sp", function() return require('telescope.builtin').git_files() end,   mode = { "n" }, desc = '[S]earch [P]roject Root Files', },
-      { "<leader>sr", function() return require('telescope.builtin').resume() end,      mode = { "n" }, desc = '[S]earch [R]esume', },
-      { "<leader>ss", function() return require('telescope.builtin').builtin() end,     mode = { "n" }, desc = '[S]earch [S]elect Telescope', },
-      { "<leader>sw", function() return require('telescope.builtin').grep_string() end, mode = { "n" }, desc = '[S]earch current [W]ord', },
-      { "<leader>sz", function() return require('telescope.builtin').spell_suggest() end, mode = { "n" }, desc = '[S]earch spelling suggestion', }, -- z because of z=
+
+      -- [[ Built-ins ]]
+      { t .. ".", function() return require('telescope.builtin').oldfiles() end,    mode = { "n" }, desc = '[F]ind Recent Files ("." for repeat)', },
+      { t .. "b", function() return require('telescope.builtin').buffers() end,     mode = { "n" }, desc = '[F]ind existing [B]uffers', },
+      { t .. "d", function() return require('telescope.builtin').diagnostics() end, mode = { "n" }, desc = '[F]ind [D]iagnostics', },
+      { t .. "f", custom_find_files,  mode = { "n" }, desc = '[F]ind [F]iles', },
+      { t .. "g", function() return require('telescope.builtin').live_grep() end,   mode = { "n" }, desc = '[F]ind by [G]rep', },
+      { t .. "G", live_grep_git_root,                                               mode = { "n" }, desc = '[F]ind git [P]roject root', },
+      { t .. "h", function() return require('telescope.builtin').help_tags() end,   mode = { "n" }, desc = '[F]ind [H]elp', },
+      { t .. "k", function() return require('telescope.builtin').keymaps() end,     mode = { "n" }, desc = '[F]ind [K]eymaps', },
+      { t .. "l", function() return require('telescope.builtin').builtin({include_extensions = true}) end, mode = { "n" }, desc = "[F]ind telescope commands", },
+      { t .. "n", '<cmd>Telescope notify<CR>',                                      mode = { "n" }, desc = '[F]ind [N]otifications', },
+      { t .. "p", function() return require('telescope.builtin').git_files() end,   mode = { "n" }, desc = '[F]ind [P]roject Root Files', },
+      { t .. "r", function() return require('telescope.builtin').resume() end,      mode = { "n" }, desc = '[F]ind [R]esume', },
+      { t .. "s", function() return require('telescope.builtin').builtin() end,     mode = { "n" }, desc = '[F]ind [S]elect Telescope', },
+      { t .. "w", function() return require('telescope.builtin').grep_string() end, mode = { "n" }, desc = '[F]ind current [W]ord', },
+      { t .. "z", function() return require('telescope.builtin').spell_suggest() end, mode = { "n" }, desc = '[F]ind spelling suggestion', }, -- z because of z=
+
+      -- [[ Non-built-ins ]]
+      { t .. "t", '<cmd>Telescope toggleterm<CR>', mode = { "n" }, desc = '[F]ind [T]erminals', },
+      { t .. 'c', '<cmd>Telescope zoxide list<CR>', mode = { 'n' }, desc = '[F]ind [Z]oxide', },
+
     },
     load = function(name)
       nixInfo.lze.loaders.multi({
@@ -144,26 +157,22 @@ return {
         'telescope-fzf-native.nvim',
         'telescope-ui-select.nvim',
         'telescope-luasnip',
+        'telescope-toggleterm.nvim',
+        'telescope-zoxide.nvim',
       })
     end,
 
     after = function(_)
-      local actions = require('telescope.actions')
       require('telescope').setup({
-        -- You can put your default mappings / updates / etc. in here
-        --  All the info you're looking for is in `:help telescope.setup()`
-        --
         defaults = {
           mappings = {
             i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-            -- FIXME: Add in the my_find_files trigger
-            -- i = { [
-            -- If selection, send it to qf, otherwise send all to qf
-            -- ["<C-q>"] = actions.smart_send_to_qflist + actions.open_qflist,
           },
           file_ignore_patterns = telescope_ignore_patterns,
           layout_strategy = 'flex', -- Change layout depending on if on laptop screen or dualup
-          -- FIXME: Still need to test this on the laptop... may be better to just make the layout_strategy a function that checks for monitors or something eventually?
+          -- FIXME: Still need to test this on the laptop... may be better to
+          -- just make the layout_strategy a function that checks for monitors
+          -- or something eventually?
           layout_config = {
             flex = {
               flip_columns = 180,
@@ -180,23 +189,36 @@ return {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
           },
+          zoxide = {
+            mappings = {
+              default = {
+                action = function(selection)
+                  -- Prefer tab page path changes by default
+                  vim.cmd.tcd(selection.path)
+                end,
+                ['<C-l>'] = {
+                  action = function(selection)
+                    vim.cmd.lcd(selection.path)
+                  end,
+                },
+                ['<C-g>'] = {
+                  action = function(selection)
+                    vim.cmd.cd(selection.path)
+                  end,
+                },
+              },
+            },
+          },
         },
       })
-
-      -- Toggle search ignore
-      vim.keymap.set('n', '<leader>tsi', function()
-        vim.g.telescope_ignore_enabled = not vim.g.telescope_ignore_enabled
-
-        require('telescope.config').set_defaults({
-          file_ignore_patterns = vim.g.telescope_ignore_enabled and telescope_ignore_patterns or {},
-        })
-      end, { noremap = true, desc = 'Toggle telescope ignore patterns' })
 
       -- Enable telescope extensions, if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
-      -- FIX: If you do this in the after for luasnip entry above, you get a stack overflow
+      -- WARNING: If you do this in the after for luasnip entry above, you get a stack overflow
       pcall(require('telescope').load_extension, 'luasnip')
+      pcall(require('telescope').load_extension, 'toggleterm')
+      pcall(require('telescope').load_extension, 'zoxide')
 
       vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
     end,
