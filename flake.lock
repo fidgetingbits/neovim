@@ -100,22 +100,6 @@
         "type": "github"
       }
     },
-    "plugins-taboo": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1729184442,
-        "narHash": "sha256-BtxyORvocIrxMmcZkGZPAfaYsM3cl8xjhWt7/eJUMGc=",
-        "owner": "gcmt",
-        "repo": "taboo.vim",
-        "rev": "937f67ab9dc2ba1861fabc40ca367e5622c30d36",
-        "type": "github"
-      },
-      "original": {
-        "owner": "gcmt",
-        "repo": "taboo.vim",
-        "type": "github"
-      }
-    },
     "plugins-telescope-luasnip": {
       "flake": false,
       "locked": {
@@ -132,6 +116,22 @@
         "type": "github"
       }
     },
+    "plugins-telescope-toggleterm": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1644448110,
+        "narHash": "sha256-3LbOrix1sTadZh7z5wtwuNKsllqyl3IVhArWdwBCdhM=",
+        "owner": "da-moon",
+        "repo": "telescope-toggleterm.nvim",
+        "rev": "5c1402507f0ad01711196e5d27e9f0606f78b7d0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "da-moon",
+        "repo": "telescope-toggleterm.nvim",
+        "type": "github"
+      }
+    },
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
@@ -140,8 +140,8 @@
         "plugins-lua-console": "plugins-lua-console",
         "plugins-nvim-better-n": "plugins-nvim-better-n",
         "plugins-nvim-toggler": "plugins-nvim-toggler",
-        "plugins-taboo": "plugins-taboo",
         "plugins-telescope-luasnip": "plugins-telescope-luasnip",
+        "plugins-telescope-toggleterm": "plugins-telescope-toggleterm",
         "wrappers": "wrappers"
       }
     },
