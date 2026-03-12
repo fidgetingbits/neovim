@@ -65,7 +65,7 @@ return {
     after = function(plugin)
       require('lualine').setup({
         options = {
-          always_show_tabline = false, -- only show tabline when >1 tabs
+          always_show_tabline = true, -- only show tabline when >1 tabs
           refresh = {
             tabline = 10000, -- FIXME: Double check why
           },
@@ -107,28 +107,28 @@ return {
               max_length = vim.o.columns - 2,
               mode = 1, -- Shows tab_name
               padding = 1,
-              tabs_color = {
-                -- Same values as the general color option can be used here.
-                active = 'TabLineSel', -- Color for active tab.
-                inactive = 'TabLineFill', -- Color for inactive tab.
-              },
+              -- tabs_color = {
+              --   -- Same values as the general color option can be used here.
+              --   active = 'TabLineSel', -- Color for active tab.
+              --   inactive = 'TabLineFill', -- Color for inactive tab.
+              -- },
 
               -- FIXME: Revisit this
-              fmt = function(name, context)
-                local buflist = vim.fn.tabpagebuflist(context.tabnr)
-                local winnr = vim.fn.tabpagewinnr(context.tabnr)
-                local bufnr = buflist[winnr]
-
-                -- hard code 'scratch' name for Snacks scratch buffers
-                if name:find('.scratch') then
-                  name = 'scratch'
-                else
-                  name = get_buffer_name(bufnr, context)
-                end
-
-                -- include tabnr only if # of tabs > 3
-                return ((vim.fn.tabpagenr('$') > 3) and (context.tabnr .. ' ') or '') .. name
-              end,
+              -- fmt = function(name, context)
+              --   local buflist = vim.fn.tabpagebuflist(context.tabnr)
+              --   local winnr = vim.fn.tabpagewinnr(context.tabnr)
+              --   local bufnr = buflist[winnr]
+              --
+              --   -- hard code 'scratch' name for Snacks scratch buffers
+              --   if name:find('.scratch') then
+              --     name = 'scratch'
+              --   else
+              --     name = get_buffer_name(bufnr, context)
+              --   end
+              --
+              --   -- include tabnr only if # of tabs > 3
+              --   return ((vim.fn.tabpagenr('$') > 3) and (context.tabnr .. ' ') or '') .. name
+              -- end,
             },
           },
         },
@@ -143,10 +143,9 @@ return {
         }
       )
       vim.keymap.set({ 'n', 'v' }, '<leader><tab>r', function()
-        local current_tab = vim.fn.tabpagenr()
         vim.ui.input({ prompt = 'New Tab Name: ' }, function(input)
           if input or input == '' then
-            vim.g['Lualine_tabname_' .. current_tab] = input
+            vim.cmd.LualineRenameTab(input)
             require('lualine').refresh({ scope = 'all', place = { 'tabline' } })
           end
         end)
