@@ -85,7 +85,8 @@ if nixInfo(false, 'settings', 'terminalMode') then
   vim.api.nvim_create_autocmd({ 'ModeChanged', 'BufWinEnter', 'WinEnter' }, {
     group = term_status_grp,
     callback = function()
-      sync_terminal_ui()
+      -- FIXME: This sometimes doesn't reset the colors, so just living with numbers for now
+      -- sync_terminal_ui()
       local bg_color = vim.api.nvim_get_hl(0, { name = 'Normal' }).bg
       if vim.bo.buftype == 'terminal' and vim.api.nvim_get_mode().mode == 't' then
         term_settings()
@@ -226,16 +227,16 @@ if nixInfo(false, 'settings', 'terminalMode') then
     require('smart-splits').swap_buf_right()
   end)
 
-  vim.keymap.set('n', '<A-left>', function()
+  vim.keymap.set({ 't', 'v', 'i', 'n' }, '<A-left>', function()
     require('smart-splits').resize_left()
   end)
-  vim.keymap.set('n', '<A-down>', function()
+  vim.keymap.set({ 't', 'v', 'i', 'n' }, '<A-down>', function()
     require('smart-splits').resize_down()
   end)
-  vim.keymap.set('n', '<A-up>', function()
+  vim.keymap.set({ 't', 'v', 'i', 'n' }, '<A-up>', function()
     require('smart-splits').resize_up()
   end)
-  vim.keymap.set('n', '<A-right>', function()
+  vim.keymap.set({ 't', 'v', 'i', 'n' }, '<A-right>', function()
     require('smart-splits').resize_right()
   end)
 
@@ -243,4 +244,7 @@ if nixInfo(false, 'settings', 'terminalMode') then
   vim.keymap.set('n', '<A-t>n', function()
     vim.cmd('term')
   end)
+
+  -- Allow scrolling back as an escape out of terminal
+  vim.keymap.set('t', '<C-b>', '<C-\\><C-n><C-b>')
 end
