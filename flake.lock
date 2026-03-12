@@ -100,6 +100,22 @@
         "type": "github"
       }
     },
+    "plugins-possession": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1761078973,
+        "narHash": "sha256-RVIjnBU3jAPPda39yhUSVL/QMgg8D2mRAlNpzZfPdUU=",
+        "owner": "jedrzejboczar",
+        "repo": "possession.nvim",
+        "rev": "fbea95b16c284727bc8deff2c3780a73efcdaca6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jedrzejboczar",
+        "repo": "possession.nvim",
+        "type": "github"
+      }
+    },
     "plugins-telescope-luasnip": {
       "flake": false,
       "locked": {
@@ -140,6 +156,7 @@
         "plugins-lua-console": "plugins-lua-console",
         "plugins-nvim-better-n": "plugins-nvim-better-n",
         "plugins-nvim-toggler": "plugins-nvim-toggler",
+        "plugins-possession": "plugins-possession",
         "plugins-telescope-luasnip": "plugins-telescope-luasnip",
         "plugins-telescope-toggleterm": "plugins-telescope-toggleterm",
         "wrappers": "wrappers"

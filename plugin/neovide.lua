@@ -43,8 +43,9 @@ if vim.g.neovide then
   local operator_cursor = 'o:hor50-' .. blink
   local showmatch_cursor = 'sm:block-' .. blink
 
-  vim.g.neovide_floating_shadow = true
-  vim.g.neovide_floating_z_height = 10
+  -- WARNING: Setting this to true messages up stuff like snacks dashboard
+  vim.g.neovide_floating_shadow = false
+  -- vim.g.neovide_floating_z_height = 10
 
   -- Follow: https://github.com/neovim/neovim/pull/31562
   vim.o.guicursor = table.concat({

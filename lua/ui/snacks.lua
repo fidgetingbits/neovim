@@ -1,4 +1,3 @@
--- FIXME: lifted from EM
 return {
   {
     'snacks.nvim',
@@ -15,78 +14,7 @@ return {
           autokeys = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
           preset = {
             pick = nil,
-            keys = {
-              {
-                icon = ' ',
-                desc = 'New File    :ene',
-                -- key = "n",
-                -- action = ":ene | startinsert"
-              },
-              {
-                icon = ' ',
-                desc = 'Find File   <leader>ff',
-                -- key = "f",
-                -- action = ":Telescope find_files",
-              },
-              {
-                icon = ' ',
-                desc = 'Find Buffer   <leader>fb',
-                -- key = "b",
-                -- action = ":Telescope buffers",
-              },
-              {
-                icon = ' ',
-                desc = 'Live grep   <leader>fg',
-                -- key = "g",
-                -- action = ":Telescope live_grep",
-              },
-              {
-                icon = ' ',
-                desc = 'Recent Files    <leader>fr',
-                -- key = "r",
-                -- action = ":Telescope oldfiles",
-              },
-              {
-                icon = '󰮥 ',
-                desc = 'Help tags     <leader>fh',
-                -- key = "r",
-                -- action = ":Telescope help_tags",
-              },
-            },
-            header = [[
-                           ..',;:::::::;,'..
-                     .':loollllc:::::::clllllol;.
-                  .coooc;..                 .';lool;.
-               .cdoc'.                           .,ldo:.
-             ,odc.               .;;,,,,,';odlcll:'..,oxl'
-           ,dd;       .,;;::'. .lXWWWWWWWNWWWMWWWWNO:. .cxo.
-         .dx;   ..'';xXWWWWWN0k0NWWMWWWWWWWWWWWWWNXNWXk:..lkc.
-        ;ko.   :0XNNNWWWWWMWWWMMWWWWWWNWXkxOXWWNOo:,;lo:.  'xx'
-       ck:     cNWWWWWWMMMWWW0dkNWWWNO0Xl'lx0NOdk0Kdod;.    .ok,
-      lO;      :XMWMMWWWMMWWWx..;l:;,cOXx:,'kXdxNWMMMWNKo.    lO,
-     :O;       ;doollkXWMMWMWKo.     .;OKllOKdd0XWMMWWWXo.     oO'
-    'Ol               .,:cloxOk:,,;;dKKX0dxkl'oNWWWMXo:;,.     .xx.
-    ok.                 'do'.'::loxOXWKk; 'd0KNWWWWWNx.         ;0:
-   'Ol                 .oXWx.  .;:;:oKWx..dNWWMMWWWXOl.         .xx.
-   :0;                  ..;c:;,,:dkxokNX:.kWWMMMWWNd..:x0x,      lO'
-   lO'                 ,xdo:..    ,lco0WXo;oXMWMMWXc.oNWWNOl.    :0,
-   lO'                .okk00o'''     .'cKW0OKx::c:. .dWWKl'.     :0;
-   c0,                    .lXX0l        oWWXkoolc::;:ll,.        cO'
-   ,0c                     .',cdd;..   ;0WXxldl'...;:.';.        dk.
-   .xx.                        .cOxoxkOXWXkdoc:cclol;           'Ol
-    :0:                          .lOXWMXo,';coo;...             oO.
-     ok.                        .cOXNNx'                       :O:
-     .xx.                     .cKWWMXl.                       ,Ol
-      .xx.                   .dNWWXOc                        ;kl
-       .ok,        .,;cloddxx0NWWMNK0kkxddolc:,..          .ck:
-         ;ko.   .oOXWWWMWWMMMMWMMWWWMMWMMMMMWWWX0x'       'dx'
-          .lkl. .cxOKNWWMWMMMWWMMWMMMWWWWWMWWNX0xl.     'ox:.
-            .oxl'   ..,;:clloooddddoooollc:;,'..      ,oxc.
-              .cddc'                              .,ldo;.
-                 'cool:'.                     .,codo:.
-                    .,cooolc:;''.......',;:lolloc'.
-                         .';clllllllllllll:;'.
-]],
+            header = [[ oedo ]],
           },
           formats = {
             icon = function(item)
@@ -114,11 +42,18 @@ return {
             end,
           },
           sections = {
-            { section = 'header' },
+            {
+              section = 'terminal',
+              cmd = 'chafa ~/dev/nix/neovim/assets/jinteki.jpg --format symbols -s 50x50 -c 2; sleep .1',
+              align = 'center',
+              height = 25,
+              width = 50,
+            },
+            -- { section = 'header' },
           },
         },
         -- picker/explorer
-        -- FIXME: currently LPSs uses this but it may be worth replacing
+        -- FIXME: currently LSPs uses this but it may be worth replacing
         -- telescope with it as well
         picker = { enabled = true },
       })

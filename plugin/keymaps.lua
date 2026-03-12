@@ -113,10 +113,14 @@ vim.keymap.set("n", "<leader>ts", function()
 	vim.opt.spell = not vim.opt.spell:get()
 end, { desc = "Toggle spell checking" })
 
-vim.keymap.set("n", "<Esc>", function()
+local function dismiss_all()
   require("noice").cmd("dismiss")
   require("notify").dismiss({ silent = true })
   vim.cmd("noh")
-end, { desc = "Dismiss all notifications and clear hlsearch" })
+end
+
+vim.keymap.set("n", "<Esc>", dismiss_all, { desc = "Dismiss all notifications and clear hlsearch" })
+-- blink uses <c-e> to close pop-up so same idea
+vim.keymap.set({ "v", "n", "t", "c"}, "<A-e>", dismiss_all, { desc = "Dismiss all notifications and clear hlsearch" })
 
 -- stylua: ignore end

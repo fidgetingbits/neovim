@@ -44,6 +44,12 @@
       url = "github:da-moon/telescope-toggleterm.nvim";
       flake = false;
     };
+
+    plugins-possession = {
+      url = "github:jedrzejboczar/possession.nvim";
+      flake = false;
+    };
+
   };
 
   outputs =

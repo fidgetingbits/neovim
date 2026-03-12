@@ -150,11 +150,8 @@ if nixInfo(false, 'settings', 'terminalMode') then
   })
 
   -- stylua: ignore start
-  vim.keymap.set({ 't', }, '<C-o>', '<C-\\><C-n>',
-    { noremap = true, silent = false, desc = 'Convenience from breaking out of terminal mode' })
+  vim.keymap.set({ 't', }, '<C-o>', '<C-\\><C-n>', { desc = 'Convenience from breaking out of terminal mode' })
   -- stylua: ignore end
-
-  -- FIXME: Still need alt+# to jump to a tab index
 
   vim.o.showtabline = 2 -- Always show tabline
   local function split_and_follow(direction)
@@ -175,19 +172,6 @@ if nixInfo(false, 'settings', 'terminalMode') then
   end
 
   local modes = { 't', 'n', 'v' }
-
-  vim.keymap.set(modes, '<A-h>', function()
-    require('smart-splits').move_cursor_left()
-  end, { noremap = true, silent = true })
-  vim.keymap.set(modes, '<A-j>', function()
-    require('smart-splits').move_cursor_down()
-  end, { noremap = true, silent = true })
-  vim.keymap.set(modes, '<A-k>', function()
-    require('smart-splits').move_cursor_up()
-  end, { noremap = true, silent = true })
-  vim.keymap.set(modes, '<A-l>', function()
-    require('smart-splits').move_cursor_right()
-  end, { noremap = true, silent = true })
 
   for i = 1, 9 do
     vim.keymap.set({ 'n', 'v', 't', 'i' }, '<A-' .. i .. '>', function()
@@ -211,34 +195,7 @@ if nixInfo(false, 'settings', 'terminalMode') then
   -- Toggle fullscreen (zen mode)
   vim.keymap.set({ 't', 'n', 'v' }, '<A-f>', function()
     vim.cmd('ZenMode')
-  end, { noremap = true, silent = true })
-
-  -- Buffer swapping/moving
-  vim.keymap.set({ 't', 'v', 'i', 'n' }, '<A-S-h>', function()
-    require('smart-splits').swap_buf_left()
-  end)
-  vim.keymap.set({ 't', 'v', 'i', 'n' }, '<A-S-j>', function()
-    require('smart-splits').swap_buf_down()
-  end)
-  vim.keymap.set({ 't', 'v', 'i', 'n' }, '<A-S-k>', function()
-    require('smart-splits').swap_buf_up()
-  end)
-  vim.keymap.set({ 't', 'v', 'i', 'n' }, '<A-S-l>', function()
-    require('smart-splits').swap_buf_right()
-  end)
-
-  vim.keymap.set({ 't', 'v', 'i', 'n' }, '<A-left>', function()
-    require('smart-splits').resize_left()
-  end)
-  vim.keymap.set({ 't', 'v', 'i', 'n' }, '<A-down>', function()
-    require('smart-splits').resize_down()
-  end)
-  vim.keymap.set({ 't', 'v', 'i', 'n' }, '<A-up>', function()
-    require('smart-splits').resize_up()
-  end)
-  vim.keymap.set({ 't', 'v', 'i', 'n' }, '<A-right>', function()
-    require('smart-splits').resize_right()
-  end)
+  end, { noremap = true, silent = true, desc = 'Toggle full screen (zen)' })
 
   -- Spawn new terminal
   vim.keymap.set('n', '<A-t>n', function()
@@ -246,5 +203,6 @@ if nixInfo(false, 'settings', 'terminalMode') then
   end)
 
   -- Allow scrolling back as an escape out of terminal
-  vim.keymap.set('t', '<C-b>', '<C-\\><C-n><C-b>')
+  -- stylua: ignore
+  vim.keymap.set('t', '<C-b>', '<C-\\><C-n><C-b>', { desc = 'Leave terminal mode and scroll back in buffer' })
 end

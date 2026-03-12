@@ -129,10 +129,11 @@ return {
         desc = '[F]ind [/] in Open Files'
       },
 
-      -- [[ Built-ins ]]
+      -- IMPORTANT: s from flash.nvim conflicts with <leader>, so don't map for now
       { t .. ".", function() return require('telescope.builtin').oldfiles() end,    mode = { "n" }, desc = '[F]ind Recent Files ("." for repeat)', },
       { t .. "b", function() return require('telescope.builtin').buffers() end,     mode = { "n" }, desc = '[F]ind existing [B]uffers', },
-      { t .. "d", function() return require('telescope.builtin').diagnostics() end, mode = { "n" }, desc = '[F]ind [D]iagnostics', },
+      { t .. "B", function() return require('telescope.builtin').builtin() end,     mode = { "n" }, desc = '[F]ind telescope builtins', },
+      { t .. 'd', '<cmd>Telescope zoxide list<CR>', mode = { 'n' }, desc = '[F]ind [Z]oxide', },
       { t .. "f", custom_find_files,  mode = { "n" }, desc = '[F]ind [F]iles', },
       { t .. "g", function() return require('telescope.builtin').live_grep() end,   mode = { "n" }, desc = '[F]ind by [G]rep', },
       { t .. "G", live_grep_git_root,                                               mode = { "n" }, desc = '[F]ind git [P]roject root', },
@@ -140,16 +141,14 @@ return {
       { t .. "k", function() return require('telescope.builtin').keymaps() end,     mode = { "n" }, desc = '[F]ind [K]eymaps', },
       { t .. "l", function() return require('telescope.builtin').builtin({include_extensions = true}) end, mode = { "n" }, desc = "[F]ind telescope commands", },
       { t .. "n", '<cmd>Telescope notify<CR>',                                      mode = { "n" }, desc = '[F]ind [N]otifications', },
-      { t .. "p", function() return require('telescope.builtin').git_files() end,   mode = { "n" }, desc = '[F]ind [P]roject Root Files', },
+      { t .. "P", function() return require('telescope.builtin').git_files() end,   mode = { "n" }, desc = '[F]ind [P]roject Root Files', },
       { t .. "r", function() return require('telescope.builtin').resume() end,      mode = { "n" }, desc = '[F]ind [R]esume', },
-      { t .. "s", function() return require('telescope.builtin').builtin() end,     mode = { "n" }, desc = '[F]ind [S]elect Telescope', },
-      { t .. "w", function() return require('telescope.builtin').grep_string() end, mode = { "n" }, desc = '[F]ind current [W]ord', },
-      { t .. "z", function() return require('telescope.builtin').spell_suggest() end, mode = { "n" }, desc = '[F]ind spelling suggestion', }, -- z because of z=
-
-      -- [[ Non-built-ins ]]
+      { t .. 'p', '<cmd>Telescope possession list<CR>', mode = { 'n' }, desc = '[F]ind [p]ossessions sessions', },
       { t .. "t", '<cmd>Telescope toggleterm<CR>', mode = { "n" }, desc = '[F]ind [T]erminals', },
-      { t .. 'c', '<cmd>Telescope zoxide list<CR>', mode = { 'n' }, desc = '[F]ind [Z]oxide', },
-
+      { t .. "w", function() return require('telescope.builtin').grep_string() end, mode = { "n" }, desc = '[F]ind current [W]ord', },
+      -- Because <leader>xx toggles diagnostic quicklist
+      { t .. "x", function() return require('telescope.builtin').diagnostics() end, mode = { "n" }, desc = '[F]ind Diagnostics', },
+      { t .. "z", function() return require('telescope.builtin').spell_suggest() end, mode = { "n" }, desc = '[F]ind spelling suggestion', }, -- z because of z=
     },
     load = function(name)
       nixInfo.lze.loaders.multi({
@@ -159,6 +158,7 @@ return {
         'telescope-luasnip',
         'telescope-toggleterm.nvim',
         'telescope-zoxide.nvim',
+        'possession',
       })
     end,
 
@@ -215,10 +215,12 @@ return {
       -- Enable telescope extensions, if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
-      -- WARNING: If you do this in the after for luasnip entry above, you get a stack overflow
+      -- WARNING: If you do this in the after for luasnip entry above, you get
+      -- a stack overflow
       pcall(require('telescope').load_extension, 'luasnip')
       pcall(require('telescope').load_extension, 'toggleterm')
       pcall(require('telescope').load_extension, 'zoxide')
+      pcall(require('telescope').load_extension, 'possession')
 
       vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
     end,
