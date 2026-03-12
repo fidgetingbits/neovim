@@ -54,4 +54,40 @@ return {
       }
     )
   ),
+
+  s(
+    'mkob',
+    fmt(
+      [[
+      {} = lib.mkOption {{
+        type = lib.types.bool;
+        default = {};
+        example = false; 
+        description = "{}";
+      }};
+    ]],
+      {
+        i(1, 'var'),
+        c(2, { t('true'), t('false') }),
+        i(3, 'description'),
+      }
+    )
+  ),
+
+  s(
+    'pkglist',
+    fmt(
+      [[
+      lib.attrValues {{
+        inherit({})
+          {}
+        ;
+      }};
+    ]],
+      {
+        i(1, 'pkgs'),
+        i(2, 'hello'),
+      }
+    )
+  ),
 }
