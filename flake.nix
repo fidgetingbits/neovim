@@ -45,11 +45,10 @@
       flake = false;
     };
 
-    plugins-possession = {
-      url = "github:jedrzejboczar/possession.nvim";
+    plugins-pick-resession = {
+      url = "github:scottmckendry/pick-resession.nvim";
       flake = false;
     };
-
   };
 
   outputs =

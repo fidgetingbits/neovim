@@ -401,11 +401,12 @@ in
                 indent-blankline-nvim
                 mini-ai
                 mini-surround
+                resession-nvim
                 ;
               inherit (config.nvim-lib.neovimPlugins)
                 nvim-toggler
                 nvim-better-n
-                possession
+                pick-resession
                 ;
             }
             ++ [
