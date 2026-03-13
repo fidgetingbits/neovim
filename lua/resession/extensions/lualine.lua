@@ -35,7 +35,7 @@ M.on_post_load = function(data)
         vim.api.nvim_tabpage_set_var(tonumber(handle), 'tabname', tab_name)
       end
     end
-    vim.cmd.redrawtabline()
+    -- vim.cmd.redrawtabline()
   end
 end
 

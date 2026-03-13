@@ -10,7 +10,7 @@ return {
         notify = true, -- FIXME: Double check what this is like
       },
       extensions = {
-        -- lualine = true,
+        lualine = {},
       },
       -- FIXME: This is old possession
       -- hooks = {
