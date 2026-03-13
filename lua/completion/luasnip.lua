@@ -1,7 +1,7 @@
 function load_snippets()
   local config_dir = nixInfo(false, 'settings', 'config_directory')
   require('luasnip.loaders.from_vscode').load({
-    paths = config_dir .. '/snippets/luasnip',
+    paths = config_dir .. '/snippets/vscode',
   })
   require('luasnip.loaders.from_lua').load({
     paths = config_dir .. '/snippets/luasnip',
