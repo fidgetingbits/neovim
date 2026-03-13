@@ -200,10 +200,23 @@ if nixInfo(false, 'settings', 'terminalMode') then
     vim.cmd('ZenMode')
   end, { noremap = true, silent = true, desc = 'Toggle full screen (zen)' })
 
-  -- Spawn new terminal
+  -- Spawn new in current buffer
   vim.keymap.set('n', term_trigger .. 'n', vim.cmd.term, { desc = 'Spawn terminal' })
+  -- stylua: ignore
+  vim.keymap.set('n', term_trigger .. 'N', '<cmd>:tabnew | terminal<CR>', { desc = 'Spawn terminal in tab' })
+
+  -- Rename terminal
+  local function rename_term()
+    vim.ui.input({ prompt = 'New Terminal Name: ' }, function(input)
+      if input or input == '' then
+        vim.b.term_name = input
+      end
+    end)
+  end
+  vim.keymap.set('n', term_trigger .. 'r', rename_term, { desc = 'Rename terminal' })
 
   -- Allow scrolling back as an escape out of terminal
   -- stylua: ignore
   vim.keymap.set('t', '<C-b>', '<C-\\><C-n><C-b>', { desc = 'Leave terminal mode and scroll back in buffer' })
 end
+

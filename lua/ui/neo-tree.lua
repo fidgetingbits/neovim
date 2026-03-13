@@ -13,7 +13,12 @@ return {
           },
         },
       })
-      vim.keymap.set('n', '<leader>n', ':Neotree toggle<CR>', { desc = 'Toggle Neotree' })
+      vim.keymap.set(
+        'n',
+        '<leader>n',
+        ':Neotree toggle current reveal_force_cwd<CR>',
+        { desc = 'Toggle Neotree' }
+      )
     end,
   },
 }

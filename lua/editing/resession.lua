@@ -6,38 +6,21 @@ return {
     resession.setup({
       autosave = {
         enabled = true,
-        interval = 60,
-        notify = true, -- FIXME: Double check what this is like
+        interval = 30,
+        notify = false,
       },
+      buf_filter = function(bufnr)
+        local buftype = vim.bo[bufnr].buftype
+        -- Keep terminal buffers, which we'll fix up a bit in the terminal extension
+        if buftype == 'terminal' then
+          return true
+        end
+        return resession.default_buf_filter(bufnr)
+      end,
       extensions = {
         lualine = {},
+        terminal = {},
       },
-      -- FIXME: This is old possession
-      -- hooks = {
-      --   before_save = function()
-      --     local user_data = {}
-      --     -- Don't bother saving the state of open tooling
-      --
-      --     -- TODO: Decide if I want this after testing neotree plugin
-      --     -- pcall(function()
-      --     --   vim.cmd("Neotree close")
-      --     -- end)
-      --     pcall(function()
-      --       require('dapui').close()
-      --     end)
-      --     pcall(function()
-      --       require('neogit').close()
-      --     end)
-      --
-      --     return {
-      --       lualine = lualine_before_save(),
-      --     }
-      --   end,
-      --
-      --   after_load = function(name, user_data)
-      --     lualine_after_load(name, user_data.lualine)
-      --   end,
-      -- },
     })
     
     -- stylua: ignore start
