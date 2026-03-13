@@ -18,6 +18,7 @@ end)
 return {
   {
     'nvim-lspconfig',
+    lazy = false, -- FIXME: on_attach not firing
     on_require = { 'lspconfig' },
     -- NOTE: will run for all specs with type(plugin.lsp) == table
     -- when their filetype trigger loads them

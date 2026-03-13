@@ -1,5 +1,8 @@
 -- See `:help vim.o`
 
+-- default "blank,buffers,curdir,folds,help,tabpages,winsize,terminal"
+vim.opt.sessionoptions:append({ 'globals', 'localoptions' })
+
 -- Sync clipboard between OS and Neovim.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
@@ -96,3 +99,4 @@ vim.o.endofline = false
 
 -- Single status line at bottom of window for all windows
 vim.opt.laststatus = 3
+

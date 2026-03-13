@@ -1,7 +1,7 @@
 return {
   { import = 'editing.mini-ai' },
   { import = 'editing.nvim-toggler' },
-  { import = 'editing.possession' },
+  { import = 'editing.resession' },
   { import = 'editing.todo-comments' },
   { import = 'editing.undotree' },
   -- FIXME: Move to modules

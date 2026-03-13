@@ -94,12 +94,7 @@ return {
         '<cmd>FormatToggle global<CR>',
         { desc = '[Format] toggle global' }
       )
-      vim.keymap.set(
-        { 'n', 'v' },
-        '<leader>Ft',
-        '<cmd>FormatToggle<CR>',
-        { desc = '[Format] toggle' }
-      )
+      vim.keymap.set({ 'n', 'v' }, '<leader>Ft', vim.cmd.FormatToggle, { desc = '[Format] toggle' })
     end,
   },
 }

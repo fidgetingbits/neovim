@@ -100,19 +100,19 @@
         "type": "github"
       }
     },
-    "plugins-possession": {
+    "plugins-pick-resession": {
       "flake": false,
       "locked": {
-        "lastModified": 1761078973,
-        "narHash": "sha256-RVIjnBU3jAPPda39yhUSVL/QMgg8D2mRAlNpzZfPdUU=",
-        "owner": "jedrzejboczar",
-        "repo": "possession.nvim",
-        "rev": "fbea95b16c284727bc8deff2c3780a73efcdaca6",
+        "lastModified": 1755917906,
+        "narHash": "sha256-q6HHHn1PP/NXg9yk00IUJiThNcgvqlSq4xUbAfeojok=",
+        "owner": "scottmckendry",
+        "repo": "pick-resession.nvim",
+        "rev": "3bd9b6a7765be068d2bd88ba77c2602229c97442",
         "type": "github"
       },
       "original": {
-        "owner": "jedrzejboczar",
-        "repo": "possession.nvim",
+        "owner": "scottmckendry",
+        "repo": "pick-resession.nvim",
         "type": "github"
       }
     },
@@ -156,7 +156,7 @@
         "plugins-lua-console": "plugins-lua-console",
         "plugins-nvim-better-n": "plugins-nvim-better-n",
         "plugins-nvim-toggler": "plugins-nvim-toggler",
-        "plugins-possession": "plugins-possession",
+        "plugins-pick-resession": "plugins-pick-resession",
         "plugins-telescope-luasnip": "plugins-telescope-luasnip",
         "plugins-telescope-toggleterm": "plugins-telescope-toggleterm",
         "wrappers": "wrappers"

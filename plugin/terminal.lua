@@ -171,36 +171,37 @@ if nixInfo(false, 'settings', 'terminalMode') then
     end
   end
 
-  local modes = { 't', 'n', 'v' }
+  local nv = { 'n', 'v' }
+  local nvt = { 'n', 'v', 't' }
+  local nvti = { 'n', 'v', 't', 'i' }
+
+  local term_trigger = '<A-s>'
 
   for i = 1, 9 do
-    vim.keymap.set({ 'n', 'v', 't', 'i' }, '<A-' .. i .. '>', function()
-      pcall(vim.api.nvim_set_current_tabpage, i)
-    end, { desc = 'Go to tab ' .. i })
+    vim.keymap.set(nvti, '<A-' .. i .. '>', i .. 'gt', { desc = 'Go to tab ' .. i })
   end
 
   for _, dir in ipairs({ 'h', 'j', 'k', 'l' }) do
     -- Using p to match zellij panes for now
-    vim.keymap.set(modes, '<A-p>' .. dir, function()
+    vim.keymap.set(nvti, '<A-p>' .. dir, function()
       split_and_follow(dir)
     end, { desc = 'Split window ' .. dir })
 
     -- Spawn terminal in direction
-    vim.keymap.set(modes, '<A-t>' .. dir, function()
+    vim.keymap.set(nvti, term_trigger .. dir, function()
       split_and_follow(dir)
       vim.cmd('term')
     end, { desc = 'Spawn terminal to' .. dir })
   end
 
   -- Toggle fullscreen (zen mode)
-  vim.keymap.set({ 't', 'n', 'v' }, '<A-f>', function()
+  -- FIXME: Tweak the settings for this probably
+  vim.keymap.set(nvt, '<A-f>', function()
     vim.cmd('ZenMode')
   end, { noremap = true, silent = true, desc = 'Toggle full screen (zen)' })
 
   -- Spawn new terminal
-  vim.keymap.set('n', '<A-t>n', function()
-    vim.cmd('term')
-  end)
+  vim.keymap.set('n', term_trigger .. 'n', vim.cmd.term, { desc = 'Spawn terminal' })
 
   -- Allow scrolling back as an escape out of terminal
   -- stylua: ignore

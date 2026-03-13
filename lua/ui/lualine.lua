@@ -142,14 +142,6 @@ return {
           end,
         }
       )
-      vim.keymap.set({ 'n', 'v' }, '<leader><tab>r', function()
-        vim.ui.input({ prompt = 'New Tab Name: ' }, function(input)
-          if input or input == '' then
-            vim.cmd.LualineRenameTab(input)
-            require('lualine').refresh({ scope = 'all', place = { 'tabline' } })
-          end
-        end)
-      end, { desc = 'Change tab name' })
     end,
   },
 }

@@ -18,9 +18,9 @@ return {
     ft = 'markdown',
     -- stylua: ignore
     keys = {
-      { "<leader>mp", "<cmd>MarkdownPreview <CR>",       mode = { "n" }, noremap = true, desc = "markdown preview" },
-      { "<leader>ms", "<cmd>MarkdownPreviewStop <CR>",   mode = { "n" }, noremap = true, desc = "markdown preview stop" },
-      { "<leader>mt", "<cmd>MarkdownPreviewToggle <CR>", mode = { "n" }, noremap = true, desc = "markdown preview toggle" },
+      { "<leader>mp", vim.cmd.MarkdownPreview,       mode = { "n" }, noremap = true, desc = "markdown preview" },
+      { "<leader>ms", vim.cmd.MarkdownPreviewStop,   mode = { "n" }, noremap = true, desc = "markdown preview stop" },
+      { "<leader>mt", vim.cmd.MarkdownPreviewToggle, mode = { "n" }, noremap = true, desc = "markdown preview toggle" },
     },
     before = function(plugin)
       vim.g.mkdp_auto_close = 0

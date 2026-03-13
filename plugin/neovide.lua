@@ -11,6 +11,8 @@ if vim.g.neovide then
   --   end,
   -- })
 
+  vim.g.neovide_confirm_quit = true
+
   -- When using rounded borders in niri the lualine/tabs blocks clip at the edges
   vim.g.neovide_padding_top = 10
   vim.g.neovide_padding_bottom = 10

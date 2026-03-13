@@ -24,7 +24,8 @@ return {
           { '<leader>p', group = '[p]ossession' },
           { '<leader>u', group = '[u]ndotree' },
           { '<leader>r', group = '[r]ename' }, -- FIXME: revisit (this is lsp?)
-          { '<leader>t', group = '[t]oggle settings' },
+          { '<leader>t', group = '[t]erminal' },
+          { '<leader>T', group = '[T]oggle settings' },
           { '<leader>x', group = 'quickfi[x] & diagnostics' },
           { '<leader>y', group = '[y]ank' },
           { '<leader>z', group = 'folds/zen' },

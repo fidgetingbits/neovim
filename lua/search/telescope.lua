@@ -143,7 +143,7 @@ return {
       { t .. "n", '<cmd>Telescope notify<CR>',                                      mode = { "n" }, desc = '[F]ind [N]otifications', },
       { t .. "P", function() return require('telescope.builtin').git_files() end,   mode = { "n" }, desc = '[F]ind [P]roject Root Files', },
       { t .. "r", function() return require('telescope.builtin').resume() end,      mode = { "n" }, desc = '[F]ind [R]esume', },
-      { t .. 'p', '<cmd>Telescope possession list<CR>', mode = { 'n' }, desc = '[F]ind [p]ossessions sessions', },
+      { t .. 'S', '<cmd>Telescope resession<CR>', mode = { 'n' }, desc = '[F]ind sessions', },
       { t .. "t", '<cmd>Telescope toggleterm<CR>', mode = { "n" }, desc = '[F]ind [T]erminals', },
       { t .. "w", function() return require('telescope.builtin').grep_string() end, mode = { "n" }, desc = '[F]ind current [W]ord', },
       -- Because <leader>xx toggles diagnostic quicklist
@@ -158,7 +158,7 @@ return {
         'telescope-luasnip',
         'telescope-toggleterm.nvim',
         'telescope-zoxide.nvim',
-        'possession',
+        'pick-resession',
       })
     end,
 
@@ -220,7 +220,7 @@ return {
       pcall(require('telescope').load_extension, 'luasnip')
       pcall(require('telescope').load_extension, 'toggleterm')
       pcall(require('telescope').load_extension, 'zoxide')
-      pcall(require('telescope').load_extension, 'possession')
+      pcall(require('telescope').load_extension, 'resession')
 
       vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
     end,
