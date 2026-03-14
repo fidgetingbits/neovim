@@ -9,14 +9,6 @@ return {
         interval = 30,
         notify = false,
       },
-      buf_filter = function(bufnr)
-        local buftype = vim.bo[bufnr].buftype
-        -- Keep terminal buffers, which we'll fix up a bit in the terminal extension
-        if buftype == 'terminal' then
-          return true
-        end
-        return resession.default_buf_filter(bufnr)
-      end,
       extensions = {
         lualine = {},
         terminal = {},
@@ -39,4 +31,3 @@ return {
     })
   end,
 }
-
