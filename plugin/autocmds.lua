@@ -18,30 +18,28 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- FIXME: revisit, ported from old config
--- Keep a list of the most recent two tabs.
--- Originally taken from:
--- https://vi.stackexchange.com/questions/9231/focus-previous-tab-window-when-closing-current
-local tablisttrack_group = vim.api.nvim_create_augroup('TabListTrack', { clear = true })
-vim.g.tablist = { 1, 1 }
--- When a tab is closed, return to the most recent tab.
--- The way vim updates tabs, in reality, this means we must return
---  to the second most recent tab.
+-- [[ Return to most recent tab on tab closure ]]
+local tablisttrack = vim.api.nvim_create_augroup('TabListTrack', { clear = true })
+vim.g.last_tabs = { vim.api.nvim_get_current_tabpage(), vim.api.nvim_get_current_tabpage() }
 
-vim.api.nvim_create_autocmd('TabNewEntered', {
+vim.api.nvim_create_autocmd('TabEnter', {
   callback = function()
-    vim.g.tablist[1] = vim.g.tablist[2]
-    vim.g.tablist[2] = vim.fn.tabpagenr()
+    local tabs = vim.g.last_tabs
+    tabs[1] = tabs[2]
+    tabs[2] = vim.api.nvim_get_current_tabpage()
+    vim.g.last_tabs = tabs
   end,
-  group = tablisttrack_group,
-  pattern = '*',
+  group = tablisttrack,
 })
+
 vim.api.nvim_create_autocmd('TabClosed', {
   callback = function()
-    vim.cmd('tabnext ' .. vim.g.tablist[1])
+    local last_tab = vim.g.last_tabs[1]
+    if vim.api.nvim_tabpage_is_valid(last_tab) then
+      vim.api.nvim_set_current_tabpage(last_tab)
+    end
   end,
-  group = tablisttrack_group,
-  pattern = '*',
+  group = tablisttrack,
 })
 
 -- FIXME: Revisit, see if we still need this, from old config
