@@ -190,11 +190,7 @@ in
             ruff # python
             taplo # toml
             ;
-          # inherit (pkgs.nodePackages)
-          # vscode-langservers-extracted
-          # ;
         };
-
       };
 
       search = {
@@ -258,7 +254,7 @@ in
           ++ lib.optionals config.settings.neovide (
             lib.attrValues {
               inherit (config.nvim-lib.neovimPlugins)
-                # Only in neovide because quitting leaves *
+                # Only in neovide because quitting closes the outer window
                 confirm-quit
                 ;
             }
