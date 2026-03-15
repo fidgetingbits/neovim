@@ -1,17 +1,34 @@
 return {
+  -- Lifted from https://github.com/BirdeeHub/birdeevim/blob/fbf665/lua/birdee/LSPs/nixlua.lua
+  {
+    'lazydev.nvim',
+    auto_enable = true,
+    cmd = { 'LazyDev' },
+    ft = 'lua',
+    after = function(_)
+      require('lazydev').setup({
+        library = {
+          {
+            words = { 'uv', 'vim%.uv', 'vim%.loop' },
+            path = nixInfo('luvit-meta', 'plugins', 'start', 'luvit-meta') .. '/library',
+          },
+          { words = { 'nixInfo' }, path = nixInfo('', 'info_plugin_path') .. '/lua' },
+          {
+            words = { 'nixInfo%.lze' },
+            path = nixInfo('lze', 'plugins', 'start', 'lze') .. '/lua',
+          },
+          {
+            words = { 'nixInfo%.lze' },
+            path = nixInfo('lzextras', 'plugins', 'start', 'lzextras') .. '/lua',
+          },
+        },
+      })
+    end,
+  },
   {
     'lua_ls',
     lsp = {
       filetypes = { 'lua' },
-
-      -- FIXME: How do we add an on_attach function without clobbering the old one?
-      -- this destroys the old on_attach
-      -- on_attach = function(client, bufnr)
-      --   -- Disable the LSP's formatting expression so 'gqgc' works (gwgc also
-      --   -- works without this fix)
-      --   -- https://vi.stackexchange.com/questions/39200/wrapping-comment-in-visual-mode-not-working-with-gq
-      --   vim.bo[bufnr].formatexpr = nil
-      -- end,
       settings = {
         Lua = {
           runtime = { version = 'LuaJIT' },
@@ -24,10 +41,6 @@ return {
             disable = { 'missing-fields' },
           },
           telemetry = { enabled = false },
-          workspace = {
-            -- Don't want to always parse nix build result folder
-            -- ignoreDir = { 'result' },
-          },
         },
       },
     },
