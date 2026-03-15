@@ -178,7 +178,9 @@ if nixInfo(false, 'settings', 'terminalMode') then
   local term_trigger = '<A-s>'
 
   for i = 1, 9 do
-    vim.keymap.set(nvti, '<A-' .. i .. '>', i .. 'gt', { desc = 'Go to tab ' .. i })
+    -- stylua: ignore
+    vim.keymap.set( nvti, '<A-' .. i .. '>', '<Cmd>tabnext' .. i .. '<CR>', { desc = 'Go to tab ' .. i }
+    )
   end
 
   for _, dir in ipairs({ 'h', 'j', 'k', 'l' }) do
