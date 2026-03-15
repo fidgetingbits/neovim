@@ -6,5 +6,8 @@
   "diagnostics": {
     "globals": ["nixInfo", "vim", "Snacks"],
     "disable": ["undefined-doc-name"]
+  },
+  "workspace": {
+    "ignoreDir": ["result"]
   }
 }

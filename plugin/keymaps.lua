@@ -100,6 +100,24 @@ vim.keymap.set(nvi, l .. "n", vim.cmd.tabnew,   { silent = true, desc = 'Create 
 vim.keymap.set(nvi, l .. "N", create_named_tab, { silent = true, desc = 'Create named tab' })
 vim.keymap.set(nvi, l .. 'r', rename_tab,       { silent = true, desc = 'Rename tab' })
 
+local function smart_open(direction)
+  local cmd = (direction == 'h' or direction == 'l') and 'vnew' or 'new'
+  local modifier = ''
+
+  if direction == 'h' then modifier = 'topleft '
+  elseif direction == 'l' then modifier = 'botright '
+  elseif direction == 'k' then modifier = 'topleft '
+  elseif direction == 'j' then modifier = 'botright '
+  end
+
+  vim.cmd(modifier .. cmd)
+end
+
+vim.keymap.set('n', '<A-n>h', function() smart_open('h') end, { desc = "Split Left" })
+vim.keymap.set('n', '<A-n>l', function() smart_open('l') end, { desc = "Split Right" })
+vim.keymap.set('n', '<A-n>k', function() smart_open('k') end, { desc = "Split Up" })
+vim.keymap.set('n', '<A-n>j', function() smart_open('j') end, { desc = "Split Down" })
+
 local function scroll(cmd)
   local current_so = vim.opt.scrolloff:get()
   vim.opt.scrolloff = 0
@@ -139,3 +157,4 @@ vim.keymap.set("n", "<leader>Ts", function() vim.opt.spell = not vim.opt.spell:g
 vim.keymap.set('i', 'jk', '<ESC>:w<CR>', {noremap=true, silent=true})
 
 -- stylua: ignore end
+

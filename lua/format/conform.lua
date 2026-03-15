@@ -16,8 +16,8 @@ return {
           rust = { 'rustfmt' },
           sh = { 'shfmt', 'shellharden' },
           zsh = { 'shfmt', 'shellharden' },
-          json = { 'prettier' },
-          yaml = { 'prettier', 'yamlfmt' },
+          json = { 'fixjson', 'prettier' },
+          yaml = { 'yamlfmt', 'prettier' },
           toml = { 'taplo' },
           -- Use a sub-list to run only the first available formatter
           -- javascript = { { "prettierd", "prettier" } },

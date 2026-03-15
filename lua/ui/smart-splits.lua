@@ -14,27 +14,30 @@ return {
         end,
       })
 
-      local modes = { 't', 'n', 'v' }
-      local ss = require('smart-splits')
-
       -- FIXME: Probably drop the non-terminal mode stuff
       -- stylua: ignore start
+      local ss = require('smart-splits')
       if nixInfo(false, 'settings', 'terminalMode') then
-        vim.keymap.set(modes, '<A-h>', function() ss.move_cursor_left() end,  { desc = "Move pane left" })
-        vim.keymap.set(modes, '<A-j>', function() ss.move_cursor_down() end,  { desc = "Move pane left" })
-        vim.keymap.set(modes, '<A-k>', function() ss.move_cursor_up() end,    { desc = "Move pane left" })
-        vim.keymap.set(modes, '<A-l>', function() ss.move_cursor_right() end, { desc = "Move pane left" })
+        local modes = { 't', 'n', 'v' }
+        vim.keymap.set(modes, '<A-h>',     ss.move_cursor_left,  { desc = "Move pane left" })
+        vim.keymap.set(modes, '<A-j>',     ss.move_cursor_down,  { desc = "Move pane left" })
+        vim.keymap.set(modes, '<A-k>',     ss.move_cursor_up,    { desc = "Move pane left" })
+        vim.keymap.set(modes, '<A-l>',     ss.move_cursor_right, { desc = "Move pane left" })
+
         modes = { 't', 'v', 'i', 'n' }
-        vim.keymap.set(modes, '<A-S-h>',   function() ss.swap_buf_left() end,  { desc = "Swap pane left" })
-        vim.keymap.set(modes, '<A-S-j>',   function() ss.swap_buf_down() end,  { desc = "Swap pane down" })
-        vim.keymap.set(modes, '<A-S-k>',   function() ss.swap_buf_up() end,    { desc = "Swap pane up" }) 
-        vim.keymap.set(modes, '<A-S-l>',   function() ss.swap_buf_right() end, { desc = "Swap pane right" })
+        vim.keymap.set(modes, '<A-S-h>',   ss.swap_buf_left,     { desc = "Swap pane left" })
+        vim.keymap.set(modes, '<A-S-j>',   ss.swap_buf_down,     { desc = "Swap pane down" })
+        vim.keymap.set(modes, '<A-S-k>',   ss.swap_buf_up,       { desc = "Swap pane up" }) 
+        vim.keymap.set(modes, '<A-S-l>',   ss.swap_buf_right,    { desc = "Swap pane right" })
 
         -- NOTE: these accept a range: `10<A-left>` will `resize_left` by `(10 * config.default_amount)`
-        vim.keymap.set(modes, '<A-left>',  function() ss.resize_left() end,    { desc = "Resize pane left" })
-        vim.keymap.set(modes, '<A-down>',  function() ss.resize_down() end,    { desc = "Resize pane down" } )
-        vim.keymap.set(modes, '<A-up>',    function() ss.resize_up() end,      { desc = "Resize pane up" } )
-        vim.keymap.set(modes, '<A-right>', function() ss.resize_right() end,   { desc = "Resize pane right" })
+        vim.keymap.set(modes, '<A-left>',  ss.resize_left,       { desc = "Resize pane left" })
+        vim.keymap.set(modes, '<A-down>',  ss.resize_down,       { desc = "Resize pane down" } )
+        vim.keymap.set(modes, '<A-up>',    ss.resize_up,         { desc = "Resize pane up" } )
+        vim.keymap.set(modes, '<A-right>', ss.resize_right,      { desc = "Resize pane right" })
+
+
+        vim.keymap.set(modes, '<A-x>', function() vim.api.nvim_win_close(0) end, { desc = "Close current window" })
       else
         vim.keymap.set('n', '<C-left>',  require('smart-splits').resize_left)
         vim.keymap.set('n', '<C-down>',  require('smart-splits').resize_down)

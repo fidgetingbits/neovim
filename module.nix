@@ -173,6 +173,7 @@ in
         data = lib.attrValues {
           inherit (pkgs.vimPlugins)
             lazydev-nvim # FIXME: switch this to specs.lua eventually
+            SchemaStore-nvim # json schemas
             nvim-lspconfig
             ;
         };
@@ -180,15 +181,20 @@ in
         extraPackages = lib.attrValues {
           inherit (pkgs)
             bash-language-server
+            vscode-json-languageserver # jsonls
             just-lsp
-            lua-language-server
+            lua-language-server # lua_ls
             marksman # markdown
             nix-doc
             nixd
             ruff # python
             taplo # toml
             ;
+          # inherit (pkgs.nodePackages)
+          # vscode-langservers-extracted
+          # ;
         };
+
       };
 
       search = {
@@ -298,6 +304,7 @@ in
         };
         extraPackages = lib.attrValues {
           inherit (pkgs)
+            fixjson
             kdlfmt
             shfmt
             shellharden

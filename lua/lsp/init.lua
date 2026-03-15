@@ -18,7 +18,7 @@ end)
 return {
   {
     'nvim-lspconfig',
-    lazy = false, -- FIXME: on_attach not firing
+    lazy = false,
     on_require = { 'lspconfig' },
     -- NOTE: will run for all specs with type(plugin.lsp) == table
     -- when their filetype trigger loads them
@@ -38,24 +38,26 @@ return {
           end
 
           local l = '<leader>l'
-          local b = require('telescope.builtin')
+          local tb = require('telescope.builtin')
           -- stylua: ignore start
-          nmap(l .. 'r',  vim.lsp.buf.rename, '[R]ename')
-          nmap(l .. 'ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-          nmap('gd',      vim.lsp.buf.definition, '[G]oto [D]efinition')
-          nmap(l .. 'd',  vim.lsp.buf.definition, 'Goto [D]efinition')
-          nmap('gr',      function() b.lsp_references() end , '[G]oto [R]eferences')
-          nmap(l .. 'r',  function() b.lsp_references() end , 'Goto [R]eferences')
-          nmap(l .. 'I',  function() b.lsp_implementations() end, 'Goto [I]mplementation')
-          nmap(l .. 'ds', function() b.lsp_document_symbols() end, '[D]ocument [S]ymbols')
-          nmap(l .. 'ws', function() b.lsp_dynamic_workspace_symbols() end, '[W]orkspace [S]ymbols')
-          nmap(l .. 'td', vim.lsp.buf.type_definition, '[T]ype [D]efinition')
-          nmap(l .. 'k',  vim.lsp.buf.hover, 'Hover Documentation')
-          nmap(l .. 'K',  vim.lsp.buf.signature_help, 'Signature Documentation')
-          nmap(l .. 'D',  vim.lsp.buf.declaration, 'Goto [D]eclaration')
-          nmap(l .. 'wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
+          nmap(l .. 'r',  vim.lsp.buf.rename,                  '[R]ename')
+          nmap(l .. 'ca', vim.lsp.buf.code_action,             '[C]ode [A]ction')
+          nmap('gd',      vim.lsp.buf.definition,              '[G]oto [D]efinition')
+          -- nmap(l .. 'd',  vim.lsp.buf.definition,              'Goto [D]efinition')
+          nmap('gr',      tb.lsp_references,                   '[G]oto [R]eferences')
+          nmap(l .. 'r',  tb.lsp_references,                   'Goto [R]eferences')
+          nmap(l .. 'I',  tb.lsp_implementations,              'Goto [I]mplementation')
+          nmap(l .. 'ds', tb.lsp_document_symbols,             '[D]ocument [S]ymbols')
+          nmap(l .. 'ws', tb.lsp_dynamic_workspace_symbols,    '[W]orkspace [S]ymbols')
+          nmap(l .. 'td', vim.lsp.buf.type_definition,         '[T]ype [D]efinition')
+          nmap(l .. 'k',  vim.lsp.buf.hover,                   'Hover Documentation')
+          nmap(l .. 'K',  vim.lsp.buf.signature_help,          'Signature Documentation')
+          nmap(l .. 'D',  vim.lsp.buf.declaration,             'Goto [D]eclaration')
+          nmap(l .. 'wa', vim.lsp.buf.add_workspace_folder,    '[W]orkspace [A]dd Folder')
           nmap(l .. 'wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-          nmap(l .. 'wl', function() print(vim.inspect(vim.lsp.buf.list_workspace_folders())) end, '[W]orkspace [L]ist Folders')
+          nmap(l .. 'wl', function()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+          end,                                                 '[W]orkspace [L]ist Folders')
           -- stylua: ignore end
 
           -- NOTE: See conform.lua for formatting with lsp fallback
@@ -66,6 +68,8 @@ return {
   { import = 'lsp.bash' },
   { import = 'lsp.lua' },
   { import = 'lsp.clang' },
+  { import = 'lsp.python' },
+  { import = 'lsp.json' },
   { import = 'lsp.just' },
   { import = 'lsp.markdown' },
   { import = 'lsp.nix' },
