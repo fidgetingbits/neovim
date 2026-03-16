@@ -1,4 +1,4 @@
-# See https://github.com/BirdeeHub/nix-wrapper-modules/blob/main/templates/neovim/README.md
+# https://github.com/BirdeeHub/nix-wrapper-modules/blob/main/templates/neovim/README.md
 {
   description = "Fidgeting Neovim";
 
@@ -12,42 +12,10 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
-
-    ###
-    # Neovim plugins from outside nixpkgs, either for fetching latest source or
-    # because there is no package yet. See nvim-lib.neovimPlugins in module.nix
-    ###
-    plugins-nvim-toggler = {
-      url = "github:nguyenvukhang/nvim-toggler";
-      flake = false;
-    };
-    plugins-nvim-better-n = {
-      url = "github:jonatan-branting/nvim-better-n";
-      flake = false;
-    };
-    plugins-lua-console = {
-      url = "github:yarospace/lua-console.nvim";
-      # url = "path:/home/aa/dev/neovim/lua-console.nvim";
-      flake = false;
-    };
-    plugins-telescope-luasnip = {
-      url = "github:benfowler/telescope-luasnip.nvim";
-      flake = false;
-    };
-
-    plugins-confirm-quit = {
-      url = "github:yutkat/confirm-quit.nvim";
-      flake = false;
-    };
-
-    plugins-telescope-toggleterm = {
-      url = "github:da-moon/telescope-toggleterm.nvim";
-      flake = false;
-    };
-
-    plugins-pick-resession = {
-      url = "github:scottmckendry/pick-resession.nvim";
-      flake = false;
+    # Shared wrapper modules and configs
+    introdus = {
+      # url = "git+ssh://git@codeberg.org/fidgetingbits/introdus?shallow=1&ref=aa";
+      url = "path:///home/aa/dev/nix/introdus/aa";
     };
   };
 
@@ -57,6 +25,7 @@
       nixpkgs,
       wrappers,
       flake-parts,
+      introdus,
       ...
     }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -78,7 +47,7 @@
         };
 
       flake.wrappers = {
-        neovim = nixpkgs.lib.modules.importApply ./module.nix inputs;
+        neovim = nixpkgs.lib.modules.importApply ./new.nix (inputs // introdus.inputs);
         default = self.wrapperModules.neovim;
       };
     };
