@@ -11,12 +11,12 @@ return {
       },
       extensions = {
         lualine = {},
+        tabby = {},
         terminal = {},
       },
     })
     
     -- stylua: ignore start
-    local r = require('resession')
     vim.keymap.set('n', '<leader>ps', resession.save,   { desc = 'Save session' })
     vim.keymap.set('n', '<leader>pl', resession.load,   { desc = 'Load session' })
     vim.keymap.set('n', '<leader>pd', resession.delete, { desc = 'Delete session' })

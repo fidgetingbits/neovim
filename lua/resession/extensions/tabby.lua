@@ -1,0 +1,80 @@
+local M = {}
+
+---Get the saved data for this extension
+---@param opts resession.Extension.OnSaveOpts Information about the session being saved
+---@return any
+M.on_save = function(opts)
+  local tab_names = {}
+
+  for _, tab in ipairs(vim.api.nvim_list_tabpages()) do
+    local success, name = pcall(require('tabby.feature.tab_name').get_raw, tab)
+    if success then
+      local num = tostring(vim.api.nvim_tabpage_get_number(tab))
+      tab_names[num] = name
+    end
+  end
+
+  return {
+    tab_names = tab_names,
+  }
+end
+
+---Restore the extension state
+---@param data The value returned from on_save
+M.on_pre_load = function(data)
+  -- This is run before the buffers, windows, and tabs are restored
+end
+
+---Restore the extension state
+---@param data The value returned from on_save
+M.on_post_load = function(data)
+  -- This is run after the buffers, windows, and tabs are restored
+  if data and data.tab_names then
+    local current = vim.api.nvim_get_current_tabpage()
+    for handle, tab_name in pairs(data.tab_names) do
+      h = tonumber(handle)
+      if vim.api.nvim_tabpage_is_valid(h) then
+        vim.api.nvim_set_current_tabpage(h)
+        vim.cmd('Tabby rename_tab ' .. tab_name)
+      else
+        vim.print('Thinks ' .. handle .. 'is invalid')
+      end
+    end
+    vim.api.nvim_set_current_tabpage(current)
+  end
+end
+
+---Called when resession gets configured
+---This function is optional
+---@param data table The configuration data passed in the config
+M.config = function(data)
+  --
+end
+
+---Check if a window is supported by this extension
+---This function is optional, but if provided save_win and load_win must
+---also be present.
+---@param winid integer
+---@param bufnr integer
+---@return boolean
+M.is_win_supported = function(winid, bufnr)
+  return false
+end
+
+---Save data for a window
+---@param winid integer
+---@return any
+M.save_win = function(winid)
+  -- This is used to save the data for a specific window that contains a non-file buffer (e.g. a filetree).
+  return {}
+end
+
+---Called with the data from save_win
+---@param winid integer
+---@param config any
+---@return integer|nil If the original window has been replaced, return the new ID that should replace it
+M.load_win = function(winid, config)
+  -- Restore the window from the config
+end
+
+return M
