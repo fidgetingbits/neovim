@@ -57,4 +57,12 @@ return {
       better_n.listen('(%d-)%]%]', { next = ']]', prev = '[[', remap = true, expr = true })
     end,
   },
+
+  {
+    'vim-easy-align',
+    cmd = 'EasyAlign',
+    keys = {
+      { 'ga', '<Plug>(EasyAlign)', mode = { 'n', 'x' }, desc = 'Easy Align' },
+    },
+  },
 }

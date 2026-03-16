@@ -405,6 +405,7 @@ in
                 mini-ai
                 mini-surround
                 resession-nvim
+                vim-easy-align
                 ;
               inherit (config.nvim-lib.neovimPlugins)
                 nvim-toggler
