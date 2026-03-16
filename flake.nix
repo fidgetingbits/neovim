@@ -47,7 +47,7 @@
         };
 
       flake.wrappers = {
-        neovim = nixpkgs.lib.modules.importApply ./new.nix (inputs // introdus.inputs);
+        neovim = nixpkgs.lib.modules.importApply ./module.nix (inputs // introdus.inputs);
         default = self.wrapperModules.neovim;
       };
     };
