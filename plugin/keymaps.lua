@@ -93,8 +93,7 @@ vim.keymap.set(nvi, l .. "h",  "gT",                 { silent = true, desc = 'Go
 vim.keymap.set(nvi, l .. "l",  "gt",                 { silent = true, desc = 'Go to next tab' })
 vim.keymap.set(nvi, l .. ".",  "g<tab>",             { silent = true, desc = 'Go to last accessed tab page' })
 vim.keymap.set(nvi, l .. "x",  vim.cmd.tabclose,     { silent = true, desc = 'Close current tab' })
--- FIXME: Depending on the tabline manager, this might need a forced redraw. redrawtabline doesn't alwasy work
--- would be nice if these were repeatable somehow
+-- TODO: would be nice if these were repeatable somehow (better-n?)
 vim.keymap.set(nvi, l .. "H",  "<cmd>:-tabmove<CR>", { silent = true, desc = 'Move tab to left' })
 vim.keymap.set(nvi, l .. "L",  "<cmd>:+tabmove<CR>", { silent = true, desc = 'Move tab to right' })
 
