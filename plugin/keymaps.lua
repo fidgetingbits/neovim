@@ -30,10 +30,10 @@ vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' })
-vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
+vim.keymap.set('n', '[d', function() vim.diagnostic.jump({count=-1, float=true}) end, { desc = 'Go to previous diagnostic message' })
+vim.keymap.set('n', ']d', function() vim.diagnostic.jump({count=1, float=true}) end,  { desc = 'Go to next diagnostic message' })
+vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float,                           { desc = 'Open floating diagnostic message' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist,                           { desc = 'Open diagnostics list' })
 
 
 -- vim.keymap.set({ "v", "x", "n" }, '<leader>y', '"+y', { noremap = true, silent = true, desc = 'Yank to clipboard' })
@@ -76,8 +76,7 @@ vim.keymap.set(nv, l .. "x", vim.cmd.bdelete, { desc = 'Delete buffer' })
 local function rename_tab()
     vim.ui.input({ prompt = 'New Tab Name: ' }, function (input)
     if input or input == '' then
-      vim.cmd.LualineRenameTab(input)
-      require('lualine').refresh({ scope = 'all', place = { 'tabline' } })
+      vim.cmd("Tabby rename_tab " .. input)
     end
   end)
 end
@@ -88,17 +87,20 @@ local function create_named_tab()
 end
 
 l = "<A-t>"
-vim.keymap.set(nvi, l .. "e", vim.cmd.tablast,  { silent = true, desc = 'Go to last tab' })
-vim.keymap.set(nvi, l .. "0", vim.cmd.tabfirst, { silent = true, desc = 'Go to first tab' })
-vim.keymap.set(nvi, l .. "h", "gT",             { silent = true, desc = 'Go to previous tab' })
-vim.keymap.set(nvi, l .. "l", "gt",             { silent = true, desc = 'Go to next tab' })
-vim.keymap.set(nvi, l .. ".", "g<tab>",         { silent = true, desc = 'Go to last accessed tab page' })
-vim.keymap.set(nvi, l .. "x", vim.cmd.tabclose, { silent = true, desc = 'Close current tab' })
-vim.keymap.set(nvi, l .. "H", "<cmd>:-tabmove<CR>",      { silent = true, desc = 'Move tab to left' })
-vim.keymap.set(nvi, l .. "L", "<cmd>:+tabmove<CR>",      { silent = true, desc = 'Move tab to right' })
-vim.keymap.set(nvi, l .. "n", vim.cmd.tabnew,   { silent = true, desc = 'Create unnamed tab' })
-vim.keymap.set(nvi, l .. "N", create_named_tab, { silent = true, desc = 'Create named tab' })
-vim.keymap.set(nvi, l .. 'r', rename_tab,       { silent = true, desc = 'Rename tab' })
+vim.keymap.set(nvi, l .. "e",  vim.cmd.tablast,      { silent = true, desc = 'Go to last tab' })
+vim.keymap.set(nvi, l .. "0",  vim.cmd.tabfirst,     { silent = true, desc = 'Go to first tab' })
+vim.keymap.set(nvi, l .. "h",  "gT",                 { silent = true, desc = 'Go to previous tab' })
+vim.keymap.set(nvi, l .. "l",  "gt",                 { silent = true, desc = 'Go to next tab' })
+vim.keymap.set(nvi, l .. ".",  "g<tab>",             { silent = true, desc = 'Go to last accessed tab page' })
+vim.keymap.set(nvi, l .. "x",  vim.cmd.tabclose,     { silent = true, desc = 'Close current tab' })
+-- FIXME: Depending on the tabline manager, this might need a forced redraw. redrawtabline doesn't alwasy work
+-- would be nice if these were repeatable somehow
+vim.keymap.set(nvi, l .. "H",  "<cmd>:-tabmove<CR>", { silent = true, desc = 'Move tab to left' })
+vim.keymap.set(nvi, l .. "L",  "<cmd>:+tabmove<CR>", { silent = true, desc = 'Move tab to right' })
+
+vim.keymap.set(nvi, l .. "n",  vim.cmd.tabnew,       { silent = true, desc = 'Create unnamed tab' })
+vim.keymap.set(nvi, l .. "N",  create_named_tab,     { silent = true, desc = 'Create named tab' })
+vim.keymap.set(nvi, l .. 'r',  rename_tab,           { silent = true, desc = 'Rename tab' })
 
 local function smart_open(direction)
   local cmd = (direction == 'h' or direction == 'l') and 'vnew' or 'new'
@@ -157,4 +159,3 @@ vim.keymap.set("n", "<leader>Ts", function() vim.opt.spell = not vim.opt.spell:g
 vim.keymap.set('i', 'jk', '<ESC>:w<CR>', {noremap=true, silent=true})
 
 -- stylua: ignore end
-

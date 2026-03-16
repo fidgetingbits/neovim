@@ -22,7 +22,7 @@ if vim.g.neovide then
   local font = nixInfo(false, 'settings', 'guifont')
   if font ~= '' then
     vim.o.guifont = font
-    print('Set font to' .. font)
+    print('Set font to ' .. font)
   end
 
   local utils = require('utils')

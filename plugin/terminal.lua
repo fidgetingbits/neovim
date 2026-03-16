@@ -1,6 +1,5 @@
 if nixInfo(false, 'settings', 'terminalMode') then
-  -- Allow infinite scrollback in terminal
-  vim.o.scrollback = -1
+  vim.o.scrollback = -1 -- Allow infinite scrollback in terminal
   vim.o.cmdheight = 0
 
   local function term_settings()
@@ -175,25 +174,39 @@ if nixInfo(false, 'settings', 'terminalMode') then
   local nvt = { 'n', 'v', 't' }
   local nvti = { 'n', 'v', 't', 'i' }
 
+  -- TODO: Try out <A-space> or <A-enter> for this as matches niri style
   local term_trigger = '<A-s>'
+
+  local function direction_name(key)
+    local name = ''
+    if key == 'h' then
+      name = 'left'
+    elseif key == 'j' then
+      name = 'below'
+    elseif key == 'k' then
+      name = 'above'
+    elseif key == 'l' then
+      name = 'right'
+    end
+    return name
+  end
 
   for i = 1, 9 do
     -- stylua: ignore
-    vim.keymap.set( nvti, '<A-' .. i .. '>', '<Cmd>tabnext' .. i .. '<CR>', { desc = 'Go to tab ' .. i }
-    )
+    vim.keymap.set(nvti, '<A-' .. i .. '>', '<Cmd>tabnext' .. i .. '<CR>', { desc = 'Go to tab ' .. i })
   end
 
   for _, dir in ipairs({ 'h', 'j', 'k', 'l' }) do
     -- Using p to match zellij panes for now
     vim.keymap.set(nvti, '<A-p>' .. dir, function()
       split_and_follow(dir)
-    end, { desc = 'Split window ' .. dir })
+    end, { desc = 'Split window ' .. direction_name(dir) })
 
     -- Spawn terminal in direction
     vim.keymap.set(nvti, term_trigger .. dir, function()
       split_and_follow(dir)
       vim.cmd('term')
-    end, { desc = 'Spawn terminal to' .. dir })
+    end, { desc = 'Spawn terminal ' .. direction_name(dir) })
   end
 
   -- Toggle fullscreen (zen mode)
