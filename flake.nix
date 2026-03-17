@@ -14,7 +14,7 @@
     };
     # Shared wrapper modules and configs
     introdus = {
-      # url = "git+ssh://git@codeberg.org/fidgetingbits/introdus?shallow=1&ref=aa";
+      # url = "git+ssh://git@codeberg.org/fidgetingbits/introdus?ref=aa";
       url = "path:///home/aa/dev/nix/introdus/aa";
     };
   };

@@ -12,8 +12,6 @@ inputs:
   ];
   # Extend the introdus neovim template with any additional functionality we want
   config = {
-    settings.aliases = [
-      "nv"
-    ];
+    settings.extraConfig = "${inputs.introdus}/wrappers/neovim";
   };
 }

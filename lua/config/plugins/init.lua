@@ -1,0 +1,479 @@
+local colorschemeName = nixCats('colorscheme')
+if not require('nixCatsUtils').isNixCats then
+  colorschemeName = 'onedark'
+end
+-- Could I lazy load on colorscheme with lze?
+-- sure. But I was going to call vim.cmd.colorscheme() during startup anyway
+-- this is just an example, feel free to do a better job!
+vim.cmd.colorscheme(colorschemeName)
+
+local ok, notify = pcall(require, "notify")
+if ok then
+  notify.setup({
+    on_open = function(win)
+      vim.api.nvim_win_set_config(win, { focusable = false })
+    end,
+    -- Avoid warning when using transparency
+    -- FIXME: Tweak color, only using suggestion from warning for now
+    background_colour = "#000000",
+  })
+  vim.notify = notify
+  vim.keymap.set("n", "<Esc>", function()
+    notify.dismiss({ silent = true, })
+  end, { desc = "dismiss notify popup and clear hlsearch" })
+end
+
+-- NOTE: you can check if you included the category with the thing wherever you want.
+if nixCats('general.extra') then
+  -- I didnt want to bother with lazy loading this.
+  -- I could put it in opt and put it in a spec anyway
+  -- and then not set any handlers and it would load at startup,
+  -- but why... I guess I could make it load
+  -- after the other lze definitions in the next call using priority value?
+  -- didnt seem necessary.
+  vim.g.loaded_netrwPlugin = 1
+  require("oil").setup({
+    default_file_explorer = true,
+    view_options = {
+      show_hidden = true
+    },
+    columns = {
+      "icon",
+      "permissions",
+      "size",
+      -- "mtime",
+    },
+    keymaps = {
+      ["g?"] = "actions.show_help",
+      ["<CR>"] = "actions.select",
+      ["<C-s>"] = "actions.select_vsplit",
+      ["<C-h>"] = "actions.select_split",
+      ["<C-t>"] = "actions.select_tab",
+      ["<C-p>"] = "actions.preview",
+      ["<C-c>"] = "actions.close",
+      ["<C-l>"] = "actions.refresh",
+      ["-"] = "actions.parent",
+      ["_"] = "actions.open_cwd",
+      ["`"] = "actions.cd",
+      ["~"] = "actions.tcd",
+      ["gs"] = "actions.change_sort",
+      ["gx"] = "actions.open_external",
+      ["g."] = "actions.toggle_hidden",
+      ["g\\"] = "actions.toggle_trash",
+    },
+  })
+  vim.keymap.set("n", "-", "<cmd>Oil<CR>", { noremap = true, desc = 'Open Parent Directory' })
+  vim.keymap.set("n", "<leader>-", "<cmd>Oil .<CR>", { noremap = true, desc = 'Open nvim root directory' })
+end
+
+require('lze').load {
+  { import = "config.plugins.telescope", },
+  { import = "config.plugins.treesitter", },
+  { import = "config.plugins.completion", },
+  {
+    "markdown-preview.nvim",
+    -- NOTE: for_cat is a custom handler that just sets enabled value for us,
+    -- based on result of nixCats('cat.name') and allows us to set a different default if we wish
+    -- it is defined in luaUtils template in lua/nixCatsUtils/lzUtils.lua
+    -- you could replace this with enabled = nixCats('cat.name') == true
+    -- if you didnt care to set a different default for when not using nix than the default you already set
+    for_cat = 'general.markdown',
+    cmd = { "MarkdownPreview", "MarkdownPreviewStop", "MarkdownPreviewToggle", },
+    ft = "markdown",
+    keys = {
+      { "<leader>mp", "<cmd>MarkdownPreview <CR>",       mode = { "n" }, noremap = true, desc = "markdown preview" },
+      { "<leader>ms", "<cmd>MarkdownPreviewStop <CR>",   mode = { "n" }, noremap = true, desc = "markdown preview stop" },
+      { "<leader>mt", "<cmd>MarkdownPreviewToggle <CR>", mode = { "n" }, noremap = true, desc = "markdown preview toggle" },
+    },
+    before = function(plugin)
+      vim.g.mkdp_auto_close = 0
+    end,
+  },
+  {
+    "undotree",
+    for_cat = 'general.extra',
+    cmd = { "UndotreeToggle", "UndotreeHide", "UndotreeShow", "UndotreeFocus", "UndotreePersistUndo", },
+    keys = { { "<leader>U", "<cmd>UndotreeToggle<CR>", mode = { "n" }, desc = "Undo Tree" }, },
+    before = function(_)
+      vim.g.undotree_WindowLayout = 1
+      vim.g.undotree_SplitWidth = 40
+    end,
+  },
+  {
+    "comment.nvim",
+    for_cat = 'general.extra',
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require('Comment').setup()
+    end,
+  },
+  {
+    "indent-blankline.nvim",
+    for_cat = 'general.extra',
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require("ibl").setup()
+    end,
+  },
+  {
+    "nvim-surround",
+    for_cat = 'general.always',
+    event = "DeferredUIEnter",
+    -- keys = "",
+    after = function(plugin)
+      require('nvim-surround').setup()
+    end,
+  },
+  {
+    "vim-startuptime",
+    for_cat = 'general.extra',
+    cmd = { "StartupTime" },
+    before = function(_)
+      vim.g.startuptime_event_width = 0
+      vim.g.startuptime_tries = 10
+      vim.g.startuptime_exe_path = nixCats.packageBinPath
+    end,
+  },
+  {
+    "fidget.nvim",
+    for_cat = 'general.extra',
+    event = "DeferredUIEnter",
+    -- keys = "",
+    after = function(plugin)
+      require('fidget').setup({})
+    end,
+  },
+  -- {
+  --   "hlargs",
+  --   for_cat = 'general.extra',
+  --   event = "DeferredUIEnter",
+  --   -- keys = "",
+  --   dep_of = { "nvim-lspconfig" },
+  --   after = function(plugin)
+  --     require('hlargs').setup {
+  --       color = '#32a88f',
+  --     }
+  --     vim.cmd([[hi clear @lsp.type.parameter]])
+  --     vim.cmd([[hi link @lsp.type.parameter Hlargs]])
+  --   end,
+  -- },
+  {
+    "lualine.nvim",
+    for_cat = 'general.always',
+    -- cmd = { "" },
+    event = "DeferredUIEnter",
+    -- ft = "",
+    -- keys = "",
+    -- colorscheme = "",
+    after = function(plugin)
+      require('lualine').setup({
+        options = {
+          icons_enabled = false,
+          theme = colorschemeName,
+          component_separators = '|',
+          section_separators = '',
+        },
+        sections = {
+          lualine_c = {
+            {
+              'filename', path = 1, status = true,
+            },
+          },
+        },
+        inactive_sections = {
+          lualine_b = {
+            {
+              'filename', path = 3, status = true,
+            },
+          },
+          lualine_x = { 'filetype' },
+        },
+        tabline = {
+          lualine_a = { 'buffers' },
+          -- if you use lualine-lsp-progress, I have mine here instead of fidget
+          -- lualine_b = { 'lsp_progress', },
+          lualine_z = { 'tabs' }
+        },
+      })
+    end,
+  },
+  {
+    "gitsigns.nvim",
+    for_cat = 'general.always',
+    event = "DeferredUIEnter",
+    -- cmd = { "" },
+    -- ft = "",
+    -- keys = "",
+    -- colorscheme = "",
+    after = function(plugin)
+      require('gitsigns').setup({
+        -- See `:help gitsigns.txt`
+        signs = {
+          add = { text = '+' },
+          change = { text = '~' },
+          delete = { text = '_' },
+          topdelete = { text = '‾' },
+          changedelete = { text = '~' },
+        },
+        on_attach = function(bufnr)
+          local gs = package.loaded.gitsigns
+
+          local function map(mode, l, r, opts)
+            opts = opts or {}
+            opts.buffer = bufnr
+            vim.keymap.set(mode, l, r, opts)
+          end
+
+          -- Navigation
+          map({ 'n', 'v' }, ']c', function()
+            if vim.wo.diff then
+              return ']c'
+            end
+            vim.schedule(function()
+              gs.next_hunk()
+            end)
+            return '<Ignore>'
+          end, { expr = true, desc = 'Jump to next hunk' })
+
+          map({ 'n', 'v' }, '[c', function()
+            if vim.wo.diff then
+              return '[c'
+            end
+            vim.schedule(function()
+              gs.prev_hunk()
+            end)
+            return '<Ignore>'
+          end, { expr = true, desc = 'Jump to previous hunk' })
+
+          -- Actions
+          -- visual mode
+          map('v', '<leader>hs', function()
+            gs.stage_hunk { vim.fn.line '.', vim.fn.line 'v' }
+          end, { desc = 'stage git hunk' })
+          map('v', '<leader>hr', function()
+            gs.reset_hunk { vim.fn.line '.', vim.fn.line 'v' }
+          end, { desc = 'reset git hunk' })
+          -- normal mode
+          map('n', '<leader>gs', gs.stage_hunk, { desc = 'git stage hunk' })
+          map('n', '<leader>gr', gs.reset_hunk, { desc = 'git reset hunk' })
+          map('n', '<leader>gS', gs.stage_buffer, { desc = 'git Stage buffer' })
+          map('n', '<leader>gu', gs.undo_stage_hunk, { desc = 'undo stage hunk' })
+          map('n', '<leader>gR', gs.reset_buffer, { desc = 'git Reset buffer' })
+          map('n', '<leader>gp', gs.preview_hunk, { desc = 'preview git hunk' })
+          map('n', '<leader>gb', function()
+            gs.blame_line { full = false }
+          end, { desc = 'git blame line' })
+          map('n', '<leader>gd', gs.diffthis, { desc = 'git diff against index' })
+          map('n', '<leader>gD', function()
+            gs.diffthis '~'
+          end, { desc = 'git diff against last commit' })
+
+          -- Toggles
+          map('n', '<leader>gtb', gs.toggle_current_line_blame, { desc = 'toggle git blame line' })
+          map('n', '<leader>gtd', gs.toggle_deleted, { desc = 'toggle git show deleted' })
+
+          -- Text object
+          map({ 'o', 'x' }, 'ih', ':<C-U>Gitsigns select_hunk<CR>', { desc = 'select git hunk' })
+        end,
+      })
+      vim.cmd([[hi GitSignsAdd guifg=#04de21]])
+      vim.cmd([[hi GitSignsChange guifg=#83fce6]])
+      vim.cmd([[hi GitSignsDelete guifg=#fa2525]])
+    end,
+  },
+  {
+    "which-key.nvim",
+    for_cat = 'general.extra',
+    -- cmd = { "" },
+    event = "DeferredUIEnter",
+    -- ft = "",
+    -- keys = "",
+    -- colorscheme = "",
+    after = function(plugin)
+      require('which-key').setup({
+      })
+      require('which-key').add {
+        { "<leader>b",         group = "buffer commands" },
+        { "<leader><leader>_", hidden = true },
+        { "<leader>c",         group = "[c]ode" },
+        { "<leader>c_",        hidden = true },
+        { "<leader>d",         group = "[d]ocument" },
+        { "<leader>d_",        hidden = true },
+        { "<leader>g",         group = "[g]it" },
+        { "<leader>g_",        hidden = true },
+        { "<leader>m",         group = "[m]arkdown" },
+        { "<leader>m_",        hidden = true },
+        { "<leader>r",         group = "[r]ename" },
+        { "<leader>r_",        hidden = true },
+        { "<leader>s",         group = "[s]earch" },
+        { "<leader>s_",        hidden = true },
+        { "<leader>t",         group = "[t]oggles" },
+        { "<leader>t_",        hidden = true },
+        { "<leader>w",         group = "[w]orkspace" },
+        { "<leader>w_",        hidden = true },
+        { "<leader>y",         group = "[y]ank" },
+        { "<leader>y_",        hidden = true },
+      }
+    end,
+  },
+  {
+    -- a quick way to jump to anywhere in a buffer. sneak, easymotion, hop alternative
+    "leap.nvim",
+    for_cat = 'general.core',
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      vim.keymap.set({ 'n', 'x', 'o' }, 's', '<Plug>(leap)')
+      vim.keymap.set('n', 'S', '<Plug>(leap-from-window)')
+    end
+  },
+  {
+    -- Better in and around targeting that includes treesitter support
+    "mini.ai",
+    for_cat = 'general.core',
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require('mini.ai').setup()
+    end
+  },
+  {
+    "neo-tree.nvim",
+    for_cat = 'general.core',
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require('neo-tree').setup({})
+      vim.keymap.set("n", "<leader>n", ":Neotree toggle<CR>", { desc = "Toggle Neotree" })
+    end
+  },
+  -- Magit port for neovim
+  {
+    "neogit",
+    for_cat = 'general.core',
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require('neogit').setup()
+      vim.keymap.set("n", "<leader>gg", ":Neogit<CR>", { desc = 'Toggle neogit buffer' })
+    end
+  },
+  {
+    "vimwiki",
+    for_cat = 'general.core',
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      -- FIXME: Add configuration stuff here
+      -- require('vimwiki').setup()
+    end
+  },
+  {
+    "zen-mode.nvim",
+    for_cat = 'general.core',
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require('zen-mode').setup()
+      vim.keymap.set("n", "<leader>zz", ":ZenMode<CR>", { desc = 'Toggle zen mode' })
+    end
+  },
+  { -- Better in and around targeting that includes treesitter support
+    "smart-splits.nvim",
+    for_cat = 'general.core',
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require('smart-splits').setup()
+      -- resizing splits
+      -- these keymaps will also accept a range,
+      -- for example `10<C-h>` will `resize_left` by `(10 * config.default_amount)`
+      vim.keymap.set('n', '<C-left>', require('smart-splits').resize_left)
+      vim.keymap.set('n', '<C-down>', require('smart-splits').resize_down)
+      vim.keymap.set('n', '<C-up>', require('smart-splits').resize_up)
+      vim.keymap.set('n', '<C-right>', require('smart-splits').resize_right)
+      -- moving between splits
+      vim.keymap.set('n', '<C-h>', require('smart-splits').move_cursor_left)
+      vim.keymap.set('n', '<C-j>', require('smart-splits').move_cursor_down)
+      vim.keymap.set('n', '<C-k>', require('smart-splits').move_cursor_up)
+      vim.keymap.set('n', '<C-l>', require('smart-splits').move_cursor_right)
+      vim.keymap.set('n', '<C-.>', require('smart-splits').move_cursor_previous)
+      -- swapping buffers between windows
+      vim.keymap.set('n', '<C-S-h>', require('smart-splits').swap_buf_left)
+      vim.keymap.set('n', '<C-S-j>', require('smart-splits').swap_buf_down)
+      vim.keymap.set('n', '<C-S-k>', require('smart-splits').swap_buf_up)
+      vim.keymap.set('n', '<C-S-l>', require('smart-splits').swap_buf_right)
+    end
+  },
+  -- FIXME: Figure out how to make transparency the default
+  {
+    "transparent.nvim",
+    for_cat = 'general.core',
+    event = "DeferredUIEnter",
+    after = function(plugin)
+      require('transparent').setup({ auto = true })
+      vim.keymap.set("n", "<leader>tr", '<cmd>TransparentToggle<CR>', { desc = '[T]oggle t[R]ansparency' })
+      vim.g.transparent_enabled = true
+    end
+  },
+  {
+    "alpha-nvim",
+    for_cat = 'general.extra',
+    --event = "VimEnter",
+    after = function(plugin)
+      local dashboard = require('alpha.themes.dashboard')
+      require('alpha').setup(dashboard.config)
+    end
+  },
+  -- {
+  --   "obsidian.nvim",
+  --   for_cat = 'general.extra',
+  --   event = "DeferredUIEnter",
+  --   after = function(plugin)
+  --     require('obsidian').setup({
+  --       legacy_commands = false,
+  --       disable_metadata = true,
+  --       workspaces = {
+  --         {
+  --           name = "personal",
+  --           path = "~/wiki/",
+  --         },
+  --       },
+  --     })
+  --     vim.keymap.set("n", "<leader>ot", require("obsidian").util.toggle_checkbox(),
+  --       { desc = '[O]bsidian [T]oggle checkbox' })
+  --   end
+  -- },
+  -- FIXME: prefer using marksman with lsp to access toc via telescope
+  {
+    "vim-markdown-toc",
+    for_cat = 'general.extra',
+    --event = "VimEnter",
+    after = function(plugin)
+      vim.g.vmt_list_item_char = "-"
+      vim.g.vmt_fence_text = '_header: "Outline"'
+      vim.g.vmt_fence_closing_text = '_footer: ""'
+      vim.g.vmt_fence_hidden_markdown_style = "GFM"
+    end
+  },
+  -- FIXME: Revisit. Seems neat in theory but too many 3 column lines is annoying
+  -- {
+  --   -- A Neovim plugin that makes vertical motions more comfortable.
+  --   "comfy-line-numbers.nvim",
+  --   for_cat = 'general.core',
+  --   event = "DeferredUIEnter",
+  --   after = function(plugin)
+  --     require('comfy-line-numbers').setup()
+  --   end
+  -- }
+
+  {
+    "kdl.vim",
+    for_cat = 'general.extra',
+    ft = "kdl",
+  },
+  {
+    'todo-comments.nvim',
+    for_cat = 'general.core',
+    event = 'DeferredUIEnter',
+    after = function(_)
+      require('todo-comments').setup({
+        pattern = [[.*<(KEYWORDS)(\([^\)]*\))?:]],
+      }
+      )
+    end,
+  },
+}
