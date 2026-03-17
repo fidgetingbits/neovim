@@ -209,11 +209,19 @@ if nixInfo(false, 'settings', 'terminalMode') then
     end, { desc = 'Spawn terminal ' .. direction_name(dir) })
   end
 
-  -- Toggle fullscreen (zen mode)
-  -- FIXME: Tweak the settings for this probably
-  vim.keymap.set(nvt, '<A-f>', function()
-    vim.cmd('ZenMode')
-  end, { noremap = true, silent = true, desc = 'Toggle full screen (zen)' })
+  -- Toggle fullscreen via zenmode
+  -- This is different than actual zen mode (<leader>zz), but we just
+  -- use it for convenience vs some other plugin
+  function full_screen()
+    require('zen-mode').toggle({
+      window = {
+        width = 0.85, -- width will be 85% of the editor width
+      },
+    })
+  end
+
+  -- stylua: ignore
+  vim.keymap.set(nvt, '<A-f>', full_screen, { silent = true, desc = 'Toggle full screen' })
 
   -- Spawn new in current buffer
   vim.keymap.set('n', term_trigger .. 'n', vim.cmd.term, { desc = 'Spawn terminal' })
