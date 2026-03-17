@@ -234,4 +234,3 @@ if nixInfo(false, 'settings', 'terminalMode') then
   -- stylua: ignore
   vim.keymap.set('t', '<C-b>', '<C-\\><C-n><C-b>', { desc = 'Leave terminal mode and scroll back in buffer' })
 end
-

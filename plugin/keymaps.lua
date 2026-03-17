@@ -1,69 +1,78 @@
 -- stylua: ignore start
--- [[ Basic Keymaps ]]
 
--- Reload config. Only applicable if devMode is set
+local nv  = { "n", "v" }
+local nvi = { "n", "v", "i" }
+
+--
+-- [[ Quality of Life ]]
+--
+
+-- NOTE: devMode only. requires config files outside the nix store
 vim.keymap.set("n", "<leader><leader>r", ":ReloadConfig<CR>", {noremap = true, silent = true})
 
-vim.keymap.set("n", "qq", vim.cmd.quitall, {noremap = true, silent = true})
-
--- Keymaps for better default experience
--- See `:help vim.keymap.set()`
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = 'Moves Line Down' })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = 'Moves Line Up' })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = 'Scroll Down' })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = 'Scroll Up' })
--- FIXME: since flash remaps n for some stuff, not sure if this is still relevant
+-- Jump to the next search result, center it, and unfold (if relevant)
 vim.keymap.set("n", "n", "nzzzv", { desc = 'Next Search Result' })
 vim.keymap.set("n", "N", "Nzzzv", { desc = 'Previous Search Result' })
 
 -- typo tolerant command abbreviations for :W and friends
--- neovide will use confirm-quit.nvim version
 vim.keymap.set("ca", "W", "w")
+-- Also see ./../lua/ui/confirm-quit.lua:13
 if not vim.g.neovide then
   vim.keymap.set("ca", "Wq", "wq")
   vim.keymap.set("ca", "WQ", "wq")
   vim.keymap.set("ca", "Q", "q")
 end
+vim.keymap.set("n", "qq", vim.cmd.quitall, {noremap = true, silent = true})
 
--- Remap for dealing with word wrap
+-- k/j move to wrapped part of next row of a long line if wrapped on screen
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
--- Diagnostic keymaps
+--
+-- [[ Diagnostics ]]
+--
+-- Also see ./../lua/ui/trouble.lua
+
 vim.keymap.set('n', '[d', function() vim.diagnostic.jump({count=-1, float=true}) end, { desc = 'Go to previous diagnostic message' })
 vim.keymap.set('n', ']d', function() vim.diagnostic.jump({count=1, float=true}) end,  { desc = 'Go to next diagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float,                           { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist,                           { desc = 'Open diagnostics list' })
 
-
--- vim.keymap.set({ "v", "x", "n" }, '<leader>y', '"+y', { noremap = true, silent = true, desc = 'Yank to clipboard' })
--- vim.keymap.set({ "n", "v", "x" }, '<leader>Y', '"+yy', { noremap = true, silent = true, desc = 'Yank line to clipboard' })
-vim.keymap.set({ "n", "v", "x" }, '<C-a>', 'gg0vG$', { noremap = true, silent = true, desc = 'Select all' })
--- vim.keymap.set({ 'n', 'v', 'x' }, '<leader>p', '"+p', { noremap = true, silent = true, desc = 'Paste from clipboard' })
+--
+-- [[ Copy / Paste ]]
+--
+vim.keymap.set({ "n", "v" }, '<C-a>', 'gg0vG$', { noremap = true, silent = true, desc = 'Select all' })
 
 vim.keymap.set("n", "<leader>yfp", function() vim.fn.setreg("+", vim.fn.expand("%:p")) end,
   { desc = "Copy full file path" })
 vim.keymap.set("n", "<leader>yrp", function() vim.fn.setreg("+", vim.fn.expand("%")) end,
   { desc = "Copy relative file path" })
-
 vim.keymap.set('i', '<C-v>', '<C-r><C-p>+',
   { noremap = true, silent = true, desc = 'Paste from clipboard from within insert mode' })
 vim.keymap.set("x", "<leader>P", '"_dP',
   { noremap = true, silent = true, desc = '[P]aste over selection without erasing unnamed register' })
 
-
--- LSP
+--
+-- [[ LSP ]]
+--
+-- Also see ./../lua/lsp/init.lua
 local l = "<leader>l"
 vim.keymap.set("n", l .. "x", vim.cmd.LspStop,  { desc = 'Turn of LSP' })
 vim.keymap.set("n", l .. "o", vim.cmd.LspStart, { desc = 'Turn on LSP' })
 
--- Window/split motions
--- See smart-splits.nvim maps instead
+--
+-- [[ Window/split motions ]]
+--
+-- Also see ./../lua/ui/smart-splits.lua
 
-local nv = { "n", "v" }
-local nvi = { "n", "v", "i" }
 
--- Buffer motions
+--
+-- [[ Buffer motions ]]
+--
 -- l = "<A-b>"
 l = "<leader>b"
 vim.keymap.set(nv, l .. "h", vim.cmd.bprev,   { desc = 'Previous buffer' })
@@ -72,7 +81,9 @@ vim.keymap.set(nv, l .. ".", "<cmd>b#<CR>",   { desc = 'Most recent buffer' })
 vim.keymap.set(nv, l .. "s", vim.cmd.ls,      { desc = 'List buffers' })
 vim.keymap.set(nv, l .. "x", vim.cmd.bdelete, { desc = 'Delete buffer' })
 
--- Tab motions
+--
+-- [[ Tab motions ]]
+--
 local function rename_tab()
     vim.ui.input({ prompt = 'New Tab Name: ' }, function (input)
     if input or input == '' then
@@ -119,6 +130,10 @@ vim.keymap.set('n', '<A-n>l', function() smart_open('l') end, { desc = "Split Ri
 vim.keymap.set('n', '<A-n>k', function() smart_open('k') end, { desc = "Split Up" })
 vim.keymap.set('n', '<A-n>j', function() smart_open('j') end, { desc = "Split Down" })
 
+--
+-- [[ Scrolling ]]
+--
+
 local function scroll(cmd)
   local current_so = vim.opt.scrolloff:get()
   vim.opt.scrolloff = 0
@@ -137,6 +152,10 @@ end, { desc = "Force zt ignoring scrolloff" })
 -- Remap marks since m is used elsewhere
 vim.keymap.set('n', '<leader>m', 'm', {noremap=true, silent=true, desc = "Marks: Set [a-z] (Built-in)"})
 
+--
+-- [[ Notifications ]]
+--
+
 local function dismiss_all()
   require("noice").cmd("dismiss")
   require("notify").dismiss({ silent = true })
@@ -150,12 +169,10 @@ vim.keymap.set({ "v", "n", "t", "c"}, "<A-e>", dismiss_all, { desc = "Dismiss al
 vim.keymap.set("n", "<leader>Ts", function() vim.opt.spell = not vim.opt.spell:get() end, { desc = "Toggle spell checking" })
 -- FIXME: add toggle for numbers
 
-
---[[
- Experimental keymaps
-
- Stuff I'm trying, but don't know if I'll keep
-]]
+--
+-- [[ Experimental ]]
+-- 
+-- Stuff I'm trying, but don't know if I'll keep
 vim.keymap.set('i', 'jk', '<ESC>:w<CR>', {noremap=true, silent=true})
 
 -- Fix most recent spelling mistake. Operations
