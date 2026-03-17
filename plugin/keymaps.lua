@@ -150,11 +150,20 @@ vim.keymap.set({ "v", "n", "t", "c"}, "<A-e>", dismiss_all, { desc = "Dismiss al
 vim.keymap.set("n", "<leader>Ts", function() vim.opt.spell = not vim.opt.spell:get() end, { desc = "Toggle spell checking" })
 -- FIXME: add toggle for numbers
 
+
 --[[
  Experimental keymaps
 
  Stuff I'm trying, but don't know if I'll keep
 ]]
 vim.keymap.set('i', 'jk', '<ESC>:w<CR>', {noremap=true, silent=true})
+
+-- Fix most recent spelling mistake. Operations
+-- 1. Set undo breakpoint
+-- 2. Switch to normal mode and auto-select first spell suggestion
+-- 3. Return to after last text changed
+-- 4. Set undo breakpoint
+-- From: https://github.com/theopn/dotfiles/blob/c96a769b/vim/.vimrc
+vim.keymap.set({"i", "n", "o"}, "<C-s>", "<C-g>u<ESC>[s1z=`]a<C-g>u", { desc = "Auto-spell correct"})
 
 -- stylua: ignore end
