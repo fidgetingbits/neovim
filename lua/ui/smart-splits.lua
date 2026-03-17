@@ -37,7 +37,7 @@ return {
         vim.keymap.set(modes, '<A-right>', ss.resize_right,      { desc = "Resize pane right" })
 
 
-        vim.keymap.set(modes, '<A-x>', function() vim.api.nvim_win_close(0) end, { desc = "Close current window" })
+        vim.keymap.set(modes, '<A-x>', function() vim.api.nvim_win_close(0, false) end, { desc = "Close current window" })
       else
         vim.keymap.set('n', '<C-left>',  require('smart-splits').resize_left)
         vim.keymap.set('n', '<C-down>',  require('smart-splits').resize_down)
