@@ -84,7 +84,6 @@
         "flake-parts": "flake-parts_2",
         "nixpkgs": "nixpkgs",
         "plugins-confirm-quit": "plugins-confirm-quit",
-        "plugins-lua-console": "plugins-lua-console",
         "plugins-nvim-better-n": "plugins-nvim-better-n",
         "plugins-nvim-toggler": "plugins-nvim-toggler",
         "plugins-pick-resession": "plugins-pick-resession",
@@ -95,8 +94,8 @@
         "wrappers": "wrappers"
       },
       "locked": {
-        "lastModified": 1773738568,
-        "narHash": "sha256-sDw3G7WBF0ogeSnx6hskPRHVEE2Qk04wlOto7eJzJgQ=",
+        "lastModified": 1773740543,
+        "narHash": "sha256-hmS3MlacUo3/icD8e5dGbLDIDS35zGAtaoALn1qAfmk=",
         "path": "/home/aa/dev/nix/introdus/aa",
         "type": "path"
       },
@@ -275,6 +274,7 @@
         "flake-parts": "flake-parts",
         "introdus": "introdus",
         "nixpkgs": "nixpkgs_2",
+        "plugins-lua-console": "plugins-lua-console",
         "wrappers": "wrappers_2"
       }
     },
