@@ -1,4 +1,5 @@
 return {
+  { import = 'editing.better-n' },
   { import = 'editing.mini-ai' },
   { import = 'editing.nvim-toggler' },
   { import = 'editing.resession' },
@@ -47,17 +48,6 @@ return {
       })
     end,
   },
-  {
-    'nvim-better-n',
-    lazy = false,
-    after = function(plugin)
-      local better_n = require('better-n')
-      better_n.setup({})
-      -- better_n.set('[[', { next = '[[', prev = ']]' })
-      better_n.listen('(%d-)%]%]', { next = ']]', prev = '[[', remap = true, expr = true })
-    end,
-  },
-
   {
     'vim-easy-align',
     cmd = 'EasyAlign',

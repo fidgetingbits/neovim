@@ -15,8 +15,9 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = 'Moves Line Up' })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = 'Scroll Down' })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = 'Scroll Up' })
 -- Jump to the next search result, center it, and unfold (if relevant)
-vim.keymap.set("n", "n", "nzzzv", { desc = 'Next Search Result' })
-vim.keymap.set("n", "N", "Nzzzv", { desc = 'Previous Search Result' })
+-- WARNING: These break better-n
+-- vim.keymap.set("n", "n", "nzzzv", { desc = 'Next Search Result' })
+-- vim.keymap.set("n", "N", "Nzzzv", { desc = 'Previous Search Result' })
 
 -- typo tolerant command abbreviations for :W and friends
 vim.keymap.set("ca", "W", "w")
@@ -128,9 +129,10 @@ function tab_move(direction)
   end
 end
 
--- TODO: would be nice if these were repeatable somehow (better-n?)
-vim.keymap.set(nvi, l .. "H",  function() tab_move("left") end, { silent = true, desc = 'Move tab to left' })
-vim.keymap.set(nvi, l .. "L",  function() tab_move("right") end, { silent = true, desc = 'Move tab to right' })
+-- FIXME: This doesn't seem to repeat, but maybe because flash.nvim or similar is hijacking N
+local tab_navigation = require('better-n').create({ next = function() tab_move("right") end, prev = function() tab_move("left") end })
+vim.keymap.set(nvi, l .. "H",  tab_navigation.prev_key, { desc = 'Move tab to left' })
+vim.keymap.set(nvi, l .. "L",  tab_navigation.next_key, { desc = 'Move tab to right' })
 
 vim.keymap.set(nvi, l .. "n",  vim.cmd.tabnew,       { silent = true, desc = 'Create unnamed tab' })
 vim.keymap.set(nvi, l .. "N",  create_named_tab,     { silent = true, desc = 'Create named tab' })
