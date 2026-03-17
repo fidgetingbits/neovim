@@ -21,9 +21,11 @@ return {
         history = true,
         -- Updates as you type
         updateevents = 'TextChanged,TextChangedI',
+        -- Deletes choice node floating text after leaving snippet
+        -- NOTE: has perf cost https://github.com/L3MON4D3/LuaSnip/issues/298
+        delete_check_events = 'TextChanged,CursorMoved',
 
-        -- This highlights the choice node with a specific color
-        -- FIXME: This will sometimes leave a stail choice line when we aren't even in the snippet anymore
+        -- Add choice node indicator
         ext_opts = {
           [require('luasnip.util.types').choiceNode] = {
             active = {
@@ -36,11 +38,11 @@ return {
       -- Load friendly-snippets
       require('luasnip.loaders.from_vscode').lazy_load()
 
-      -- Load snipmate snippets
-      -- FIXME: There is a lot of duplication with friendly-snippets
-      -- so may need to reconsider
-      ls.filetype_extend('all', { '_' })
-      require('luasnip.loaders.from_snipmate').lazy_load()
+      -- Load snipmate snippets (NOTE: lots of duplicates)
+      --
+      -- snipmate globals use '_' identifier for all
+      -- ls.filetype_extend('all', { '_' })
+      -- require('luasnip.loaders.from_snipmate').lazy_load()
 
       load_snippets()
 
