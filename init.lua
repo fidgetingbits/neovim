@@ -21,11 +21,8 @@ else
   vim.notify('ERROR: This config cannot run without introdus. Use the module-generated wrapper')
 end
 
--- vim.loader.enable() -- byte code caching
-
--- See the auto-loaded files in plugin/ for options, keybinds, etc.
-
--- require('nixinfo') -- setup nixInfo and lze
+-- NOTE: See https://codeberg.org/fidgetingbits/introdus/src/branch/aa/wrappers/neovim/
+-- for more shared config and plugins
 
 -- Load all the plugins/lsps from lua/
 nixInfo.lze.load({
