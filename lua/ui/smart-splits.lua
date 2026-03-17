@@ -35,6 +35,7 @@ return {
         vim.keymap.set(modes, '<A-down>',  ss.resize_down,       { desc = "Resize pane down" } )
         vim.keymap.set(modes, '<A-up>',    ss.resize_up,         { desc = "Resize pane up" } )
         vim.keymap.set(modes, '<A-right>', ss.resize_right,      { desc = "Resize pane right" })
+        vim.keymap.set(modes, '<A-=>', function() vim.cmd("wincmd =") end,      { desc = "Resize pane right" })
 
 
         vim.keymap.set(modes, '<A-x>', function() vim.api.nvim_win_close(0, false) end, { desc = "Close current window" })
