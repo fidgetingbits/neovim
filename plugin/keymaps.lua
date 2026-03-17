@@ -104,9 +104,33 @@ vim.keymap.set(nvi, l .. "h",  "gT",                 { silent = true, desc = 'Go
 vim.keymap.set(nvi, l .. "l",  "gt",                 { silent = true, desc = 'Go to next tab' })
 vim.keymap.set(nvi, l .. ".",  "g<tab>",             { silent = true, desc = 'Go to last accessed tab page' })
 vim.keymap.set(nvi, l .. "x",  vim.cmd.tabclose,     { silent = true, desc = 'Close current tab' })
+
+function tab_move(direction)
+  -- If we are on the left or right edge, allow wrapping
+  local index = vim.api.nvim_tabpage_get_number(0)
+  if direction == "left" then
+    if index == 1 then
+      -- Wrap to the end
+      vim.cmd("$tabmove")
+    else
+      vim.cmd("-tabmove")
+    end
+  elseif direction == "right" then
+    local pages = vim.api.nvim_list_tabpages()
+    if index == #pages then
+      -- Wrap to the start
+      vim.cmd("0tabmove")
+    else
+      vim.cmd("+tabmove")
+    end
+  else
+    vim.notify("tab_move: bad direction")
+  end
+end
+
 -- TODO: would be nice if these were repeatable somehow (better-n?)
-vim.keymap.set(nvi, l .. "H",  "<cmd>:-tabmove<CR>", { silent = true, desc = 'Move tab to left' })
-vim.keymap.set(nvi, l .. "L",  "<cmd>:+tabmove<CR>", { silent = true, desc = 'Move tab to right' })
+vim.keymap.set(nvi, l .. "H",  function() tab_move("left") end, { silent = true, desc = 'Move tab to left' })
+vim.keymap.set(nvi, l .. "L",  function() tab_move("right") end, { silent = true, desc = 'Move tab to right' })
 
 vim.keymap.set(nvi, l .. "n",  vim.cmd.tabnew,       { silent = true, desc = 'Create unnamed tab' })
 vim.keymap.set(nvi, l .. "N",  create_named_tab,     { silent = true, desc = 'Create named tab' })
@@ -184,3 +208,4 @@ vim.keymap.set('i', 'jk', '<ESC>:w<CR>', {noremap=true, silent=true})
 vim.keymap.set({"i", "n", "o"}, "<C-s>", "<C-g>u<ESC>[s1z=`]a<C-g>u", { desc = "Auto-spell correct"})
 
 -- stylua: ignore end
+
