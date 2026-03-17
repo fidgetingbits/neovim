@@ -29,7 +29,9 @@ return {
         ext_opts = {
           [require('luasnip.util.types').choiceNode] = {
             active = {
-              virt_text = { { ' ← Choice ', 'ErrorMsg' } },
+              -- use :Telescope highlights to find colors like @character
+              --             text, color
+              virt_text = { { '', '@character' } },
             },
           },
         },
