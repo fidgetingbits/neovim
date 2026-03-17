@@ -8,7 +8,7 @@ return {
       conform.setup({
         formatters_by_ft = {
           -- Conform will run multiple formatters sequentially
-          -- FIXME: switch to treefmt
+          -- FIXME: switch to use treefmt
           lua = { 'stylua' },
           kdl = { 'kdlfmt' },
           python = { 'ruff' },
@@ -21,6 +21,13 @@ return {
           toml = { 'taplo' },
           -- Use a sub-list to run only the first available formatter
           -- javascript = { { "prettierd", "prettier" } },
+        },
+        formatters = {
+          kdl = {
+            command = 'kdlfmt',
+            args = { 'format', '--kdl-version=v1', '-' },
+            stdin = true,
+          },
         },
         format_on_save = function(bufnr)
           -- Disable with a global or buffer-local variable
