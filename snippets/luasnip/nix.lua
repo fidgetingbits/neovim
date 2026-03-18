@@ -35,7 +35,7 @@ return {
     nix_types(1),
   }),
   s(
-    'mko',
+    { trig = 'mko', desc = 'mkOption of selectable type' },
     fmt(
       [[
       {} = lib.mkOption {{
@@ -56,7 +56,10 @@ return {
   ),
 
   s(
-    'mkob',
+    {
+      trig = 'mkob',
+      desc = 'mkOption of type boolean',
+    },
     fmt(
       [[
       {} = lib.mkOption {{
@@ -70,6 +73,46 @@ return {
         i(1, 'var'),
         c(2, { t('true'), t('false') }),
         i(3, 'description'),
+      }
+    )
+  ),
+
+  s(
+    { trig = 'wsa', desc = 'writeShellApplication' },
+    fmt(
+      [[
+      {} = pkgs.writeShellApplication {{
+        name = "{}";
+        runtimeInputs = lib.attrValues {{
+          inherit (pkgs)
+          {}
+          ;
+        }};
+        text = {};
+      }};
+      ]],
+      {
+        f(function(args)
+          return args[1][1]
+        end, { 1 }),
+        i(1, 'name'),
+        i(2, 'hello'),
+        c(3, {
+          sn(
+            nil,
+            fmt(
+              [[
+              # bash 
+                ''
+                  {}
+                ''
+              ]],
+              { i(1) }
+            )
+          ),
+          sn(nil, fmt('lib.readFile ./{}', { i(1, 'file') })),
+          t(''),
+        }),
       }
     )
   ),
