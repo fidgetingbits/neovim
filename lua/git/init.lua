@@ -1,4 +1,5 @@
+local MP = ...
 return {
-  { import = 'git.gitsigns' },
-  { import = 'git.neogit' },
+  { import = MP:relpath('gitsigns') },
+  { import = MP:relpath('neogit') },
 }

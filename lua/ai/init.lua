@@ -1,3 +1,4 @@
+local MP = ...
 return {
-  { import = 'ai.codecompanion' },
+  { import = MP:relpath('codecompanion') },
 }

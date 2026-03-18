@@ -1,4 +1,5 @@
+local MP = ...
 return {
-  { import = 'completion.blink' },
-  { import = 'completion.luasnip' },
+  { import = MP:relpath('blink') },
+  { import = MP:relpath('luasnip') },
 }

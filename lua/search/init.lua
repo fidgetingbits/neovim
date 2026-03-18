@@ -1,4 +1,5 @@
+local MP = ...
 return {
-  { import = 'search.flash' },
-  { import = 'search.telescope' },
+  { import = MP:relpath('flash') },
+  { import = MP:relpath('telescope') },
 }

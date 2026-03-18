@@ -1,3 +1,4 @@
+local MP = ...
 -- NOTE: This config uses lzextras.lsp handler
 -- https://github.com/BirdeeHub/lzextras?tab=readme-ov-file#lsp-handler
 -- Because we have the paths, we can set a more performant fallback function
@@ -70,13 +71,13 @@ return {
       })
     end,
   },
-  { import = 'lsp.bash' },
-  { import = 'lsp.lua' },
-  { import = 'lsp.clang' },
-  { import = 'lsp.python' },
-  { import = 'lsp.json' },
-  { import = 'lsp.just' },
-  { import = 'lsp.markdown' },
-  { import = 'lsp.nix' },
-  { import = 'lsp.python' },
+  { import = MP:relpath('bash') },
+  { import = MP:relpath('lua') },
+  { import = MP:relpath('clang') },
+  { import = MP:relpath('python') },
+  { import = MP:relpath('json') },
+  { import = MP:relpath('just') },
+  { import = MP:relpath('markdown') },
+  { import = MP:relpath('nix') },
+  { import = MP:relpath('python') },
 }

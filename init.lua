@@ -1,3 +1,6 @@
+local MP = '' --[[ MP + relpath() trick explained in introdus repo
+                   Not set to ... here because base init.lua isn't passed an arg ]] --
+
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -28,39 +31,39 @@ end
 -- Load all the plugins/lsps from lua/
 nixInfo.lze.load({
   {
-    import = 'ai',
+    import = MP:relpath('ai'),
     category = 'ai',
   },
   {
-    import = 'completion',
+    import = MP:relpath('completion'),
     category = 'completion',
   },
   {
-    import = 'editing',
+    import = MP:relpath('editing'),
     category = 'editing',
   },
   {
-    import = 'format',
+    import = MP:relpath('format'),
     category = 'format',
   },
   {
-    import = 'git',
+    import = MP:relpath('git'),
     category = 'git',
   },
   {
-    import = 'lsp',
+    import = MP:relpath('lsp'),
     category = 'lsp',
   },
   {
-    import = 'markdown',
+    import = MP:relpath('markdown'),
     category = 'markdown',
   },
   {
-    import = 'search',
+    import = MP:relpath('search'),
     category = 'search',
   },
   {
-    import = 'ui',
+    import = MP:relpath('ui'),
     category = 'ui',
   },
 })
