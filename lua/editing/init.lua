@@ -1,10 +1,11 @@
+local MP = ...
 return {
-  { import = 'editing.better-n' },
-  { import = 'editing.mini-ai' },
-  { import = 'editing.nvim-toggler' },
-  { import = 'editing.resession' },
-  { import = 'editing.todo-comments' },
-  { import = 'editing.undotree' },
+  { import = MP:relpath('better-n') },
+  { import = MP:relpath('mini-ai') },
+  { import = MP:relpath('nvim-toggler') },
+  { import = MP:relpath('resession') },
+  { import = MP:relpath('todo-comments') },
+  { import = MP:relpath('undotree') },
   -- FIXME: Move to modules
   {
     'indent-blankline.nvim',
