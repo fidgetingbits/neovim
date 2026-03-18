@@ -14,7 +14,6 @@ inputs:
   config = {
     settings.extraConfig = "${inputs.introdus}/wrappers/neovim";
 
-    # nvim-lib.neovimPlugins = config.nvim-lib.pluginsFromPrefix "plugins-" (inputs // inputs.introdus);
     nvim-lib.pluginInputs = [
       inputs
       inputs.introdus
@@ -28,6 +27,7 @@ inputs:
           lib.attrValues {
             inherit (pkgs.vimPlugins)
               catppuccin-nvim
+              scope-nvim # Per tabpage-scoped buffers
               ;
           }
           ++ lib.optionals config.settings.devMode (

@@ -129,7 +129,6 @@ function tab_move(direction)
   end
 end
 
--- FIXME: This doesn't seem to repeat, but maybe because flash.nvim or similar is hijacking N
 local tab_navigation = require('better-n').create({ next = function() tab_move("right") end, prev = function() tab_move("left") end })
 vim.keymap.set(nvi, l .. "H",  tab_navigation.prev_key, { desc = 'Move tab to left' })
 vim.keymap.set(nvi, l .. "L",  tab_navigation.next_key, { desc = 'Move tab to right' })
@@ -210,4 +209,3 @@ vim.keymap.set('i', 'jk', '<ESC>:w<CR>', {noremap=true, silent=true})
 vim.keymap.set({"i", "n", "o"}, "<C-s>", "<C-g>u<ESC>[s1z=`]a<C-g>u", { desc = "Auto-spell correct"})
 
 -- stylua: ignore end
-

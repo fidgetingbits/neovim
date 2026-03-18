@@ -1,6 +1,4 @@
 local function mode()
-  -- FIXME: Tweak these to differentiate the mode
-  -- Map of modes to their respective shorthand indicators
   local mode_map = {
     n = 'N', -- Normal mode
     i = 'I', -- Insert mode
@@ -23,7 +21,7 @@ local function mode()
     t = 'T', -- Terminal mode
   }
   -- Return the mode shorthand or [UNKNOWN] if no match
-  return mode_map[vim.fn.mode()] or '[UNKNOWN]'
+  return mode_map[vim.fn.mode()] or 'U?'
 end
 
 return {
