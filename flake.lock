@@ -84,19 +84,17 @@
         "flake-parts": "flake-parts_2",
         "nixpkgs": "nixpkgs",
         "plugins-confirm-quit": "plugins-confirm-quit",
-        "plugins-lua-console": "plugins-lua-console",
         "plugins-nvim-better-n": "plugins-nvim-better-n",
         "plugins-nvim-toggler": "plugins-nvim-toggler",
         "plugins-pick-resession": "plugins-pick-resession",
         "plugins-telescope-luasnip": "plugins-telescope-luasnip",
-        "plugins-telescope-toggleterm": "plugins-telescope-toggleterm",
         "pre-commit-hooks": "pre-commit-hooks",
         "treefmt-nix": "treefmt-nix",
         "wrappers": "wrappers"
       },
       "locked": {
-        "lastModified": 1773794644,
-        "narHash": "sha256-vqO2IzYpYTZt2RU5yy5dOmEScPKBqFgzSUunGI+AfIQ=",
+        "lastModified": 1773799560,
+        "narHash": "sha256-TbtvHwSTUhv/tRzUBJK26jG3Zdt/ZH0fiYvlaSyW/mU=",
         "path": "/home/aa/dev/nix/introdus/aa",
         "type": "path"
       },
@@ -275,6 +273,8 @@
         "flake-parts": "flake-parts",
         "introdus": "introdus",
         "nixpkgs": "nixpkgs_2",
+        "plugins-lua-console": "plugins-lua-console",
+        "plugins-telescope-toggleterm": "plugins-telescope-toggleterm",
         "wrappers": "wrappers_2"
       }
     },

@@ -18,7 +18,8 @@ if introdus_config then
   end
   require('introdus')
 else
-  vim.notify('ERROR: This config cannot run without introdus. Use the module-generated wrapper')
+  print([[ERROR: This config cannot run without introdus. 
+      Use settings.extraConfig in your wrapper to specify the introdus path]])
 end
 
 -- NOTE: See https://codeberg.org/fidgetingbits/introdus/src/branch/aa/wrappers/neovim/

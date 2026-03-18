@@ -17,6 +17,17 @@
       # url = "git+ssh://git@codeberg.org/fidgetingbits/introdus?ref=aa";
       url = "path:///home/aa/dev/nix/introdus/aa";
     };
+
+    plugins-lua-console = {
+      url = "github:yarospace/lua-console.nvim";
+      # url = "path:/home/aa/dev/neovim/lua-console.nvim";
+      flake = false;
+    };
+
+    plugins-telescope-toggleterm = {
+      url = "github:da-moon/telescope-toggleterm.nvim";
+      flake = false;
+    };
   };
 
   outputs =
@@ -28,6 +39,9 @@
       introdus,
       ...
     }@inputs:
+    let
+      lib = nixpkgs.lib;
+    in
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [ wrappers.flakeModules.wrappers ];
       systems = nixpkgs.lib.platforms.all;
@@ -47,7 +61,7 @@
         };
 
       flake.wrappers = {
-        neovim = nixpkgs.lib.modules.importApply ./module.nix (inputs // introdus.inputs);
+        neovim = lib.modules.importApply ./module.nix (inputs // introdus.inputs);
         default = self.wrapperModules.neovim;
       };
     };
