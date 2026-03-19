@@ -63,6 +63,10 @@ nixInfo.lze.load({
     category = 'search',
   },
   {
+    import = MP:relpath('theme'),
+    category = 'theme',
+  },
+  {
     import = MP:relpath('ui'),
     category = 'ui',
   },

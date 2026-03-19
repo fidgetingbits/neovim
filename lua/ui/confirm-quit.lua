@@ -1,7 +1,7 @@
 return {
   {
     'confirm-quit',
-    enabled = nixInfo(false, 'settings', 'neovide'),
+    enabled = (vim.g.neovide ~= true),
     after = function()
       local cq = require('confirm-quit')
       cq.setup()

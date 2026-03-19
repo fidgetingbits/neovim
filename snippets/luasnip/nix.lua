@@ -102,7 +102,7 @@ return {
             nil,
             fmt(
               [[
-              # bash 
+              # bash
                 ''
                   {}
                 ''

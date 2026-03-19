@@ -43,8 +43,8 @@ local function live_grep_git_root()
 end
 
 local telescope_ignore_patterns = {
-  -- Ignore nix lock files
-  '%.lock',
+  '%.lock', -- Ignore nix lock files
+  'facter.json',
 }
 
 -- Allows you to toggle the search to include hidden files

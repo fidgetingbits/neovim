@@ -1,8 +1,5 @@
 local MP = ...
 return {
-  -- Primary colorscheme
-  { import = MP:relpath('catppuccin') },
-
   { import = MP:relpath('confirm-quit') },
   { import = MP:relpath('hardtime') },
   { import = MP:relpath('lualine') },

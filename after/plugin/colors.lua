@@ -1,1 +1,1 @@
-vim.cmd([[hi LineNr guifg=#bb9af7]])
+-- FIXME: This is catppuccin specific

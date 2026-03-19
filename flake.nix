@@ -55,6 +55,7 @@
                 devMode = true;
                 neovide = true;
                 terminalMode = true;
+                unwrappedConfig = "/home/aa/dev/nix/neovim";
               };
             };
           };

@@ -6,13 +6,19 @@ inputs:
   pkgs,
   ...
 }:
+let
+  configDir = "/dev/nix/neovim"; # relative to home
+in
 {
   imports = [
     inputs.introdus.wrapperModules.neovim
   ];
   # Extend the introdus neovim template with any additional functionality we want
   config = {
-    settings.extraConfig = "${inputs.introdus}/wrappers/neovim";
+    settings = {
+      extraConfig = "${inputs.introdus}/wrappers/neovim";
+      unwrappedConfig = lib.generators.mkLuaInline "vim.uv.os_homedir() .. '${configDir}'";
+    };
 
     nvim-lib.pluginInputs = [
       inputs
@@ -26,7 +32,6 @@ inputs:
         data =
           lib.attrValues {
             inherit (pkgs.vimPlugins)
-              catppuccin-nvim
               scope-nvim # Per tabpage-scoped buffers
               ;
           }
@@ -45,6 +50,16 @@ inputs:
             }
           );
       };
+      theme = {
+        data = lib.attrValues {
+          inherit (pkgs.vimPlugins)
+            catppuccin-nvim
+            miasma-nvim
+            lush-nvim
+            ;
+        };
+      };
+
     };
 
   };
