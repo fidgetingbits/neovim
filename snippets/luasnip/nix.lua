@@ -57,6 +57,41 @@ return {
 
   s(
     {
+      trig = 'mke',
+      desc = 'mkEnableOption',
+    },
+    fmt(
+      [[
+        enable = lib.mkEnableOption "Enable {} ";
+    ]],
+      {
+        i(1, 'description'),
+      }
+    )
+  ),
+
+  s(
+    {
+      trig = 'mket',
+      desc = 'Enable option defauling to true',
+    },
+    fmt(
+      [[
+      enable = lib.mkOption {{
+        type = lib.types.bool;
+        default = true;
+        example = false; 
+        description = "{}";
+      }};
+    ]],
+      {
+        i(1, 'description'),
+      }
+    )
+  ),
+
+  s(
+    {
       trig = 'mkob',
       desc = 'mkOption of type boolean',
     },
@@ -130,6 +165,44 @@ return {
       {
         i(1, 'pkgs'),
         i(2, 'hello'),
+      }
+    )
+  ),
+
+  -- FIXME: This could add some choices for the module args (pkgs, config, etc)
+  -- FIXME: Enable option should also choice to one that is enabled by default
+  s(
+    {
+      trig = 'module',
+      desc = 'Nix module skeleton',
+    },
+    fmt(
+      [[
+      {{
+        pkgs,
+        config,
+        lib,
+        ...
+      }}:
+      let
+        cfg = config.{};
+      in
+      {{
+        imports = []; 
+        options = {{
+        {} = {{
+          enable = lib.mkEnableOption "Enable {} settings";
+        }};
+        config = lib.mkIf cfg.enable {{
+        }};
+      }}
+    ]],
+      {
+        f(function(args)
+          return args[1][1]
+        end, { 1 }),
+        i(1, 'namespace'),
+        i(2, 'module feature'),
       }
     )
   ),
