@@ -20,7 +20,5 @@ return {
       },
     })
   end,
-  after = function(plugin)
-    vim.cmd.colorscheme('catppuccin')
-  end,
+  after = function(plugin) end,
 }

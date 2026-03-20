@@ -100,3 +100,5 @@ vim.o.endofline = false
 -- Single status line at bottom of window for all windows
 vim.opt.laststatus = 3
 
+-- FIXME: Should make this a global so it's easier to fetch color palette?
+vim.cmd.colorscheme('miasma')
