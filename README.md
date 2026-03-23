@@ -14,3 +14,4 @@ To build a specific configuration use `nix build .#<package>`. For example,
 
 * [neovim wrapper template](https://github.com/BirdeeHub/nix-wrapper-modules/tree/main/templates/neovim)
 * [neovim wrapper module](https://github.com/BirdeeHub/nix-wrapper-modules/tree/cf2acacb/wrapperModules/n/neovim)
+
