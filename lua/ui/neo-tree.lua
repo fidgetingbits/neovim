@@ -7,7 +7,7 @@ return {
         event_handlers = {
           {
             event = 'neo_tree_buffer_enter',
-            handler = function(arg)
+            handler = function(_)
               vim.opt.relativenumber = true
             end,
           },
@@ -16,7 +16,7 @@ return {
       vim.keymap.set(
         'n',
         '<leader>n',
-        ':Neotree toggle current reveal_force_cwd<CR>',
+        ':Neotree toggle reveal_force_cwd<CR>',
         { desc = 'Toggle Neotree' }
       )
     end,
