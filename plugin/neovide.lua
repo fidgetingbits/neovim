@@ -26,13 +26,20 @@ if vim.g.neovide then
   end
 
   local utils = require('utils')
-  -- FIXME: Color name should probably come from external setting s
-  if vim.g.colors_name == 'catppuccin-mocha' then
+
+  -- FIXME: Likely move this
+  vim.cmd.colorscheme(vim.g.colorscheme)
+
+  if vim.g.colors_name == 'miasma' then
+    -- No built-in palette
+    -- local colors =
+  elseif vim.g.colors_name == 'catppuccin-mocha' then
     local colors = require('catppuccin.palettes').get_palette('mocha')
     vim.api.nvim_set_hl(0, 'Normal', { bg = colors.base })
     utils.set_cursor_colors(colors)
     utils.set_term_colors(colors)
   end
+
   vim.g.neovide_cursor_smooth_blink = true
 
   vim.g.neovide_hide_mouse_when_typing = true
@@ -61,7 +68,7 @@ if vim.g.neovide then
 
   --[[ Neovide keymaps ]]
   -- stylua: ignore start
-  vim.keymap.set({ 'i', "n", "x", "v" }, '<C-S-v>', '<C-r>+',
+  vim.keymap.set({ 'i', "", "x", "v" }, '<C-S-v>', '<C-r>+',
     { noremap = true, silent = true, desc = 'Paste from clipboard from within most modes' })
   -- IMPORTANT: without `silent = false` pasting into cmdline mode won't show up immediately in neovide
   vim.keymap.set({ 'c', }, '<C-S-v>', '<C-r>+',

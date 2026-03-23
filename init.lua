@@ -1,8 +1,11 @@
-local MP = '' --[[ MP + relpath() trick explained in introdus repo
-                   Not set to ... here because base init.lua isn't passed an arg ]] --
+-- MP + relpath() trick explained in introdus repo
+-- Not set to ... here because base init.lua isn't passed an arg
 
+local MP = ''
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
+vim.g.colorscheme = 'catppuccin'
+-- vim.g.colorscheme = 'miasma'
 
 -- This config is derived from the introdus neovim wrapper
 -- so have introdus set things up for us
