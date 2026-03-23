@@ -12,6 +12,10 @@ return {
           col = nil,
           pane_gap = 4,
           autokeys = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
+          wo = {
+            relativenumber = false,
+            number = false,
+          },
           preset = {
             pick = nil,
             header = [[ oedo ]],

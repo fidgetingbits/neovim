@@ -93,7 +93,6 @@ if nixInfo(false, 'settings', 'terminalMode') then
         -- FIXME: Set this to a global we set for laststatus elsewhere, in case
         -- we eventually set this to 3
         vim.opt_local.laststatus = 2
-        vim.opt_local.relativenumber = true
         vim.opt_local.signcolumn = 'yes'
 
         vim.opt_local.winhl = ''
