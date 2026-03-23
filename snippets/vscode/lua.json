@@ -1,4 +1,14 @@
 {
+  "stylua ignore": {
+    "body": "-- stylua: ignore ${1|start,end|}",
+    "description": "stylua ignore",
+    "prefix": "stylua ignore"
+  },
+  "stylua ignore block": {
+    "body": "-- stylua: ignore start\n$0\n-- stylua: ignore end",
+    "description": "stylua ignore block",
+    "prefix": "stylua ignore block"
+  },
   "Insert lua code block": {
     "prefix": "cbl",
     "body": ["```lua", "$0", "```"],
