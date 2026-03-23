@@ -106,7 +106,7 @@ vim.keymap.set(nvi, l .. "l",  "gt",                 { silent = true, desc = 'Go
 vim.keymap.set(nvi, l .. ".",  "g<tab>",             { silent = true, desc = 'Go to last accessed tab page' })
 vim.keymap.set(nvi, l .. "x",  vim.cmd.tabclose,     { silent = true, desc = 'Close current tab' })
 
-function tab_move(direction)
+local function tab_move(direction)
   -- If we are on the left or right edge, allow wrapping
   local index = vim.api.nvim_tabpage_get_number(0)
   if direction == "left" then
@@ -191,8 +191,11 @@ vim.keymap.set("n", "<Esc>", dismiss_all, { desc = "Dismiss all notifications an
 -- blink uses <c-e> to close pop-up so same idea
 vim.keymap.set({ "v", "n", "t", "c"}, "<A-e>", dismiss_all, { desc = "Dismiss all notifications and clear hlsearch" })
 
-vim.keymap.set("n", "<leader>Ts", function() vim.opt.spell = not vim.opt.spell:get() end, { desc = "Toggle spell checking" })
+vim.keymap.set("n", "<leader>ts", function() vim.opt.spell = not vim.opt.spell:get() end, { desc = "Toggle spell checking" })
 -- FIXME: add toggle for numbers
+
+
+vim.keymap.set('n', "<leader><leader>t", vim.cmd.InspectTree, { desc = "Treesitter inspection" })
 
 --
 -- [[ Experimental ]]
