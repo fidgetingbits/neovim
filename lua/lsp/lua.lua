@@ -39,6 +39,8 @@ return {
           -- See per-project .luarc.json for extras
           diagnostics = {
             disable = { 'missing-fields' },
+            -- Allow ignoring unused variables prefixed with _ to keep the names around
+            unusedLocalExclude = { '_*' },
           },
           telemetry = { enabled = false },
         },

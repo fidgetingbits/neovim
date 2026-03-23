@@ -46,15 +46,17 @@ return {
           local l = '<leader>l'
           local tb = require('telescope.builtin')
           -- stylua: ignore start
-          nmap(l .. 'r',  vim.lsp.buf.rename,                  '[R]ename')
-          nmap(l .. 'ca', vim.lsp.buf.code_action,             '[C]ode [A]ction')
           nmap('gd',      vim.lsp.buf.definition,              '[G]oto [D]efinition')
-          -- nmap(l .. 'd',  vim.lsp.buf.definition,              'Goto [D]efinition')
           nmap('gr',      tb.lsp_references,                   '[G]oto [R]eferences')
-          nmap(l .. 'r',  tb.lsp_references,                   'Goto [R]eferences')
+
+          -- nmap(l .. 'd',  vim.lsp.buf.definition,              'Goto [D]efinition')
+          nmap(l .. 'R',  tb.lsp_references,                   'Goto [R]eferences')
           nmap(l .. 'I',  tb.lsp_implementations,              'Goto [I]mplementation')
           nmap(l .. 'ds', tb.lsp_document_symbols,             '[D]ocument [S]ymbols')
           nmap(l .. 'ws', tb.lsp_dynamic_workspace_symbols,    '[W]orkspace [S]ymbols')
+
+          nmap(l .. 'r',  vim.lsp.buf.rename,                  '[R]ename')
+          nmap(l .. 'ca', vim.lsp.buf.code_action,             '[C]ode [A]ction')
           nmap(l .. 'td', vim.lsp.buf.type_definition,         '[T]ype [D]efinition')
           nmap(l .. 'k',  vim.lsp.buf.hover,                   'Hover Documentation')
           nmap(l .. 'K',  vim.lsp.buf.signature_help,          'Signature Documentation')
