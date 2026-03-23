@@ -192,6 +192,17 @@ return {
       -- stylua: ignore end
     end,
   },
+
+  {
+    'nvim-treesitter-context',
+    auto_enable = true,
+    lazy = false,
+    dep_of = { 'nvim-treesitter' },
+
+    after = function(plugin)
+      require('nvim-treesitter-context').setup({})
+    end,
+  },
   {
     'nvim-ts-autotag',
     auto_enable = true,
