@@ -34,6 +34,9 @@ in
             inherit (pkgs.vimPlugins)
               scope-nvim # Per tabpage-scoped buffers
               ;
+            inherit (config.nvim-lib.neovimPlugins)
+              ansi
+              ;
           }
           ++ lib.optionals config.settings.devMode (
             lib.attrValues {

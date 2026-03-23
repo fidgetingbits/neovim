@@ -66,9 +66,10 @@ return {
           set_jumps = true,
         },
       })
+
+      -- Helpers
       local xo = { 'x', 'o' }
       local nxo = { 'n', 'x', 'o' }
-      -- Helpers
       local select_textobject = function(query, group)
         group = group or 'textobjects'
         require('nvim-treesitter-textobjects.select').select_textobject(query, group)
@@ -200,7 +201,18 @@ return {
     dep_of = { 'nvim-treesitter' },
 
     after = function(plugin)
-      require('nvim-treesitter-context').setup({})
+      require('treesitter-context').setup({
+        max_lines = 5, -- Don't pollute too much of the screen
+        min_window_height = 20, -- Don't show unless there is enough space
+        mode = 'topline', -- Only show context for out-of-view code
+      })
+
+      vim.keymap.set({ 'n', 'v' }, '<leader>tc', function()
+        vim.cmd('TSContext toggle')
+      end, { desc = 'Toggle Treesitter Context' })
+      vim.keymap.set('n', '[c', function()
+        require('treesitter-context').go_to_context(vim.v.count1)
+      end, { silent = true, desc = 'Jump to previous treesitter context' })
     end,
   },
   {

@@ -14,4 +14,11 @@ return {
   { import = MP:relpath('trouble') },
   { import = MP:relpath('which-key') },
   { import = MP:relpath('zen-mode') },
+  {
+    'ansi',
+    lazy = false,
+    after = function()
+      require('ansi').setup({})
+    end,
+  },
 }

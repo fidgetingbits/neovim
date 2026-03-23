@@ -28,6 +28,11 @@
       url = "github:da-moon/telescope-toggleterm.nvim";
       flake = false;
     };
+
+    plugins-ansi = {
+      url = "github:0xferrous/ansi.nvim";
+      flake = false;
+    };
   };
 
   outputs =

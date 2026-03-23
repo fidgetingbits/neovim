@@ -8,7 +8,7 @@ local nvi = { "n", "v", "i" }
 --
 
 -- NOTE: devMode only. requires config files outside the nix store
-vim.keymap.set("n", "<leader><leader>r", ":ReloadConfig<CR>", {noremap = true, silent = true})
+vim.keymap.set("n", "<leader><leader>r", vim.cmd.ReloadConfig, {noremap = true, silent = true})
 
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = 'Moves Line Down' })
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = 'Moves Line Up' })
