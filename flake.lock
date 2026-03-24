@@ -93,8 +93,8 @@
         "wrappers": "wrappers"
       },
       "locked": {
-        "lastModified": 1774248694,
-        "narHash": "sha256-MPma2VMhL/jSFjEX6v3b9UPMfvoEUEcqysmR0YTcIBM=",
+        "lastModified": 1774257673,
+        "narHash": "sha256-Wg2jf/Uc6DUspf5g9MnQ5a7ONZzYdFLjM1q2j5zLjWc=",
         "path": "/home/aa/dev/nix/introdus/aa",
         "type": "path"
       },
@@ -130,6 +130,22 @@
         "owner": "nixos",
         "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "plugins-ansi": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1768975991,
+        "narHash": "sha256-Kv7xDWqKbF0jVtGZDRYDoN7UVl22E/If3vRHMmQAmNA=",
+        "owner": "0xferrous",
+        "repo": "ansi.nvim",
+        "rev": "a1451a9957fe04e2950abfec7c1fd4d044e2e537",
+        "type": "github"
+      },
+      "original": {
+        "owner": "0xferrous",
+        "repo": "ansi.nvim",
         "type": "github"
       }
     },
@@ -273,6 +289,7 @@
         "flake-parts": "flake-parts",
         "introdus": "introdus",
         "nixpkgs": "nixpkgs_2",
+        "plugins-ansi": "plugins-ansi",
         "plugins-lua-console": "plugins-lua-console",
         "plugins-telescope-toggleterm": "plugins-telescope-toggleterm",
         "wrappers": "wrappers_2"
