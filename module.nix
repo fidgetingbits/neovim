@@ -17,9 +17,11 @@ in
   config = {
     settings = {
       extraConfig = "${inputs.introdus}/wrappers/neovim";
-      unwrappedConfig =
-        lib.generators.mkLuaInline # lua
-          "vim.uv.os_homedir() .. '${configDir}'";
+      # unwrappedConfig = lib.mkOverride 100 (
+      # unwrappedConfig = lib.mkForce (
+      #   lib.generators.mkLuaInline # lua
+      #     "vim.uv.os_homedir() .. '${configDir}'"
+      # );
     };
 
     nvim-lib.pluginInputs = [

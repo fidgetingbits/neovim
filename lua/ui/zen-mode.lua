@@ -1,6 +1,7 @@
 return {
   {
-    'zen-mode.nvim',
+    -- 'zen-mode.nvim',
+    'zen-mode',
     event = 'DeferredUIEnter',
     after = function(plugin)
       require('zen-mode').setup()
