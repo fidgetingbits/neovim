@@ -83,18 +83,21 @@
       "inputs": {
         "flake-parts": "flake-parts_2",
         "nixpkgs": "nixpkgs",
+        "nixpkgs-unstable": "nixpkgs-unstable",
         "plugins-confirm-quit": "plugins-confirm-quit",
         "plugins-nvim-better-n": "plugins-nvim-better-n",
         "plugins-nvim-toggler": "plugins-nvim-toggler",
         "plugins-pick-resession": "plugins-pick-resession",
         "plugins-telescope-luasnip": "plugins-telescope-luasnip",
+        "plugins-treesitter-textobjects": "plugins-treesitter-textobjects",
+        "plugins-zen-mode": "plugins-zen-mode",
         "pre-commit-hooks": "pre-commit-hooks",
         "treefmt-nix": "treefmt-nix",
         "wrappers": "wrappers"
       },
       "locked": {
-        "lastModified": 1774257673,
-        "narHash": "sha256-Wg2jf/Uc6DUspf5g9MnQ5a7ONZzYdFLjM1q2j5zLjWc=",
+        "lastModified": 1774397768,
+        "narHash": "sha256-Vo+spVUPqjoiq9WlrortU2OyGeSP/TfS/oxFuCcFhyk=",
         "path": "/home/aa/dev/nix/introdus/aa",
         "type": "path"
       },
@@ -105,16 +108,34 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1773507054,
-        "narHash": "sha256-Q8U5VXgrcxmCxPtCCJCIZkcAX3FCZwGh1GNVIXxMND0=",
-        "owner": "NixOS",
+        "lastModified": 1774106199,
+        "narHash": "sha256-US5Tda2sKmjrg2lNHQL3jRQ6p96cgfWh3J1QBliQ8Ws=",
+        "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "e80236013dc8b77aa49ca90e7a12d86f5d8d64c9",
+        "rev": "6c9a78c09ff4d6c21d0319114873508a6ec01655",
         "type": "github"
       },
       "original": {
-        "id": "nixpkgs",
-        "type": "indirect"
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1774106199,
+        "narHash": "sha256-US5Tda2sKmjrg2lNHQL3jRQ6p96cgfWh3J1QBliQ8Ws=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "6c9a78c09ff4d6c21d0319114873508a6ec01655",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
       }
     },
     "nixpkgs_2": {
@@ -258,6 +279,39 @@
       "original": {
         "owner": "da-moon",
         "repo": "telescope-toggleterm.nvim",
+        "type": "github"
+      }
+    },
+    "plugins-treesitter-textobjects": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1774087849,
+        "narHash": "sha256-H1tIn3XYJtLF1JvlUJvLtTScMdV/NHDFq+KZjBV4q1c=",
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter-textobjects",
+        "rev": "93d60a475f0b08a8eceb99255863977d3a25f310",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nvim-treesitter",
+        "repo": "nvim-treesitter-textobjects",
+        "type": "github"
+      }
+    },
+    "plugins-zen-mode": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1774319734,
+        "narHash": "sha256-AjAvSu6hEd8KsIknt1io5jccPpEybtJBRqCsdhDgQ3I=",
+        "owner": "fidgetingbits",
+        "repo": "zen-mode.nvim",
+        "rev": "0b5745363717dec21d6d46d354bacfb250212cb2",
+        "type": "github"
+      },
+      "original": {
+        "owner": "fidgetingbits",
+        "ref": "fix-terminal",
+        "repo": "zen-mode.nvim",
         "type": "github"
       }
     },

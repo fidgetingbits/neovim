@@ -53,10 +53,10 @@ nixInfo.lze.load({
     import = MP:relpath('git'),
     category = 'git',
   },
-  {
-    import = MP:relpath('lsp'),
-    category = 'lsp',
-  },
+  -- {
+  --   import = MP:relpath('lsp'),
+  --   category = 'lsp',
+  -- },
   {
     import = MP:relpath('markdown'),
     category = 'markdown',

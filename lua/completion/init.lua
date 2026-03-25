@@ -1,5 +1,5 @@
 local MP = ...
 return {
-  { import = MP:relpath('blink') },
-  { import = MP:relpath('luasnip') },
+  -- { import = MP:relpath('blink') },
+  -- { import = MP:relpath('luasnip') },
 }

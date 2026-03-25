@@ -1,5 +1,5 @@
 local MP = ...
 return {
-  { import = MP:relpath('flash') },
-  { import = MP:relpath('telescope') },
+  -- { import = MP:relpath('flash') },
+  -- { import = MP:relpath('telescope') },
 }
