@@ -8,6 +8,7 @@ return {
   -- { import = MP:relpath('noice') },
   { import = MP:relpath('notifications') },
   -- { import = MP:relpath('smart-splits') },
+  { import = MP:relpath('scope') },
   { import = MP:relpath('snacks') },
   { import = MP:relpath('tabby') },
   { import = MP:relpath('toggleterm') },

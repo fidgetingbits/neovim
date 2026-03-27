@@ -146,6 +146,7 @@ return {
       { t .. "r", function() return require('telescope.builtin').resume() end,      mode = { "n" }, desc = '[F]ind [R]esume', },
       { t .. 'S', '<cmd>Telescope resession<CR>', mode = { 'n' }, desc = '[F]ind sessions', },
       { t .. "t", '<cmd>Telescope toggleterm<CR>', mode = { "n" }, desc = '[F]ind [T]erminals', },
+      { t .. "T", '<cmd>Telescope scope buffers<CR>', mode = { "n" }, desc = '[F]ind [T]ab-scoped buffers', },
       { t .. "w", function() return require('telescope.builtin').grep_string() end, mode = { "n" }, desc = '[F]ind current [W]ord', },
       -- Because <leader>xx toggles diagnostic quicklist
       { t .. "x", function() return require('telescope.builtin').diagnostics() end, mode = { "n" }, desc = '[F]ind Diagnostics', },
@@ -215,13 +216,12 @@ return {
 
       -- Enable telescope extensions, if they are installed
       pcall(require('telescope').load_extension, 'fzf')
-      pcall(require('telescope').load_extension, 'ui-select')
-      -- WARNING: If you do this in the after for luasnip entry above, you get
-      -- a stack overflow
       pcall(require('telescope').load_extension, 'luasnip')
-      pcall(require('telescope').load_extension, 'toggleterm')
-      pcall(require('telescope').load_extension, 'zoxide')
       pcall(require('telescope').load_extension, 'resession')
+      pcall(require('telescope').load_extension, 'scope')
+      pcall(require('telescope').load_extension, 'toggleterm')
+      pcall(require('telescope').load_extension, 'ui-select')
+      pcall(require('telescope').load_extension, 'zoxide')
 
       vim.api.nvim_create_user_command('LiveGrepGitRoot', live_grep_git_root, {})
     end,
