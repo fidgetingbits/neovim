@@ -1,5 +1,6 @@
 return {
   'toggleterm.nvim',
+  enabled = nixInfo(false, 'settings', 'terminalMode'),
   after = function()
     require('toggleterm').setup({
       hide_numbers = false, -- I want to control this myself
