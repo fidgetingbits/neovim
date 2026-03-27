@@ -86,6 +86,14 @@ vim.keymap.set('i', 'jk', '<ESC>:w<CR>', {noremap=true, silent=true})
 -- From: https://github.com/theopn/dotfiles/blob/c96a769b/vim/.vimrc
 vim.keymap.set({"i", "n", "o"}, "<C-s>", "<C-g>u<ESC>[s1z=`]a<C-g>u", { desc = "Auto-spell correct"})
 
+-- sudo save
+vim.keymap.set(
+    'c',
+    'w!!',
+    '<cmd>w !sudo tee > /dev/null %<cr>',
+    { desc = '`sudo save` privileged files' }
+  )
+
 -- Paste yanked line without line breaks before/after cursor position
 -- nnoremap gP i<CR><Esc>PkJxJx
 -- nnoremap gp a<CR><Esc>PkJxJx
