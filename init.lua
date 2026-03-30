@@ -7,6 +7,8 @@ vim.g.maplocalleader = ' '
 vim.g.colorscheme = 'catppuccin'
 -- vim.g.colorscheme = 'miasma'
 
+-- In order to keep our folders clean, we add runtime folders to allow luasnip
+-- to find our snippets lazily.
 vim.opt.runtimepath:prepend(vim.fn.fnamemodify('./snippets', ':p'))
 vim.opt.runtimepath:prepend(vim.fn.fnamemodify('./snippets/vscode', ':p'))
 
@@ -14,20 +16,7 @@ vim.opt.runtimepath:prepend(vim.fn.fnamemodify('./snippets/vscode', ':p'))
 -- so have introdus set things up for us
 local introdus_config = os.getenv('NVIM_BASE_CONFIG')
 if introdus_config then
-  -- Prepend so B's lua/ directory is searchable immediately
-  vim.opt.rtp:prepend(introdus_config)
-  -- FIXME: This would be nice if the snippets were a plugin auto-added to rtp
-  vim.opt.rtp:prepend(introdus_config .. '/snippets')
-  vim.opt.rtp:prepend(introdus_config .. '/snippets/vscode')
-
-  -- Prepend to packpath so B's plugins (if any) are found
-  vim.opt.packpath:prepend(introdus_config)
-
-  -- Handle the 'after' directory correctly
-  local introdus_after = introdus_config .. '/after'
-  if vim.fn.isdirectory(introdus_after) == 1 then
-    vim.opt.rtp:append(introdus_after)
-  end
+  vim.opt.runtimepath:prepend(introdus_config)
   require('introdus')
 else
   print([[ERROR: This config cannot run without introdus. 
