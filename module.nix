@@ -16,8 +16,7 @@ in
   # Extend the introdus neovim template with any additional functionality we want
   config = {
     settings = {
-      extraConfig = "${inputs.introdus}/wrappers/neovim";
-      # unwrappedConfig = lib.mkOverride 100 (
+      baseConfig = "${inputs.introdus}/wrappers/neovim";
       # unwrappedConfig = lib.mkForce (
       #   lib.generators.mkLuaInline # lua
       #     "vim.uv.os_homedir() .. '${configDir}'"
@@ -66,8 +65,6 @@ in
             ;
         };
       };
-
     };
-
   };
 }

@@ -1,6 +1,5 @@
 local MP = ...
 return {
-  { import = MP:relpath('better-n') },
   { import = MP:relpath('undotree') },
   { import = MP:relpath('cutlass') },
   {

@@ -7,12 +7,18 @@ vim.g.maplocalleader = ' '
 vim.g.colorscheme = 'catppuccin'
 -- vim.g.colorscheme = 'miasma'
 
+vim.opt.runtimepath:prepend(vim.fn.fnamemodify('./snippets', ':p'))
+vim.opt.runtimepath:prepend(vim.fn.fnamemodify('./snippets/vscode', ':p'))
+
 -- This config is derived from the introdus neovim wrapper
 -- so have introdus set things up for us
 local introdus_config = os.getenv('NVIM_BASE_CONFIG')
 if introdus_config then
   -- Prepend so B's lua/ directory is searchable immediately
   vim.opt.rtp:prepend(introdus_config)
+  -- FIXME: This would be nice if the snippets were a plugin auto-added to rtp
+  vim.opt.rtp:prepend(introdus_config .. '/snippets')
+  vim.opt.rtp:prepend(introdus_config .. '/snippets/vscode')
 
   -- Prepend to packpath so B's plugins (if any) are found
   vim.opt.packpath:prepend(introdus_config)
@@ -25,7 +31,7 @@ if introdus_config then
   require('introdus')
 else
   print([[ERROR: This config cannot run without introdus. 
-      Use settings.extraConfig in your wrapper to specify the introdus path]])
+      Use settings.baseConfig in your wrapper to specify the introdus path]])
 end
 
 -- NOTE: See https://codeberg.org/fidgetingbits/introdus/src/branch/aa/wrappers/neovim/
