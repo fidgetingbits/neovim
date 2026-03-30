@@ -2,6 +2,44 @@
 {
   description = "Fidgeting Neovim";
 
+  outputs =
+    {
+      self,
+      nixpkgs,
+      wrappers,
+      flake-parts,
+      introdus,
+      ...
+    }@inputs:
+    let
+      lib = nixpkgs.lib;
+    in
+    flake-parts.lib.mkFlake { inherit inputs; } {
+      imports = [ wrappers.flakeModules.wrappers ];
+      systems = nixpkgs.lib.platforms.all;
+
+      perSystem =
+        { pkgs, config, ... }:
+        {
+          packages = {
+            full = config.packages.neovim.wrap {
+              settings = {
+                devMode = true;
+                neovide = true;
+                terminalMode = true;
+                unwrappedConfig = "/home/aa/dev/nix/neovim";
+                baseConfig = lib.mkForce "/home/aa/dev/nix/introdus/aa/wrappers/neovim";
+              };
+            };
+          };
+        };
+
+      flake.wrappers = {
+        neovim = lib.modules.importApply ./module.nix (inputs // introdus.inputs);
+        default = self.wrapperModules.neovim;
+      };
+    };
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     wrappers = {
@@ -34,41 +72,4 @@
       flake = false;
     };
   };
-
-  outputs =
-    {
-      self,
-      nixpkgs,
-      wrappers,
-      flake-parts,
-      introdus,
-      ...
-    }@inputs:
-    let
-      lib = nixpkgs.lib;
-    in
-    flake-parts.lib.mkFlake { inherit inputs; } {
-      imports = [ wrappers.flakeModules.wrappers ];
-      systems = nixpkgs.lib.platforms.all;
-
-      perSystem =
-        { pkgs, config, ... }:
-        {
-          packages = {
-            full = config.packages.neovim.wrap {
-              settings = {
-                devMode = true;
-                neovide = true;
-                terminalMode = true;
-                unwrappedConfig = "/home/aa/dev/nix/neovim";
-              };
-            };
-          };
-        };
-
-      flake.wrappers = {
-        neovim = lib.modules.importApply ./module.nix (inputs // introdus.inputs);
-        default = self.wrapperModules.neovim;
-      };
-    };
 }
