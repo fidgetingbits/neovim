@@ -39,6 +39,9 @@ vim.keymap.set('i', '<C-v>', '<C-r><C-p>+',
 vim.keymap.set("x", "<leader>P", '"_dP',
   { noremap = true, silent = true, desc = '[P]aste over selection without erasing unnamed register' })
 
+vim.keymap.set({ "n", "o", }, 'gP', "i<CR><Esc>PkJxJx", { desc = "Paste line without breaks before cursor"} )
+vim.keymap.set({ "n", "o", }, 'gp', "a<CR><Esc>PkJxJx", { desc = "Paste line without breaks after cursor"} )
+
 --
 -- [[ LSP ]]
 --
@@ -46,11 +49,6 @@ vim.keymap.set("x", "<leader>P", '"_dP',
 local l = "<leader>l"
 vim.keymap.set("n", l .. "x", vim.cmd.LspStop,  { desc = 'Turn of LSP' })
 vim.keymap.set("n", l .. "o", vim.cmd.LspStart, { desc = 'Turn on LSP' })
-
---  If we want to do this from insert mode we need a non-leader one, as it fucks up using space
-local tab_navigation = require('better-n').create({ next = function() tab_move("right") end, prev = function() tab_move("left") end })
-vim.keymap.set(nv, l .. "H",  tab_navigation.prev_key, { desc = 'Move tab to left' })
-vim.keymap.set(nv, l .. "L",  tab_navigation.next_key, { desc = 'Move tab to right' })
 
 --
 -- [[ Notifications ]]
@@ -93,9 +91,5 @@ vim.keymap.set(
     '<cmd>w !sudo tee > /dev/null %<cr>',
     { desc = '`sudo save` privileged files' }
   )
-
--- Paste yanked line without line breaks before/after cursor position
--- nnoremap gP i<CR><Esc>PkJxJx
--- nnoremap gp a<CR><Esc>PkJxJx
 
 -- stylua: ignore end
