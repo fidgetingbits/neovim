@@ -97,8 +97,8 @@
         "wrappers": "wrappers"
       },
       "locked": {
-        "lastModified": 1774577007,
-        "narHash": "sha256-J0jMRiKs/X0VU/0R3Mi6QKpGSaXrPdhvnYvm+d5b1J0=",
+        "lastModified": 1774838626,
+        "narHash": "sha256-KTOlMl+W6ulTOdq3cGPrGIbRVbPsTITTbypWBx2RCN8=",
         "path": "/home/aa/dev/nix/introdus/aa",
         "type": "path"
       },
