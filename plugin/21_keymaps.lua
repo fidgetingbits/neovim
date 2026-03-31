@@ -65,7 +65,7 @@ vim.keymap.set("n", "<Esc>", dismiss_all, { desc = "Dismiss all notifications an
 vim.keymap.set({ "v", "n", "t", "c"}, "<A-e>", dismiss_all, { desc = "Dismiss all notifications and clear hlsearch" })
 
 vim.keymap.set("n", "<leader>ts", function() vim.opt.spell = not vim.opt.spell:get() end, { desc = "Toggle spell checking" })
--- FIXME: add toggle for numbers
+-- FIXME: add toggle for numbers, listchars, 
 
 
 vim.keymap.set('n', "<leader><leader>t", vim.cmd.InspectTree, { desc = "Treesitter inspection" })
