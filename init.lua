@@ -9,8 +9,10 @@ vim.g.colorscheme = 'catppuccin'
 
 -- In order to keep our folders clean, we add runtime folders to allow luasnip
 -- to find our snippets lazily.
-vim.opt.runtimepath:prepend(vim.fn.fnamemodify('./snippets', ':p'))
-vim.opt.runtimepath:prepend(vim.fn.fnamemodify('./snippets/vscode', ':p'))
+local path = debug.getinfo(1, 'S').source:sub(2)
+local dir = vim.fn.fnamemodify(path, ':h')
+vim.opt.rtp:prepend(dir .. '/snippets/')
+vim.opt.rtp:prepend(dir .. '/snippets/vscode')
 
 -- This config is derived from the introdus neovim wrapper
 -- so have introdus set things up for us
