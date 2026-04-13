@@ -1,7 +1,6 @@
 local MP = ...
 return {
   { import = MP:relpath('undotree') },
-  { import = MP:relpath('cutlass') },
   {
     'indent-blankline.nvim',
     event = 'DeferredUIEnter',

@@ -1,6 +1,5 @@
 local MP = ...
 return {
-  { import = MP:relpath('hardtime') },
   { import = MP:relpath('lualine') },
   { import = MP:relpath('lua-console') },
   { import = MP:relpath('modes') },
@@ -9,7 +8,6 @@ return {
   { import = MP:relpath('snacks') },
   { import = MP:relpath('tabby') },
   { import = MP:relpath('toggleterm') },
-  { import = MP:relpath('trouble') },
   { import = MP:relpath('which-key') },
   {
     'ansi',

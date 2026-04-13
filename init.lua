@@ -35,10 +35,6 @@ nixInfo.lze.load({
     category = 'ai',
   },
   {
-    import = MP:relpath('completion'),
-    category = 'completion',
-  },
-  {
     import = MP:relpath('editing'),
     category = 'editing',
   },
@@ -51,21 +47,13 @@ nixInfo.lze.load({
     enabled = nixInfo(false, 'settings', 'devMode'),
     category = 'git',
   },
-  -- {
-  --   import = MP:relpath('lsp'),
-  --   category = 'lsp',
-  -- },
+  {
+    import = MP:relpath('lsp'),
+    category = 'lsp',
+  },
   {
     import = MP:relpath('markdown'),
     category = 'markdown',
-  },
-  {
-    import = MP:relpath('search'),
-    category = 'search',
-  },
-  {
-    import = MP:relpath('theme'),
-    category = 'theme',
   },
   {
     import = MP:relpath('ui'),

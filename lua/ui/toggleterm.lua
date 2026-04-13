@@ -5,7 +5,6 @@ return {
     require('toggleterm').setup({
       hide_numbers = false, -- I want to control this myself
       shade_terminals = false, -- Works on open, and then disappears on refocus
-      -- FIXME: Tweak the highlights
     })
     vim.o.hidden = true
 
