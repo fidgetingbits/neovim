@@ -51,9 +51,11 @@ in
           lib.attrValues {
             inherit (pkgs.vimPlugins)
               scope-nvim # Per tabpage-scoped buffers
+              nvim-highlight-colors
               ;
             inherit (config.nvim-lib.neovimPlugins)
               ansi
+              modes
               ;
           }
           ++ lib.optionals config.settings.devMode (

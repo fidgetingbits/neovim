@@ -79,5 +79,10 @@
       url = "github:0xferrous/ansi.nvim";
       flake = false;
     };
+
+    plugins-modes = {
+      url = "github:mvllow/modes.nvim";
+      flake = false;
+    };
   };
 }
