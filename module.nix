@@ -8,6 +8,21 @@ inputs:
 }:
 let
   configDir = "/dev/nix/neovim"; # relative to home
+  # This duplicates introdus, so could just use a function so the files/folders
+  # don't need to keep synced
+  configSource = lib.fileset.toSource {
+    root = ./.;
+    fileset =
+      map (p: lib.optional (builtins.pathExists p) p) [
+        ./init.lua
+        ./lua
+        ./after
+        ./plugin
+        ./snippets
+      ]
+      |> lib.flatten
+      |> lib.fileset.unions;
+  };
 in
 {
   imports = [
@@ -16,11 +31,11 @@ in
   # Extend the introdus neovim template with any additional functionality we want
   config = {
     settings = {
+      # Introdus is the base config we build on
       baseConfig = "${inputs.introdus}/wrappers/neovim";
-      # unwrappedConfig = lib.mkForce (
-      #   lib.generators.mkLuaInline # lua
-      #     "vim.uv.os_homedir() .. '${configDir}'"
-      # );
+      # When not in dev-mode, the neovim-wrapper's /nix/store folder is our
+      # config extending introdus
+      wrappedConfig = "${configSource}";
     };
 
     nvim-lib.pluginInputs = [

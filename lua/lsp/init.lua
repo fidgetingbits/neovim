@@ -73,6 +73,7 @@ return {
       })
     end,
   },
+  -- See introdus for more lsp config
   { import = MP:relpath('bash') },
   { import = MP:relpath('lua') },
   { import = MP:relpath('clang') },

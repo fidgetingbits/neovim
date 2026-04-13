@@ -21,7 +21,7 @@ if introdus_config then
   vim.opt.runtimepath:prepend(introdus_config)
   require('introdus')
 else
-  print([[ERROR: This config cannot run without introdus. 
+  print([[ERROR: This config cannot run without introdus.
       Use settings.baseConfig in your wrapper to specify the introdus path]])
 end
 
@@ -48,6 +48,7 @@ nixInfo.lze.load({
   },
   {
     import = MP:relpath('git'),
+    enabled = nixInfo(false, 'settings', 'devMode'),
     category = 'git',
   },
   -- {

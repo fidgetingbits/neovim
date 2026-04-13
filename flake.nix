@@ -29,8 +29,16 @@
                 terminalMode = true;
                 unwrappedConfig = "/home/aa/dev/nix/neovim";
                 baseConfig = lib.mkForce "/home/aa/dev/nix/introdus/aa/wrappers/neovim";
+                # baseConfig = lib.mkForce "/home/aa/dev/nix/introdus/neovim-shared-config/wrappers/neovim";
               };
             };
+            basic = config.packages.neovim.wrap {
+              settings = {
+                neovide = true;
+
+              };
+            };
+
           };
         };
 
