@@ -47,7 +47,7 @@ vim.keymap.set({ "n", "o", }, 'gp', "a<CR><Esc>PkJxJx", { desc = "Paste line wit
 --
 -- Also see ./../lua/lsp/init.lua
 local l = "<leader>l"
-vim.keymap.set("n", l .. "x", vim.cmd.LspStop,  { desc = 'Turn of LSP' })
+vim.keymap.set("n", l .. "x", vim.cmd.LspStop,  { desc = 'Turn off LSP' })
 vim.keymap.set("n", l .. "o", vim.cmd.LspStart, { desc = 'Turn on LSP' })
 
 --
@@ -65,14 +65,14 @@ vim.keymap.set("n", "<Esc>", dismiss_all, { desc = "Dismiss all notifications an
 vim.keymap.set({ "v", "n", "t", "c"}, "<A-e>", dismiss_all, { desc = "Dismiss all notifications and clear hlsearch" })
 
 vim.keymap.set("n", "<leader>ts", function() vim.opt.spell = not vim.opt.spell:get() end, { desc = "Toggle spell checking" })
--- FIXME: add toggle for numbers, listchars, 
+-- FIXME: add toggle for numbers, listchars,
 
 
 vim.keymap.set('n', "<leader><leader>t", vim.cmd.InspectTree, { desc = "Treesitter inspection" })
 
 --
 -- [[ Experimental ]]
--- 
+--
 -- Stuff I'm trying, but don't know if I'll keep
 vim.keymap.set('i', 'jk', '<ESC>:w<CR>', {noremap=true, silent=true})
 

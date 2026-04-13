@@ -1,3 +1,4 @@
+-- See introdus for more introdus settings
 if vim.g.neovide then
   vim.opt.mouse = 'a'
   -- FIXME: renable for debugging
@@ -65,32 +66,13 @@ if vim.g.neovide then
     showmatch_cursor,
   }, ',')
 
-
   --[[ Neovide keymaps ]]
-  -- stylua: ignore start
-  vim.keymap.set({ 'i', "", "x", "v" }, '<C-S-v>', '<C-r>+',
-    { noremap = true, silent = true, desc = 'Paste from clipboard from within most modes' })
-  -- IMPORTANT: without `silent = false` pasting into cmdline mode won't show up immediately in neovide
-  vim.keymap.set({ 'c', }, '<C-S-v>', '<C-r>+',
-    { noremap = true, silent = false, desc = 'Paste from clipboard from within all modes' })
-  vim.api.nvim_set_keymap('t', '<C-S-v>', '<C-\\><C-n>"+Pi', {noremap = true, silent = true, desc = 'Paste from clipboard from terminal mode'})
-
-  -- Tweak font sizes
-  vim.keymap.set({ "t", "n", "v" }, "<C-+>", function()
-    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1
-  end)
-  vim.keymap.set({ "t", "n", "v" }, "<C-->", function()
-    vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1
-  end)
-  vim.keymap.set({ "t", "n", "v" }, "<C-=>", function()
-    vim.g.neovide_scale_factor = 1
-  end)
 
   -- FIXME:These aren't working yet
-  vim.keymap.set({ "t", "n", "v" }, "<C-ScrollWheelUp>", function()
+  vim.keymap.set({ 't', 'n', 'v' }, '<C-ScrollWheelUp>', function()
     vim.g.neovide_scale_factor = vim.g.neovide_scale_factor + 0.1
   end)
-  vim.keymap.set({ "n", "v" }, "<C-ScrollWheelDown>", function()
+  vim.keymap.set({ 'n', 'v' }, '<C-ScrollWheelDown>', function()
     vim.g.neovide_scale_factor = vim.g.neovide_scale_factor - 0.1
   end)
 
@@ -99,7 +81,8 @@ if vim.g.neovide then
     'n',
     '<LeftMouse>',
     '<LeftMouse><cmd>lua vim.api.nvim_set_current_win(vim.fn.getmousepos().winid)<CR>',
-    { silent = true })
+    { silent = true }
+  )
   -- stylua: ignore end
 
   -- FIXME: This should match a setting that is tied to monitor in the neovim config
