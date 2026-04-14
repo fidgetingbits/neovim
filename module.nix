@@ -73,6 +73,9 @@ in
             }
           );
       };
+      editing = {
+        data = lib.attrValues { inherit (pkgs.vimPlugins) nvim-early-retirement; };
+      };
       theme = {
         data = lib.attrValues {
           inherit (pkgs.vimPlugins)
