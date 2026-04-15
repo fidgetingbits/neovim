@@ -45,6 +45,17 @@ in
 
     # NOTE: Specs are enabled by default
     specs = {
+      ai = {
+        after = [ "ui" ];
+        enable = config.settings.devMode;
+        lazy = true;
+        data = lib.attrValues {
+          inherit (pkgs.vimPlugins)
+            copilot-lua
+            copilot-lsp # NES functionality
+            ;
+        };
+      };
       # Extending existing spec from introdus
       ui = {
         data =

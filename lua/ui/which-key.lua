@@ -11,7 +11,8 @@ return {
           keys = {},
         },
         spec = {
-          { '<leader>b', group = '[b]uffer ' },
+          { '<leader>a', group = '[a]i' },
+          { '<leader>b', group = '[b]uffer' },
           { '<leader>f', group = '[f]ind' },
           { '<leader>F', group = '[F]ormatting' },
           { '<leader>g', group = '[g]it' },
@@ -19,6 +20,7 @@ return {
           { '<leader>l', group = '[l]sp' },
           { '<leader>m', group = '[m]arkdown' },
           { '<leader>n', group = '[n]eotree' },
+          { '<leader>N', group = '[N]otifications' },
           { '<leader>o', group = '[o]bsidian' },
           { '<leader>u', group = '[u]ndotree' },
           { '<leader>s', group = '[s]ession' },
