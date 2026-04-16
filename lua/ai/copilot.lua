@@ -35,6 +35,7 @@ return {
             dismiss = '<Esc>',
           },
         },
+        filetypes = { ['*'] = false },
       })
 
       vim.cmd('silent! Copilot disable')
