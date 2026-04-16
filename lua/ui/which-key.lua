@@ -12,16 +12,18 @@ return {
         },
         spec = {
           -- stylua: ignore start
+          { "<leader>", mode = { "s" }, hidden = true },
           { '<leader>a',  group = '[a]i' },
           { '<leader>ap', group = 'Copilot' },
           { '<leader>b',  group = '[b]uffer' },
-          { '<leader>cc', group = 'CodeCompanion' },
+          { '<leader>c',  group = 'CodeCompanion' },
           { '<leader>f',  group = '[f]ind' },
           { '<leader>F',  group = '[F]ormatting' },
           { '<leader>g',  group = '[g]it' },
           { '<leader>i',  group = '[i]nverse value' },
           { '<leader>l',  group = '[l]sp' },
-          { '<leader>m',  group = '[m]arkdown' },
+          -- { '<leader>m',  group = '[m]arks' }, -- Won't show up due to built-in, but is in use
+          { '<leader>M',  group = '[M]arkdown' },
           { '<leader>n',  group = '[n]eotree' },
           { '<leader>N',  group = '[N]otifications' },
           { '<leader>o',  group = '[o]bsidian' },
@@ -33,6 +35,12 @@ return {
           { '<leader>z',  group = 'folds/zen' },
           { '<leader><leader>', group = 'misc' },
           -- stylua: ignore end
+        },
+        triggers = {
+          { '<auto>', mode = 'nixsotc' },
+          { 'a', mode = 'o' },
+          { 'i', mode = 'o' },
+          { 'm', mode = 'no' },
         },
       })
     end,

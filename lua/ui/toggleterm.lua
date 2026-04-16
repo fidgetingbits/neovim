@@ -9,7 +9,7 @@ return {
     vim.o.hidden = true
 
     -- stylua: ignore start
-    vim.keymap.set( { 'n', 'v', 'i', 't' }, '<A-;>', function() vim.cmd('ToggleTerm size=40 direction=float') end, {})
+    vim.keymap.set( { 'n', 'x', 'i', 't' }, '<A-;>', function() vim.cmd('ToggleTerm size=40 direction=float') end, {})
     -- stylua: ignore end
   end,
 }

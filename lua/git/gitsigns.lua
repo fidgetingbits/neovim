@@ -22,7 +22,7 @@ return {
           end
 
           -- Navigation
-          map({ 'n', 'v' }, ']c', function()
+          map({ 'n', 'x' }, ']c', function()
             if vim.wo.diff then
               return ']c'
             end
@@ -32,7 +32,7 @@ return {
             return '<Ignore>'
           end, { expr = true, desc = 'Jump to next hunk' })
 
-          map({ 'n', 'v' }, '[c', function()
+          map({ 'n', 'x' }, '[c', function()
             if vim.wo.diff then
               return '[c'
             end
@@ -44,10 +44,10 @@ return {
 
           -- Actions
           -- visual mode
-          map('v', '<leader>hs', function()
+          map('x', '<leader>hs', function()
             gs.stage_hunk({ vim.fn.line('.'), vim.fn.line('v') })
           end, { desc = 'stage git hunk' })
-          map('v', '<leader>hr', function()
+          map('x', '<leader>hr', function()
             gs.reset_hunk({ vim.fn.line('.'), vim.fn.line('v') })
           end, { desc = 'reset git hunk' })
           -- normal mode

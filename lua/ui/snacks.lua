@@ -18,7 +18,7 @@ return {
           },
           preset = {
             pick = nil,
-            header = [[ 
+            header = [[
                                    .,
                                    '��i�,   .
                                     l����0�, :.

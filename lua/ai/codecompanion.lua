@@ -25,9 +25,9 @@ return {
   keys = {
     { '<leader>ct', function() vim.cmd("CodeCompanionChat toggle") end, mode = { 'n' }, desc = 'CodeCompanion Chat Toggle' },
     { '<leader>ch', function() vim.cmd("CodeCompanion") end, mode = { 'n' }, desc = 'CodeCompanion Inline Prompt' },
-    { '<leader>cc', function() vim.cmd("CodeCompanionActions") end, mode = { 'n', 'v' }, desc = 'CodeCompanion Actions' },
+    { '<leader>cc', function() vim.cmd("CodeCompanionActions") end, mode = { 'n', 'x' }, desc = 'CodeCompanion Actions' },
     { '<leader>cf', explore_open_chats, mode = { 'n', }, desc = 'CodeCompanion Chats' },
-    { 'ga', function() vim.cmd("CodeCompanionChat add") end, mode = { 'v', }, desc = 'CodeCompanion Add Selection to chat' },
+    { 'ga', function() vim.cmd("CodeCompanionChat add") end, mode = { 'x', }, { noremap = true, desc = 'CodeCompanion Add Selection to chat' }},
   },
   after = function(_plugin)
     require('codecompanion').setup({

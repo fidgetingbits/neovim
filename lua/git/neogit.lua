@@ -9,7 +9,7 @@ return {
         function()
           require('neogit').open({ kind = 'split' })
         end,
-        mode = { 'n', 'v' },
+        mode = { 'n', 'x' },
         desc = 'Open neogit in split',
       },
     },

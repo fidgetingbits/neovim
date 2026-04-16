@@ -40,6 +40,7 @@ return {
 
       vim.cmd('silent! Copilot disable')
 
+      -- FIXME:: these should be in keys
       -- ai, pilot
       local l = '<leader>ap'
       -- stylua: ignore start
