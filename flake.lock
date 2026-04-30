@@ -93,12 +93,13 @@
         "plugins-treesitter-textobjects": "plugins-treesitter-textobjects",
         "plugins-zen-mode": "plugins-zen-mode",
         "pre-commit-hooks": "pre-commit-hooks",
+        "silentSDDM": "silentSDDM",
         "treefmt-nix": "treefmt-nix",
         "wrappers": "wrappers"
       },
       "locked": {
-        "lastModified": 1776315347,
-        "narHash": "sha256-B4D6lAcNXm4iVKvbf9mVYrK7K7fvgPFfn8zSzz1JQpg=",
+        "lastModified": 1777536153,
+        "narHash": "sha256-A5hjrjWAY8AcBc86HiY/zzlQ8PaXIbbajUSRl++BmYw=",
         "path": "/home/aa/dev/nix/introdus/aa",
         "type": "path"
       },
@@ -381,6 +382,27 @@
         "plugins-modes": "plugins-modes",
         "plugins-telescope-toggleterm": "plugins-telescope-toggleterm",
         "wrappers": "wrappers_2"
+      }
+    },
+    "silentSDDM": {
+      "inputs": {
+        "nixpkgs": [
+          "introdus",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1775652648,
+        "narHash": "sha256-mLE7i9r9qenayJ8adWm22SbqUwLuopvRhyoizuZTtyo=",
+        "owner": "uiriansan",
+        "repo": "SilentSDDM",
+        "rev": "a0fb8a48de772c0340dd6639b331ebf6ec2eb554",
+        "type": "github"
+      },
+      "original": {
+        "owner": "uiriansan",
+        "repo": "SilentSDDM",
+        "type": "github"
       }
     },
     "treefmt-nix": {

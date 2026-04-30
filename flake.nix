@@ -35,7 +35,6 @@
             basic = config.packages.neovim.wrap {
               settings = {
                 neovide = true;
-
               };
             };
 

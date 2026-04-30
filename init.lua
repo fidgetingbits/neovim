@@ -9,12 +9,14 @@ vim.g.colorscheme = 'catppuccin'
 
 -- In order to keep our folders clean, we add runtime folders to allow luasnip
 -- to find our snippets lazily.
+-- NOTE: These are snippets in addition to the shared introdus ones, so we still
+-- keep them here
 local path = debug.getinfo(1, 'S').source:gsub('^@', '')
 local dir = vim.fn.fnamemodify(path, ':h')
 vim.opt.rtp:prepend(dir .. '/snippets/')
 vim.opt.rtp:prepend(dir .. '/snippets/vscode')
 
--- This config is derived from the introdus neovim wrapper
+-- This config is derived from the shared introdus neovim wrapper config
 -- so have introdus set things up for us
 local introdus_config = os.getenv('NVIM_BASE_CONFIG')
 if introdus_config then
@@ -25,10 +27,8 @@ else
       Use settings.baseConfig in your wrapper to specify the introdus path]])
 end
 
--- NOTE: See https://codeberg.org/fidgetingbits/introdus/src/branch/aa/wrappers/neovim/
--- for more shared config and plugins
-
--- Load all the plugins/lsps from lua/
+-- Load plugins (from ./lua/) that extend the shared introdus plugins
+-- See https://codeberg.org/fidgetingbits/introdus/src/branch/aa/wrappers/neovim/
 nixInfo.lze.load({
   {
     import = MP:relpath('ai'),

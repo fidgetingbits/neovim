@@ -1,15 +1,16 @@
+# This module extends defaults that are part of the introdus shared wrapper.
+# See https://codeberg.org/fidgetingbits/introdus/src/branch/aa/wrappers/neovim
+# for the shared settings
 inputs:
 {
   config,
-  wlib,
   lib,
   pkgs,
   ...
 }:
 let
-  configDir = "/dev/nix/neovim"; # relative to home
-  # This duplicates introdus, so could just use a function so the files/folders
-  # don't need to keep synced
+  # FIXME: Make this work...
+  # configSource = lib.introdus.neovim.configSource ./.;
   configSource = lib.fileset.toSource {
     root = ./.;
     fileset =
@@ -28,12 +29,12 @@ in
   imports = [
     inputs.introdus.wrapperModules.neovim
   ];
-  # Extend the introdus neovim template with any additional functionality we want
+
   config = {
     settings = {
-      # Introdus is the base config we build on
+      # Introdus as the base config
       baseConfig = "${inputs.introdus}/wrappers/neovim";
-      # When not in dev-mode, the neovim-wrapper's /nix/store folder is our
+      # When not in using hot reloading, this flakes /nix/store folder is the
       # config extending introdus
       wrappedConfig = "${configSource}";
     };
@@ -45,17 +46,21 @@ in
 
     # NOTE: Specs are enabled by default
     specs = {
+
+      # LLM tooling
       ai = {
         after = [ "ui" ];
         enable = config.settings.devMode;
         lazy = true;
         data = lib.attrValues {
           inherit (pkgs.vimPlugins)
+            codecompanion-spinner-nvim
             copilot-lua
             copilot-lsp # NES functionality
             ;
         };
       };
+
       # Extending existing spec from introdus
       ui = {
         data =

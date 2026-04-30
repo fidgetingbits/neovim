@@ -2,7 +2,7 @@
 default:
     @just --list
 
-test:
+neovide:
     nix flake update introdus && \
     nix build .#full && \
     result/bin/nvim-neovide

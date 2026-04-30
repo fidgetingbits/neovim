@@ -1,7 +1,7 @@
 -- stylua: ignore start
 
-local nv  = { "n", "v" }
-local nvi = { "n", "v", "i" }
+local nv  = { "n", "x" }
+local nvi = { "n", "x", "i" }
 
 --
 -- [[ Quality of Life ]]
@@ -69,6 +69,18 @@ vim.keymap.set("n", "<leader>ts", function() vim.opt.spell = not vim.opt.spell:g
 
 
 vim.keymap.set('n', "<leader><leader>t", vim.cmd.InspectTree, { desc = "Treesitter inspection" })
+
+
+--
+-- [[ Search and replace ]]
+--
+-- substitute current word
+vim.keymap.set(
+  'n',
+  '<leader>sr',
+  ':%s/<c-r><c-w>//g<left><left>',
+  { desc = 'substitute the word you are currently on' }
+)
 
 --
 -- [[ Experimental ]]

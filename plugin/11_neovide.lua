@@ -1,6 +1,7 @@
 -- See introdus for more introdus settings
 if vim.g.neovide then
-  vim.opt.mouse = 'a'
+  vim.o.mouse = 'a'
+
   -- FIXME: renable for debugging
   -- vim.api.nvim_create_autocmd('OptionSet', {
   --   pattern = 'mouse',
@@ -43,7 +44,7 @@ if vim.g.neovide then
 
   vim.g.neovide_cursor_smooth_blink = true
 
-  vim.g.neovide_hide_mouse_when_typing = true
+  -- vim.g.neovide_hide_mouse_when_typing = true
 
   -- FIXME: tweak this. maybe use outside of terminal too
   local blink = 'blinkwait777-blinkon1111-blinkoff666-Cursor'

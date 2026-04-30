@@ -23,14 +23,19 @@ return {
   cmd = { 'CodeCompanion', 'CodeCompanionChat', 'CodeCompanionCmd', 'CodeCompanionActions' },
   -- stylua: ignore
   keys = {
+    -- Use an extra alt-one for toggling since chat is often in insert mode
+    { '<A-c>', function() vim.cmd("CodeCompanionChat toggle") end, mode = { 'n' }, desc = 'CodeCompanion Chat Toggle' },
     { '<leader>ct', function() vim.cmd("CodeCompanionChat toggle") end, mode = { 'n' }, desc = 'CodeCompanion Chat Toggle' },
     { '<leader>ch', function() vim.cmd("CodeCompanion") end, mode = { 'n' }, desc = 'CodeCompanion Inline Prompt' },
     { '<leader>cc', function() vim.cmd("CodeCompanionActions") end, mode = { 'n', 'x' }, desc = 'CodeCompanion Actions' },
-    { '<leader>cf', explore_open_chats, mode = { 'n', }, desc = 'CodeCompanion Chats' },
+    { '<leader>cf', explore_open_chats, mode = { 'n', }, desc = 'CodeCompanion Find Chats' },
     { 'ga', function() vim.cmd("CodeCompanionChat add") end, mode = { 'x', }, { noremap = true, desc = 'CodeCompanion Add Selection to chat' }},
   },
   after = function(_plugin)
     require('codecompanion').setup({
+      extensions = {
+        spinner = {},
+      },
       strategies = {
         chat = {
           adapter = 'copilot',
@@ -66,5 +71,10 @@ return {
         },
       },
     })
+    -- Expand cc in commandline mode
+    vim.cmd.cab('cc CodeCompanion')
+
+    -- Noice notification pop-up during CodeCompanion commands
+    require('ai.extensions.companion-notification').init()
   end,
 }
