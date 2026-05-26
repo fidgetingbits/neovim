@@ -4,6 +4,7 @@ return {
   { import = MP:relpath('lua-console') },
   { import = MP:relpath('modes') },
   { import = MP:relpath('neo-tree') },
+  { import = MP:relpath('neov-ime') },
   { import = MP:relpath('notifications') },
   { import = MP:relpath('snacks') },
   { import = MP:relpath('tabby') },

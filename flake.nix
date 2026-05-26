@@ -83,5 +83,10 @@
       url = "github:mvllow/modes.nvim";
       flake = false;
     };
+
+    plugins-neov-ime = {
+      url = "github:sevenc-nanashi/neov-ime.nvim";
+      flake = false;
+    };
   };
 }

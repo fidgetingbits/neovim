@@ -64,6 +64,14 @@ in
       # Extending existing spec from introdus
       ui = {
         data =
+          let
+            # Remove the broken help tags hook
+            fixedNeovIme = config.nvim-lib.neovimPlugins.neov-ime.overrideAttrs (oldAttrs: {
+              preFixup = ''
+                rm -rf $out/doc
+              '';
+            });
+          in
           lib.attrValues {
             inherit (pkgs.vimPlugins)
               scope-nvim # Per tabpage-scoped buffers
@@ -74,6 +82,7 @@ in
               modes
               ;
           }
+          ++ [ fixedNeovIme ]
           ++ lib.optionals config.settings.devMode (
             lib.attrValues {
               inherit (config.nvim-lib.neovimPlugins)

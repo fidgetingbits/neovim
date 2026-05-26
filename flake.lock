@@ -98,8 +98,8 @@
         "wrappers": "wrappers"
       },
       "locked": {
-        "lastModified": 1777536153,
-        "narHash": "sha256-A5hjrjWAY8AcBc86HiY/zzlQ8PaXIbbajUSRl++BmYw=",
+        "lastModified": 1779352700,
+        "narHash": "sha256-b9BStRN9BoBzAgpCLyPgRUAnagLER5fZHrqffF/aXXo=",
         "path": "/home/aa/dev/nix/introdus/aa",
         "type": "path"
       },
@@ -233,6 +233,22 @@
       "original": {
         "owner": "mvllow",
         "repo": "modes.nvim",
+        "type": "github"
+      }
+    },
+    "plugins-neov-ime": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1776904381,
+        "narHash": "sha256-7jK1g1WRXz9fh4nR4x3aG0UZJ4qwEtWuBjrN+K5UbEE=",
+        "owner": "sevenc-nanashi",
+        "repo": "neov-ime.nvim",
+        "rev": "dbfb6d8cd8da0fa74ecf8ef8984f793910b7f874",
+        "type": "github"
+      },
+      "original": {
+        "owner": "sevenc-nanashi",
+        "repo": "neov-ime.nvim",
         "type": "github"
       }
     },
@@ -380,6 +396,7 @@
         "plugins-ansi": "plugins-ansi",
         "plugins-lua-console": "plugins-lua-console",
         "plugins-modes": "plugins-modes",
+        "plugins-neov-ime": "plugins-neov-ime",
         "plugins-telescope-toggleterm": "plugins-telescope-toggleterm",
         "wrappers": "wrappers_2"
       }
