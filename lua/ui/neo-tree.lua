@@ -12,6 +12,12 @@ return {
             end,
           },
         },
+        filesystem = {
+          filtered_items = {
+            -- Don't bother parsing lock files
+            never_show_by_pattern = { 'locks/*.lock' },
+          },
+        },
       })
       vim.keymap.set(
         'n',
