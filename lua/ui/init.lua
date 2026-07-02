@@ -2,6 +2,7 @@ local MP = ...
 return {
   { import = MP:relpath('lualine') },
   { import = MP:relpath('lua-console') },
+  { import = MP:relpath('marks') },
   { import = MP:relpath('modes') },
   { import = MP:relpath('neo-tree') },
   { import = MP:relpath('neov-ime') },
@@ -9,7 +10,6 @@ return {
   { import = MP:relpath('snacks') },
   { import = MP:relpath('tabby') },
   { import = MP:relpath('toggleterm') },
-  { import = MP:relpath('which-key') },
   {
     'ansi',
     lazy = false,

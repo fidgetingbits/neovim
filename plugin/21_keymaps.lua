@@ -94,7 +94,7 @@ vim.keymap.set('i', 'jk', '<ESC>:w<CR>', {noremap=true, silent=true})
 -- 3. Return to after last text changed
 -- 4. Set undo breakpoint
 -- From: https://github.com/theopn/dotfiles/blob/c96a769b/vim/.vimrc
-vim.keymap.set({"i", "n", "o"}, "<C-s>", "<C-g>u<ESC>[s1z=`]a<C-g>u", { desc = "Auto-spell correct"})
+vim.keymap.set({"i", "n", "o"}, "<C-S-s>", "<C-g>u<ESC>[s1z=`]a<C-g>u", { desc = "Auto-spell correct"})
 
 -- sudo save
 vim.keymap.set(
@@ -103,5 +103,30 @@ vim.keymap.set(
     '<cmd>w !sudo tee > /dev/null %<cr>',
     { desc = '`sudo save` privileged files' }
   )
+
+-- This lets you do something like "paste inside next string" using mini.ai motions
+_G.paste_operator = function(type)
+  local start_mark = vim.api.nvim_buf_get_mark(0, '[')
+  local end_mark = vim.api.nvim_buf_get_mark(0, ']')
+
+  -- Use the unnamed/clipboard register (or modify to standard '"')
+  local reg_content = vim.fn.getreg('"')
+  local reg_type = vim.fn.getregtype('"')
+
+  -- Replace the region selected by the motion with the register content
+  vim.api.nvim_buf_set_text(
+    0,
+    start_mark[1] - 1,
+    start_mark[2],
+    end_mark[1] - 1,
+    end_mark[2] + 1,
+    vim.split(reg_content, '\n')
+  )
+end
+
+vim.keymap.set('n', '<leader>p', function()
+  vim.o.operatorfunc = 'v:lua.paste_operator'
+  return 'g@'
+end, { expr = true, desc = "Paste over motion" })
 
 -- stylua: ignore end

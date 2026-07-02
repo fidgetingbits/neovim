@@ -55,8 +55,9 @@ in
         data = lib.attrValues {
           inherit (pkgs.vimPlugins)
             codecompanion-spinner-nvim
-            copilot-lua
-            copilot-lsp # NES functionality
+            minuet-ai-nvim # Auto-complete aka Next Edit Suggestion (NES) / Fill In The Middle (FIM)
+            # copilot-lua
+            # copilot-lsp # NES functionality
             ;
         };
       };
@@ -74,8 +75,9 @@ in
           in
           lib.attrValues {
             inherit (pkgs.vimPlugins)
-              scope-nvim # Per tabpage-scoped buffers
+              marks-nvim
               nvim-highlight-colors
+              scope-nvim # Per tabpage-scoped buffers
               ;
             inherit (config.nvim-lib.neovimPlugins)
               ansi
