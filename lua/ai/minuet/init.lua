@@ -81,10 +81,10 @@ return {
 
       -- FIXME: Make this a telescope selector for swapping the provider out
       vim.api.nvim_create_user_command('MinuetProvider', function(opts)
-        local p = require('ai.minuet_providers').configs[opts.args]
+        local p = require('ai.minuet.providers').configs[opts.args]
         if p then
           local provider = vim.tbl_extend('force', require('minuet').config[p.type], p)
-          provider.optional = fim_optionals
+          provider.optional = fim_optional
           -- Copy in the table as provider_options
           require('minuet').config[p.type] = provider
           print('Switched to provider: ' .. opts.args)
@@ -93,7 +93,7 @@ return {
         nargs = 1,
         complete = function()
           local providers = {}
-          for key, _ in pairs(require('minuet_providers').configs) do
+          for key, _ in pairs(require('ai.minuet.providers').configs) do
             providers[#providers + 1] = key
           end
           return providers

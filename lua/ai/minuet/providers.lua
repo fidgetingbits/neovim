@@ -13,7 +13,7 @@ return {
       type = 'openai_fim_compatible',
       default = 'coder',
       models = {
-        coder = 'fim:qwen-1.5b',
+        coder = 'Qwen 2.5 Coder 1.5B (Ultra Light)',
       },
 
       -- minuet provider_options
@@ -37,7 +37,7 @@ return {
       type = 'openai_fim_compatible',
       default = 'coder',
       models = {
-        coder = 'qwen3.6-27b:latest',
+        coder = 'Qwen 3.6 General 35B Q4 (Light)',
       },
 
       -- minuet provider_options
