@@ -55,9 +55,8 @@ in
         data = lib.attrValues {
           inherit (pkgs.vimPlugins)
             codecompanion-spinner-nvim
-            minuet-ai-nvim # Auto-complete aka Next Edit Suggestion (NES) / Fill In The Middle (FIM)
-            # copilot-lua
-            # copilot-lsp # NES functionality
+            codecompanion-history-nvim
+            minuet-ai-nvim # Agent-assisted auto-complete (Fill-in-the-middle)
             ;
         };
       };

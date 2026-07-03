@@ -56,6 +56,10 @@ nixInfo.lze.load({
     category = 'markdown',
   },
   {
+    import = MP:relpath('theme'),
+    category = 'theme',
+  },
+  {
     import = MP:relpath('ui'),
     category = 'ui',
   },
