@@ -30,6 +30,10 @@ return {
         end,
         suffix = false,
       },
+      optional = {
+        max_tokens = 256,
+        stop = { '\n\n' },
+      },
     },
 
     oedo = {
@@ -37,7 +41,7 @@ return {
       type = 'openai_fim_compatible',
       default = 'coder',
       models = {
-        coder = 'Qwen 3.6 General 35B Q4 (Light)',
+        coder = 'Qwen 3.6 General 35B Q8 (Light)',
       },
 
       -- minuet provider_options
@@ -62,9 +66,7 @@ return {
       name = 'openrouter',
       type = 'openai_compatible',
       models = {
-        coder = 'qwen/qwen3-coder:free', -- best free coding model, 256k-1M ctx
-        reasoning = 'deepseek/deepseek-v4-flash:free', -- strong reasoning, 1M ctx
-        agentic = 'nvidia/nemotron-3-ultra:free', -- 1M ctx agentic tasks
+        coder = 'google/gemma-4-31b-it:free',
       },
 
       -- minuet provider_options

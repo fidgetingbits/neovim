@@ -2,8 +2,8 @@ return function()
   return require('codecompanion.adapters').extend('openai_compatible', {
     schema = {
       model = {
-        default = 'Qwen 3.6 Coder 30B (Light)',
-        name = 'qwen3-coder',
+        default = 'Qwen 3.6 General 35B Q8 (Light)',
+        name = 'qwen3.6:35b-a3b-mtp-q8',
       },
     },
     env = {

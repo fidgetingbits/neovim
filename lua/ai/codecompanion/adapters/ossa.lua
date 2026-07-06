@@ -2,8 +2,9 @@ return function()
   return require('codecompanion.adapters').extend('openai_compatible', {
     schema = {
       model = {
-        default = 'fim:qwen-1.5',
-        name = 'qwen-1.5',
+
+        default = 'Qwen 2.5 Coder 1.5B (Ultra Light)',
+        name = 'qwen2.6:coder-1.5b',
       },
     },
     env = {

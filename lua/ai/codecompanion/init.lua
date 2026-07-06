@@ -127,6 +127,7 @@ return {
                 },
               },
             },
+            -- Show the LLM server and selected model in the chat
             roles = {
               llm = function(adapter)
                 local adapter_name = adapter.name or 'CodeCompanion'
