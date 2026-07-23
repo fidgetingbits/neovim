@@ -23,11 +23,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1778716662,
-        "narHash": "sha256-m1Yf0wZ8j1OHjTc2UwHwyQRSnNeSgLJOd7q5Y45hzi4=",
+        "lastModified": 1782949081,
+        "narHash": "sha256-vp6Y/Grm98ESt6ceOkWiHWyZRDV3J1RID4w+6NWK9yA=",
         "owner": "hercules-ci",
         "repo": "flake-parts",
-        "rev": "f7c1a2d347e4c52d5fb8d10cb4d94b5884e546fb",
+        "rev": "17c9d6cdfc60c64f4ee8d306f9bc0b4ccb51481e",
         "type": "github"
       },
       "original": {
@@ -99,7 +99,7 @@
         "wrappers": "wrappers"
       },
       "locked": {
-        "lastModified": 1783061509,
+        "lastModified": 1783570034,
         "narHash": "sha256-4Wvj6tmN2IRBc5kRSOvdZTmzRTf8juMlY53SKq0xjGs=",
         "path": "/home/aa/dev/nix/introdus/aa",
         "type": "path"
@@ -159,11 +159,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1780930886,
-        "narHash": "sha256-rppURzHviaQN131F+nLiLdGfcb0uCd9gGP0E5+iw9MI=",
+        "lastModified": 1784555310,
+        "narHash": "sha256-/FCliTPgiuV1owejZFNx3Ch9irdvkOfOFl+HHZ+DrtM=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "8c3cede7ddc26bd659d2d383b5610efbd2c7a16e",
+        "rev": "421eebfd0ec7bccd4abe826ce62d7e6e83129493",
         "type": "github"
       },
       "original": {
@@ -176,11 +176,11 @@
     "plugins-ansi": {
       "flake": false,
       "locked": {
-        "lastModified": 1775672651,
-        "narHash": "sha256-BIf3gXwVwtNFSZdGjdLqboKCwzviKJefe3zjwvUn5GA=",
+        "lastModified": 1782266429,
+        "narHash": "sha256-GrU7Q6ZTzSWnZaNoU+yh2BDYweY6RQx6p+RNNvGx8nY=",
         "owner": "0xferrous",
         "repo": "ansi.nvim",
-        "rev": "95de464c315ecbe9d7ca3d9a203ef85def0cf6aa",
+        "rev": "195b64c3da1c22c2e95648dcbdc6ed075d507064",
         "type": "github"
       },
       "original": {
@@ -489,11 +489,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780661205,
-        "narHash": "sha256-3F5DixT3Gk91lBI9E+TGMm0ko5HrRbDiL23di16TJGA=",
+        "lastModified": 1782135443,
+        "narHash": "sha256-vAmbArdCyjqpVW+37aCy/PMBOLIqukUXLQuEKLwUhA4=",
         "owner": "BirdeeHub",
         "repo": "nix-wrapper-modules",
-        "rev": "8dd304c3582ddd339217e1cc5fb53f50acb63c2d",
+        "rev": "6e7f66fa2cdf4d63162580b438f7fcf87c28a46f",
         "type": "github"
       },
       "original": {
