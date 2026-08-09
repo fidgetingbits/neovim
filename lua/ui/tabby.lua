@@ -4,7 +4,7 @@ return {
   after = function(plugin)
     require('tabby').setup({
       preset = 'tab_only',
-      lualine_theme = 'catppuccin',
+      lualine_theme = vim.g.colorscheme,
     })
   end,
 }

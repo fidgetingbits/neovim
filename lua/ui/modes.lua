@@ -1,7 +1,8 @@
 return {
   'modes',
   event = 'VimEnter',
-  after = function(plugin)
+  after = function(_)
+    -- FIXME: This should be made generic assume get_pallete is used by other plugins
     local colors = require('catppuccin.palettes').get_palette()
     require('modes').setup({
       colors = {

@@ -47,7 +47,7 @@ in
     # NOTE: Specs are enabled by default
     specs = {
 
-      # LLM tooling
+      # LAM tooling
       ai = {
         after = [ "ui" ];
         enable = config.settings.devMode;
@@ -56,7 +56,7 @@ in
           inherit (pkgs.vimPlugins)
             codecompanion-spinner-nvim
             codecompanion-history-nvim
-            minuet-ai-nvim # Agent-assisted auto-complete (Fill-in-the-middle)
+            minuet-ai-nvim # Agent-assisted auto-complete
             ;
         };
       };
@@ -81,6 +81,7 @@ in
             inherit (config.nvim-lib.neovimPlugins)
               ansi
               modes
+              haunt
               ;
           }
           ++ [ fixedNeovIme ]
@@ -105,6 +106,7 @@ in
       theme = {
         data = lib.attrValues {
           inherit (pkgs.vimPlugins)
+            kanagawa-nvim
             catppuccin-nvim
             miasma-nvim
             lush-nvim

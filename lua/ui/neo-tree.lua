@@ -4,6 +4,7 @@ return {
     event = 'DeferredUIEnter',
     after = function(plugin)
       require('neo-tree').setup({
+
         event_handlers = {
           {
             event = 'neo_tree_buffer_enter',
@@ -14,6 +15,9 @@ return {
         },
         filesystem = {
           filtered_items = {
+            -- Sometimes I .gitignore public/ folder with peoples repos,
+            -- but still want to browse them
+            hide_gitignored = false,
             -- Don't bother parsing lock files
             never_show_by_pattern = { 'locks/*.lock' },
           },

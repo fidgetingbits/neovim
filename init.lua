@@ -5,6 +5,7 @@ local MP = ''
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 vim.g.colorscheme = 'catppuccin'
+-- vim.g.colorscheme = 'kanagawa'
 -- vim.g.colorscheme = 'miasma'
 
 -- In order to keep our folders clean, we add runtime folders to allow luasnip

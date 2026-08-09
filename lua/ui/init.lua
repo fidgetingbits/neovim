@@ -1,5 +1,6 @@
 local MP = ...
 return {
+  { import = MP:relpath('haunt') },
   { import = MP:relpath('lualine') },
   { import = MP:relpath('lua-console') },
   { import = MP:relpath('marks') },

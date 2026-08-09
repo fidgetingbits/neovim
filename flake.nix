@@ -88,5 +88,9 @@
       url = "github:sevenc-nanashi/neov-ime.nvim";
       flake = false;
     };
+    plugins-haunt = {
+      url = "github:TheNoeTrevino/haunt.nvim";
+      flake = false;
+    };
   };
 }

@@ -77,8 +77,8 @@
         "wrappers": "wrappers"
       },
       "locked": {
-        "lastModified": 1785988853,
-        "narHash": "sha256-Ek4RGQb1Bv/zH9/7AolfSoLP5kNTzLIUugtoE+3L8FY=",
+        "lastModified": 1786078989,
+        "narHash": "sha256-9tbRuxxyIHgU5k0Ed/bwq0vxIxMJuZGLokrT9I0ilAs=",
         "path": "/home/aa/dev/nix/introdus/aa",
         "type": "path"
       },
@@ -180,6 +180,22 @@
       "original": {
         "owner": "yutkat",
         "repo": "confirm-quit.nvim",
+        "type": "github"
+      }
+    },
+    "plugins-haunt": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1780801661,
+        "narHash": "sha256-MieiFpcuTgNAJOBoflIMfzipxat49dGusEoFFS81/hg=",
+        "owner": "TheNoeTrevino",
+        "repo": "haunt.nvim",
+        "rev": "be28256ec96d39bf3951966b72c7b34519019993",
+        "type": "github"
+      },
+      "original": {
+        "owner": "TheNoeTrevino",
+        "repo": "haunt.nvim",
         "type": "github"
       }
     },
@@ -389,6 +405,7 @@
         "introdus": "introdus",
         "nixpkgs": "nixpkgs_2",
         "plugins-ansi": "plugins-ansi",
+        "plugins-haunt": "plugins-haunt",
         "plugins-lua-console": "plugins-lua-console",
         "plugins-modes": "plugins-modes",
         "plugins-neov-ime": "plugins-neov-ime",
