@@ -9,6 +9,7 @@
       wrappers,
       flake-parts,
       introdus,
+      neovim-nightly-overlay,
       ...
     }@inputs:
     let
@@ -19,10 +20,15 @@
       systems = nixpkgs.lib.platforms.all;
 
       perSystem =
-        { pkgs, config, ... }:
+        {
+          pkgs,
+          config,
+          ...
+        }:
         {
           packages = {
             full = config.packages.neovim.wrap {
+              package = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.neovim-debug;
               settings = {
                 devMode = true;
                 neovide = true;
@@ -61,6 +67,11 @@
     introdus = {
       # url = "git+ssh://git@codeberg.org/fidgetingbits/introdus?ref=aa";
       url = "path:///home/aa/dev/nix/introdus/aa";
+    };
+
+    neovim-nightly-overlay = {
+      url = "github:nix-community/neovim-nightly-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     plugins-lua-console = {
