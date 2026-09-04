@@ -106,4 +106,7 @@ vim.keymap.set(
     { desc = '`sudo save` privileged files' }
   )
 
+-- One less key to press? :P
+vim.keymap.set({ 'n', 'v' }, ';', ':')
+
 -- stylua: ignore end
