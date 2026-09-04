@@ -80,7 +80,7 @@ return {
   keys = {
     -- Use an extra alt-one for toggling since chat is often in insert mode.
     { '<A-space>', function() vim.cmd("CodeCompanionChat toggle") end, mode = { 'i', 'n', 't' }, desc = 'CodeCompanion Chat Toggle' },
-    { l .. 't', function() vim.cmd("CodeCompanionChat toggle") end, mode = { 'n' }, desc = 'CodeCompanion Chat Toggle' },
+    { l .. 't', function() vim.cmd("CodeCompanionChat toggle") end, mode = { 'n', 'v' }, desc = 'CodeCompanion Chat Toggle' },
     { l .. 'h', function() vim.cmd("CodeCompanion") end, mode = { 'n' }, desc = 'CodeCompanion Inline Prompt' },
     { l .. 'c', function() vim.cmd("CodeCompanionActions") end, mode = { 'n', 'x' }, desc = 'CodeCompanion Actions' },
     { l .. 'f', explore_open_chats, mode = { 'n', }, desc = 'CodeCompanion Find Chats' },
