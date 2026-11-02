@@ -84,6 +84,7 @@
         "nixpkgs": "nixpkgs",
         "nixpkgs-stable": "nixpkgs-stable",
         "nixpkgs-unstable": "nixpkgs-unstable",
+        "noctalia": "noctalia",
         "plugins-blink-cmp": "plugins-blink-cmp",
         "plugins-blink-lib": "plugins-blink-lib",
         "plugins-confirm-quit": "plugins-confirm-quit",
@@ -101,8 +102,8 @@
         "wrappers": "wrappers"
       },
       "locked": {
-        "lastModified": 1788426136,
-        "narHash": "sha256-qRJbYL5ESf95Dx79gx77TIRnY331D8nXKJ93yAtDbrM=",
+        "lastModified": 1793604826,
+        "narHash": "sha256-rl7aAKMp2XC2bPe1s04oznLXjOTHvIFdKeNlV6wnUaU=",
         "path": "/home/aa/dev/nix/introdus/aa",
         "type": "path"
       },
@@ -210,6 +211,27 @@
         "owner": "nixos",
         "ref": "nixpkgs-unstable",
         "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "noctalia": {
+      "inputs": {
+        "nixpkgs": [
+          "introdus",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791942860,
+        "narHash": "sha256-kHlo7IkhPivjLmHlxVZeTMBarNLPfkqQ2nlS2SQ2zfQ=",
+        "owner": "noctalia-dev",
+        "repo": "noctalia",
+        "rev": "fc2af27c0e616006bf858cad3b7c9711a028e501",
+        "type": "github"
+      },
+      "original": {
+        "owner": "noctalia-dev",
+        "repo": "noctalia",
         "type": "github"
       }
     },

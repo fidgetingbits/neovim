@@ -14,7 +14,7 @@ let
   configSource = lib.fileset.toSource {
     root = ./.;
     fileset =
-      map (p: lib.optional (builtins.pathExists p) p) [
+      map (p: lib.optional (lib.pathExists p) p) [
         ./init.lua
         ./lua
         ./after

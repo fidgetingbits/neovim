@@ -29,6 +29,7 @@
           packages = {
             full = config.packages.neovim.wrap {
               package = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.neovim-debug;
+              #package = inputs.neovim-nightly-overlay.packages.${pkgs.stdenv.hostPlatform.system}.neovim;
               settings = {
                 devMode = true;
                 neovide = true;

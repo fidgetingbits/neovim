@@ -24,6 +24,8 @@ local function mode()
   return mode_map[vim.fn.mode()] or 'U?'
 end
 
+local ok, minuet_lualine = pcall(require, 'minuet.lualine')
+
 return {
   {
     'lualine.nvim',
@@ -57,7 +59,7 @@ return {
           },
           lualine_x = {
             {
-              require('minuet.lualine'),
+              ok and minuet_lualine or nil,
               -- the follwing is the default configuration
               -- the name displayed in the lualine. Set to "provider", "model" or "both"
               -- display_name = 'both',

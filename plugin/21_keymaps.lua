@@ -59,7 +59,10 @@ local function dismiss_all()
   require("notify").dismiss({ silent = true })
   vim.cmd("noh")
   -- We do this here, because otherwise it hijacks it it seems
-  require('minuet.virtualtext').action.dismiss()
+  local ok, vt = pcall(require, 'minuet.virtualtext')
+  if ok and vt.action and vt.action.dismiss then
+    vt.action.dismiss()
+  end
 end
 
 vim.keymap.set("n", "<Esc>", dismiss_all, { desc = "Dismiss all notifications and clear hlsearch" })
