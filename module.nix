@@ -82,6 +82,7 @@ in
               ansi
               modes
               haunt
+              screenkey
               ;
           }
           ++ [ fixedNeovIme ]

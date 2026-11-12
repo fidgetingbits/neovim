@@ -11,6 +11,7 @@ return {
   { import = MP:relpath('snacks') },
   { import = MP:relpath('tabby') },
   { import = MP:relpath('toggleterm') },
+  { import = MP:relpath('screenkey') },
   {
     'ansi',
     lazy = false,

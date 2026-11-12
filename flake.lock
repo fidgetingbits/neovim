@@ -102,8 +102,8 @@
         "wrappers": "wrappers"
       },
       "locked": {
-        "lastModified": 1793757136,
-        "narHash": "sha256-90lRSE3uTYjfIlC3m2FdZNr2D1KMnPMjEmE5SXoD0Os=",
+        "lastModified": 1794470832,
+        "narHash": "sha256-QzV5qUjqZHbOeh5B7pliKvfqwhpq4a070iZbZ9OXbkU=",
         "path": "/home/aa/dev/nix/introdus/aa",
         "type": "path"
       },
@@ -444,6 +444,22 @@
         "type": "github"
       }
     },
+    "plugins-screenkey": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1777413486,
+        "narHash": "sha256-VCK4s4uSqnmGP7u4KuQsNrkt+NCR5oJf036cKEBO+yo=",
+        "owner": "NStefan002",
+        "repo": "screenkey.nvim",
+        "rev": "740e238d1f143cb5f3a9d932f9c5142d3581b986",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NStefan002",
+        "repo": "screenkey.nvim",
+        "type": "github"
+      }
+    },
     "plugins-telescope-luasnip": {
       "flake": false,
       "locked": {
@@ -542,6 +558,7 @@
         "plugins-lua-console": "plugins-lua-console",
         "plugins-modes": "plugins-modes",
         "plugins-neov-ime": "plugins-neov-ime",
+        "plugins-screenkey": "plugins-screenkey",
         "plugins-telescope-toggleterm": "plugins-telescope-toggleterm",
         "wrappers": "wrappers_2"
       }

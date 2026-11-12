@@ -13,7 +13,7 @@
       ...
     }@inputs:
     let
-      lib = nixpkgs.lib;
+      inherit (nixpkgs) lib;
     in
     flake-parts.lib.mkFlake { inherit inputs; } {
       imports = [ wrappers.flakeModules.wrappers ];
@@ -102,6 +102,10 @@
     };
     plugins-haunt = {
       url = "github:TheNoeTrevino/haunt.nvim";
+      flake = false;
+    };
+    plugins-screenkey = {
+      url = "github:NStefan002/screenkey.nvim";
       flake = false;
     };
   };
